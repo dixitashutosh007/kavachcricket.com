@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>About Us | KAvach Cricket Club Bangalore - Cricket for Working Professionals</title>
+  
+  <!-- SEO & AI Discoverability Tags -->
+  <meta name="description" content="Learn about KAvach Cricket Club, Bangalore's premier leather-ball cricket community built for working professionals. Founded in 2022, featuring 350+ members, 900+ matches played, weekday morning practice at Play Arena Sarjapur Road, and the marquee KPL tournament.">
+  <meta name="keywords" content="About KAvach Cricket Club, Cricket Club in Bangalore, Cricket Club for Adults, Leather Ball Cricket Club, Cricket for Working Professionals, Sarjapur Road Cricket Club, Bangalore South Cricket, Best Cricket Club in Bangalore">
+  <link rel="canonical" href="https://www.kavachcricket.com/about.html">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About KAvach Cricket Club | Cricket for Working Professionals">
+  <meta property="og:description" content="Founded in South Bangalore in 2022, KAvach is home to 350+ professionals playing structured leather ball cricket. Discover our journey, ethos, teams, and community.">
+  <meta property="og:url" content="https://www.kavachcricket.com/about.html">
+  <meta property="og:image" content="https://www.kavachcricket.com/assets/images/community-play-arena.jpg">
+  <meta property="og:site_name" content="KAvach Cricket Club">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About KAvach Cricket Club Bangalore">
+  <meta name="twitter:description" content="Structured leather-ball cricket for working professionals in Bangalore. 350+ members, 900+ matches, and vibrant cricket culture.">
+  <meta name="twitter:image" content="https://www.kavachcricket.com/assets/images/community-play-arena.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/images/logo.png">
+  <link rel="apple-touch-icon" href="./assets/images/logo.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsClub",
+    "name": "KAvach Cricket Club",
+    "alternateName": ["KAvach Cricket Bangalore", "KAvach Club"],
+    "slogan": "Go Get Them ! KAvach",
+    "url": "https://www.kavachcricket.com/about.html",
+    "logo": "https://www.kavachcricket.com/assets/images/logo.png",
+    "image": "https://www.kavachcricket.com/assets/images/community-play-arena.jpg",
+    "description": "KAvach Cricket Club is Bangalore's leading leather-ball cricket club exclusively for working professionals. Founded in 2022 with 350+ active members and 900+ matches played.",
+    "sport": "Cricket",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Inside Play Arena, 1st Cross Road, Valliyamma Layout, Kasavanahalli, Off Sarjapur Road",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "postalCode": "560035",
+      "addressCountry": "IN"
+    },
+    "telephone": "+91-8296211687",
+    "email": "kavachcricketclub@gmail.com"
+  }
+  </script>
+
+  <style>
+    .about-page-hero {
+      padding: 130px 0 60px;
+      background: linear-gradient(180deg, rgba(17, 19, 24, 0.95) 0%, rgba(10, 11, 14, 1) 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-breadcrumb {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .about-breadcrumb a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .about-breadcrumb a:hover {
+      color: var(--yellow-accent);
+    }
+    .about-breadcrumb span {
+      color: var(--red-light);
+    }
+    .story-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .story-card-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+    .story-card-visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .pillar-card {
+      background: var(--dark-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-yellow);
+      box-shadow: var(--shadow-card);
+    }
+    .pillar-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: rgba(229, 57, 53, 0.12);
+      border: 1px solid var(--border-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red-light);
+      margin-bottom: 20px;
+    }
+    .pillar-icon-box.yellow {
+      background: rgba(255, 193, 7, 0.12);
+      border-color: var(--border-yellow);
+      color: var(--yellow-accent);
+    }
+    .pillar-icon-box svg {
+      width: 26px;
+      height: 26px;
+    }
+    .pillar-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .pillar-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .teams-track-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .team-track-card {
+      background: var(--dark-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      transition: all var(--transition-normal);
+    }
+    .team-track-card:hover {
+      border-color: var(--border-yellow);
+      transform: translateY(-4px);
+    }
+    .team-track-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--yellow-accent);
+      margin-bottom: 6px;
+    }
+    .team-track-card .track-role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .team-track-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .stats-banner-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.08) 0%, rgba(255, 193, 7, 0.08) 100%);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .stat-banner-item .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--yellow-accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-banner-item .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+    @media (max-width: 960px) {
+      .story-card-grid {
+        grid-template-columns: 1fr;
+      }
+      .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .teams-track-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats-banner-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .teams-track-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-banner-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Universal Clean Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
+        <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
+        <div class="brand-info">
+          <span class="brand-name">K<span>A</span>VACH</span>
+          <span class="brand-tagline">Cricket for All</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        
+        <div class="nav-item">
+          <a href="./index.html#home" class="nav-link">Home</a>
+        </div>
+
+        <!-- Dropdown: The Club (Active on this page) -->
+        <div class="nav-item">
+          <a href="#about-top" class="nav-link active">
+            <span>The Club</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="./about.html" class="dropdown-link" style="color: var(--yellow-accent);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>About KAvach</span>
+            </a>
+            <a href="./index.html#about" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Our Story & Culture</span>
+            </a>
+            <a href="./index.html#rankings" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Rankings & Milestones</span>
+            </a>
+            <a href="./kpl.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KPL Tournament</span>
+            </a>
+            <a href="./timeout.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KAvach Timeout</span>
+            </a>
+            <a href="./index.html#gallery" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Photo Gallery</span>
+            </a>
+            <a href="./index.html#testimonials" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Player Stories</span>
+            </a>
+            <a href="./index.html#faq" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Frequently Asked Questions</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Studio Link -->
+        <div class="nav-item">
+          <a href="./index.html#studio" class="nav-link">Studio</a>
+        </div>
+
+        <!-- How to Join Link -->
+        <div class="nav-item">
+          <a href="./index.html#how-to-join" class="nav-link">How to Join</a>
+        </div>
+
+        <!-- Policies Link -->
+        <div class="nav-item">
+          <a href="./policies.html" class="nav-link">Policies</a>
+        </div>
+
+        <!-- Contact Link -->
+        <div class="nav-item">
+          <a href="./index.html#contact" class="nav-link">Contact</a>
+        </div>
+
+      </nav>
+
+      <!-- Clean Header Action: WhatsApp Us + Primary CTA -->
+      <div class="header-actions">
+        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" aria-label="WhatsApp KAvach Cricket Club">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <span>WhatsApp Us</span>
+        </a>
+        <a href="./index.html#contact" class="btn btn-primary btn-sm">Book Trial</a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a href="./index.html#home" class="mobile-direct-link">Home <span>&rarr;</span></a>
+
+      <!-- Mobile Accordion: The Club -->
+      <div class="mobile-nav-item">
+        <button class="mobile-nav-header">
+          <span>The Club & Culture</span>
+          <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="mobile-sub-menu">
+          <a href="./about.html" class="mobile-sub-link" style="color: var(--yellow-accent);">&bull; About KAvach</a>
+          <a href="./index.html#about" class="mobile-sub-link">&bull; Our Story & Culture</a>
+          <a href="./index.html#rankings" class="mobile-sub-link">&bull; Rankings & Milestones</a>
+          <a href="./kpl.html" class="mobile-sub-link">&bull; KPL Tournament</a>
+          <a href="./timeout.html" class="mobile-sub-link">&bull; KAvach Timeout</a>
+          <a href="./index.html#gallery" class="mobile-sub-link">&bull; Photo Gallery</a>
+          <a href="./index.html#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
+          <a href="./index.html#faq" class="mobile-sub-link">&bull; Frequently Asked Questions</a>
+        </div>
+      </div>
+
+      <a href="./index.html#studio" class="mobile-direct-link">KAvach Studio Plans <span>&rarr;</span></a>
+      <a href="./index.html#how-to-join" class="mobile-direct-link">How to Join (2 Paths) <span>&rarr;</span></a>
+      <a href="./policies.html" class="mobile-direct-link" style="color: var(--red-light);">Policies & Disclaimers <span>&rarr;</span></a>
+      <a href="./index.html#contact" class="mobile-direct-link">Contact & Location <span>&rarr;</span></a>
+
+      <div class="mobile-nav-actions">
+        <a href="./index.html#contact" class="btn btn-primary btn-lg">Book Trial Practice Session</a>
+        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" style="justify-content: center; padding: 12px;">
+          <svg class="wa-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <span>WhatsApp Us</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="about-top">
+
+    <!-- About Page Hero -->
+    <section class="about-page-hero">
+      <div class="container">
+        <div class="about-breadcrumb reveal">
+          <a href="./index.html#home">Home</a>
+          <span>/</span>
+          <a href="#about-top">The Club</a>
+          <span>/</span>
+          <span>About KAvach</span>
+        </div>
+
+        <div class="section-tag yellow-tag reveal">Cricket for All &bull; Cricket for Working Professionals</div>
+        <h1 class="section-title reveal delay-1" style="font-size: clamp(2rem, 4.5vw, 3.2rem); margin-top: 12px;">
+          Built Exclusively for Working Professionals.<br>
+          <span class="text-gradient-red">United by Passion for Leather Ball Cricket.</span>
+        </h1>
+        
+        <p class="section-subtitle reveal delay-2" style="max-width: 860px; margin-left: 0; text-align: left; font-size: 1.1rem; line-height: 1.75;">
+          KAvach Cricket Club is one of Bangalore's most respected cricket communities, based inside Play Arena, Sarjapur Road. We provide a structured, high-energy environment for techies, corporate leaders, doctors, and professionals to return to leather-ball cricket, regain peak fitness, and play competitive matches without disrupting their careers.
+        </p>
+
+        <!-- Key Milestones Ribbon -->
+        <div class="stats-banner-row reveal delay-3">
+          <div class="stat-banner-item">
+            <div class="stat-num">350+</div>
+            <div class="stat-label">Active Working Professionals</div>
+          </div>
+          <div class="stat-banner-item">
+            <div class="stat-num">900+</div>
+            <div class="stat-label">Leather Ball Matches Played</div>
+          </div>
+          <div class="stat-banner-item">
+            <div class="stat-num">Top 20</div>
+            <div class="stat-label">All-India Amateur Club Rank</div>
+          </div>
+          <div class="stat-banner-item">
+            <div class="stat-num">Top 5</div>
+            <div class="stat-label">Bangalore Amateur Cricket Rank</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- The Genesis & Story -->
+    <section class="section" id="origin-story" style="background: var(--dark-bg);">
+      <div class="container">
+        <div class="story-card-grid">
+          
+          <div class="reveal">
+            <span class="section-tag">How It Began</span>
+            <h2 class="section-title" style="margin-top: 10px;">
+              From 4 Strangers on a Net to a <span class="text-gradient-red">350+ Strong Family</span>
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+              In early 2022, four working professionals living in a residential society in South Bangalore decided they missed the sound of leather meeting willow. Each had played serious school, university, or club cricket in their youth, but careers, demanding work hours, and family commitments had kept them away from the game for over 15 years.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+              They put out a single morning net invitation: <em>just 45 minutes of morning cricket for health, fitness, and pure passion.</em> To their astonishment, more than 15 passionate players turned up at dawn!
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 24px;">
+              On <strong>5th February 2022</strong>, KAvach played its very first official leather-ball match. What began as an informal morning circle quickly ignited into a full-fledged cricketing movement across Bangalore South.
+            </p>
+
+            <div class="about-slogan-box">
+              <div class="slogan-heading">Go Get Them ! KAvach 💪</div>
+              <p>Our rallying cry echoes across Bangalore grounds every single weekend — celebrating discipline, fierce athletic effort, and brotherhood on and off the pitch.</p>
+            </div>
+          </div>
+
+          <div class="story-card-visual reveal delay-1">
+            <img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club community gathering at Play Arena" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Philosophy & Values -->
+    <section class="section" id="philosophy" style="background: var(--dark-surface);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag yellow-tag">Our Ethos</span>
+          <h2 class="section-title">The 6 Pillars That <span class="text-gradient-red">Define KAvach</span></h2>
+          <p class="section-subtitle">
+            We are not just a group that rents a ground; we are an institution governed by mutual respect, competitive standards, and professional integrity.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <div class="pillar-card reveal">
+            <div class="pillar-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h3>Engineered for Busy Professionals</h3>
+            <p>
+              Morning net practice sessions run sharp from <strong>7:00 AM to 9:00 AM, Tuesday through Friday</strong> at Play Arena. Players complete high-intensity conditioning, bowl, bat, and head straight to their corporate desks fully energized.
+            </p>
+          </div>
+
+          <div class="pillar-card reveal delay-1">
+            <div class="pillar-icon-box yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </div>
+            <h3>100% Seasoned Leather Ball</h3>
+            <p>
+              We do not play tennis-ball cricket. We respect the craftsmanship, protective discipline, technical batting, and swing bowling required for true red and white leather-ball cricket.
+            </p>
+          </div>
+
+          <div class="pillar-card reveal delay-2">
+            <div class="pillar-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>The Think Tank Mentorship</h3>
+            <p>
+              A dedicated governance council composed of senior club members and experienced cricketers manages squad selections, player welfare, tournament logistics, and ensures transparent, merit-based opportunities.
+            </p>
+          </div>
+
+          <div class="pillar-card reveal">
+            <div class="pillar-icon-box yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3>Zero Tolerance on Toxicity</h3>
+            <p>
+              Ego, abusive language, indiscipline, or disrespect toward teammates, umpires, or opponents have zero place at KAvach. Our dressing room is a safe, encouraging space where everyone uplifts one another.
+            </p>
+          </div>
+
+          <div class="pillar-card reveal delay-1">
+            <div class="pillar-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
+            </div>
+            <h3>Marquee Flagship Tournaments</h3>
+            <p>
+              Beyond weekly 20/30-over bilateral fixtures, we organize the <strong>KAvach Premier League (KPL)</strong> — an IPL-style franchise auction tournament with bespoke kits, and <strong>KAvach Timeout</strong> — our signature annual family sports festival.
+            </p>
+          </div>
+
+          <div class="pillar-card reveal delay-2">
+            <div class="pillar-icon-box yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>Youth Talent Scholarship</h3>
+            <p>
+              We sponsor deserving young cricketers and students who cannot afford match and net fees. Exceptional youth players representing KSCA divisions train with our professionals completely free of cost.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Squad Categorization & Teams -->
+    <section class="section" id="teams-pathways" style="background: var(--dark-bg);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Player Development</span>
+          <h2 class="section-title">Skill-Calibrated <span class="text-gradient-red">Squad Tracks</span></h2>
+          <p class="section-subtitle">
+            Every cricketer is unique. Through trial sessions and performance tracking on CricHeroes, we ensure every member plays at their calibrated competitive level.
+          </p>
+        </div>
+
+        <div class="teams-track-grid">
+          
+          <div class="team-track-card reveal">
+            <h4>Drona</h4>
+            <span class="track-role">Return to Cricket & Fundamentals</span>
+            <p>
+              For working professionals returning to the leather ball after years away. Focuses on safe net habits, technique revitalization, and low-pressure practice matches.
+            </p>
+          </div>
+
+          <div class="team-track-card reveal delay-1">
+            <h4>Eklavya</h4>
+            <span class="track-role">Intermediate Club Matches</span>
+            <p>
+              For consistent cricketers with good fitness looking to sharpen match awareness, execute game plans, and compete in weekend 20-over league fixtures.
+            </p>
+          </div>
+
+          <div class="team-track-card reveal delay-2">
+            <h4>KAvach Pro</h4>
+            <span class="track-role">Top-Tier Competitive XI</span>
+            <p>
+              Our premier tournament squad featuring KSCA league players, seasoned club veterans, and elite amateur cricketers competing in premier Bangalore tournaments.
+            </p>
+          </div>
+
+          <div class="team-track-card reveal delay-3">
+            <h4>Yudhveer</h4>
+            <span class="track-role">Weekday Practice & Drills</span>
+            <p>
+              Tailored for corporate executives and engineers whose weekends are tied to family travel, offering intensive Tuesday–Friday morning conditioning sessions.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Venue & Community Banner -->
+    <section class="section" style="background: var(--dark-surface); padding-top: 40px; padding-bottom: 70px;">
+      <div class="container">
+        <div class="story-card-grid" style="align-items: center;">
+          
+          <div class="story-card-visual reveal">
+            <img src="./assets/images/play-arena-pitch-celebration.jpg" alt="KAvach squad medal celebration on Play Arena pitch" loading="lazy">
+          </div>
+
+          <div class="reveal delay-1">
+            <span class="section-tag yellow-tag">Our Home Base</span>
+            <h2 class="section-title" style="margin-top: 10px;">
+              KAvach Studio at <span class="text-gradient-red">Play Arena, Sarjapur Road</span>
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+              Headquartered inside the iconic <strong>Play Arena, Kasavanahalli (Bangalore South)</strong>, KAvach Studio provides high-spec cricket infrastructure: all-weather turf nets, state-of-the-art bowling machines, floodlights, video analysis tools, and fitness amenities.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 24px;">
+              Whether you are an engineer looking to blow off steam before standup, a senior doctor maintaining athletic fitness, or a seasoned cricketer eyeing competitive silver, KAvach is your cricketing home.
+            </p>
+
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <a href="./index.html#contact" class="btn btn-primary btn-lg">Book Your Trial Session</a>
+              <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20joining%20KAvach" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">Chat with Management</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-col footer-brand">
+          <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
+            <img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48">
+            <div class="brand-info">
+              <span class="brand-name">K<span>A</span>VACH</span>
+              <span class="brand-tagline">Cricket for All</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            Bangalore's premier community for working professionals in leather-ball cricket. Structured training at Play Arena, weekend matches, and annual tournaments.
+          </p>
+          <div class="footer-slogan shimmer-slogan">Go Get Them ! KAvach</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Cricket & Programs</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html#how-to-join" class="footer-link">Two Paths to Join</a></li>
+            <li><a href="./index.html#programs" class="footer-link">Daily Practice Sessions</a></li>
+            <li><a href="./index.html#programs" class="footer-link">Weekend Matches</a></li>
+            <li><a href="./index.html#studio" class="footer-link">Studio & Subscriptions</a></li>
+            <li><a href="./index.html#youth-program" class="footer-link">Youth Scholarship</a></li>
+            <li><a href="./kpl.html" class="footer-link" style="color: var(--yellow-accent);">KPL Tournament</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>The Club & Rules</h4>
+          <ul class="footer-links">
+            <li><a href="./about.html" class="footer-link" style="color: var(--yellow-accent);">About KAvach</a></li>
+            <li><a href="./index.html#about" class="footer-link">Our Story & Culture</a></li>
+            <li><a href="./index.html#rankings" class="footer-link">Rankings & Stats</a></li>
+            <li><a href="./index.html#gallery" class="footer-link">Photo Gallery</a></li>
+            <li><a href="./timeout.html" class="footer-link" style="color: #6ee7b7;">KAvach Timeout</a></li>
+            <li><a href="./index.html#testimonials" class="footer-link">Player Stories</a></li>
+            <li><a href="./policies.html" class="footer-link">Liability Waiver & Policies</a></li>
+            <li><a href="./index.html#faq" class="footer-link">FAQ</a></li>
+            <li><a href="https://form.jotform.com/231925336416153" class="footer-link" target="_blank" rel="noopener">Official Registration ↗</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Venue & Hours</h4>
+          <p class="footer-desc" style="margin-bottom: 8px;">
+            Inside Play Arena, Kasavanahalli, Off Sarjapur Road, Bangalore – 560035
+          </p>
+          <p class="footer-desc" style="margin-bottom: 12px; color: var(--yellow-accent);">
+            <strong>Daily Practice:</strong> Tue–Fri, 7:00 AM – 9:00 AM<br>
+            <strong>Weekend Matches:</strong> Sat & Sun
+          </p>
+          <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" class="btn-whatsapp-header" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+            <span>WhatsApp Us</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2022–2026 <strong>KAvach Cricket Club</strong>. All rights reserved. Slogan: <em>"Go Get Them ! KAvach"</em>
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="./policies.html" style="color: var(--text-muted); text-decoration: none;">Policies & Waivers</a>
+          <a href="./policies.html#liability-waiver" style="color: var(--text-muted); text-decoration: none;">Liability Waiver</a>
+          <a href="./policies.html#payments-refunds" style="color: var(--text-muted); text-decoration: none;">Refund Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed Floating WhatsApp Button -->
+  <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20joining%20KAvach%20Cricket%20Club" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp KAvach Cricket Club">
+    <div class="whatsapp-icon-pulse">
+      <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+    </div>
+    <span class="floating-whatsapp-tooltip">Chat with KAvach</span>
+  </a>
+
+  <!-- Mobile Drawer Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('mobileToggle');
+      const drawer = document.getElementById('mobileNavDrawer');
+      if (toggle && drawer) {
+        toggle.addEventListener('click', () => {
+          const isOpen = drawer.classList.toggle('active');
+          toggle.classList.toggle('active');
+          toggle.setAttribute('aria-expanded', isOpen);
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        drawer.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            drawer.classList.remove('active');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+      // Accordion headers
+      document.querySelectorAll('.mobile-nav-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.mobile-nav-item');
+          item.classList.toggle('open');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

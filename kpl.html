@@ -132,10 +132,10 @@
 </head>
 <body>
 
-  <!-- Clean Header -->
+  <!-- Universal Site Header -->
   <header class="site-header">
     <div class="container header-container">
-      <a href="./index.html" class="brand-logo" aria-label="KAvach Cricket Club Home">
+      <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
         <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
@@ -143,22 +143,127 @@
         </div>
       </a>
 
-      <nav class="nav-menu" aria-label="KPL Navigation">
-        <a href="./index.html" class="nav-link">&larr; Main Club Site</a>
-        <a href="#overview" class="nav-link">Overview</a>
-        <a href="#franchises" class="nav-link">Franchises</a>
-        <a href="#auction" class="nav-link">Auction Draft</a>
-        <a href="#awards" class="nav-link">Awards & Caps</a>
-        <a href="#moments" class="nav-link">Moments</a>
-        <a href="./timeout.html" class="nav-link">Timeout</a>
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        
+        <div class="nav-item">
+          <a href="./index.html#home" class="nav-link">Home</a>
+        </div>
+
+        <!-- Dropdown: The Club (Active on this section) -->
+        <div class="nav-item">
+          <a href="#overview" class="nav-link active">
+            <span>The Club</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="./about.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>About KAvach</span>
+            </a>
+            <a href="./index.html#about" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Our Story & Culture</span>
+            </a>
+            <a href="./index.html#rankings" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Rankings & Milestones</span>
+            </a>
+            <a href="./kpl.html" class="dropdown-link" style="color: var(--yellow-accent);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KPL Tournament</span>
+            </a>
+            <a href="./timeout.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KAvach Timeout</span>
+            </a>
+            <a href="./index.html#gallery" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Photo Gallery</span>
+            </a>
+            <a href="./index.html#testimonials" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Player Stories</span>
+            </a>
+            <a href="./index.html#faq" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Frequently Asked Questions</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Studio Link -->
+        <div class="nav-item">
+          <a href="./index.html#studio" class="nav-link">Studio</a>
+        </div>
+
+        <!-- How to Join Link -->
+        <div class="nav-item">
+          <a href="./index.html#how-to-join" class="nav-link">How to Join</a>
+        </div>
+
+        <!-- Policies Link -->
+        <div class="nav-item">
+          <a href="./policies.html" class="nav-link">Policies</a>
+        </div>
+
+        <!-- Contact Link -->
+        <div class="nav-item">
+          <a href="./index.html#contact" class="nav-link">Contact</a>
+        </div>
+
       </nav>
 
+      <!-- Clean Header Action: WhatsApp Us + Primary CTA -->
       <div class="header-actions">
         <a href="https://wa.me/918296211687?text=Hi%2C%20I%20am%20interested%20in%20playing%20in%20KPL" target="_blank" rel="noopener" class="header-veer-chat" aria-label="WhatsApp KAvach Cricket Club">
           <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
           <span>WhatsApp Us</span>
         </a>
         <a href="./index.html#contact" class="btn btn-primary btn-sm">Join Club to Play</a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a href="./index.html#home" class="mobile-direct-link">Home <span>&rarr;</span></a>
+
+      <!-- Mobile Accordion: The Club -->
+      <div class="mobile-nav-item">
+        <button class="mobile-nav-header">
+          <span>The Club & Culture</span>
+          <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="mobile-sub-menu">
+          <a href="./about.html" class="mobile-sub-link">&bull; About KAvach</a>
+          <a href="./index.html#about" class="mobile-sub-link">&bull; Our Story & Culture</a>
+          <a href="./index.html#rankings" class="mobile-sub-link">&bull; Rankings & Milestones</a>
+          <a href="./kpl.html" class="mobile-sub-link" style="color: var(--yellow-accent);">&bull; KPL Tournament</a>
+          <a href="./timeout.html" class="mobile-sub-link">&bull; KAvach Timeout</a>
+          <a href="./index.html#gallery" class="mobile-sub-link">&bull; Photo Gallery</a>
+          <a href="./index.html#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
+          <a href="./index.html#faq" class="mobile-sub-link">&bull; Frequently Asked Questions</a>
+        </div>
+      </div>
+
+      <a href="./index.html#studio" class="mobile-direct-link">KAvach Studio Plans <span>&rarr;</span></a>
+      <a href="./index.html#how-to-join" class="mobile-direct-link">How to Join (2 Paths) <span>&rarr;</span></a>
+      <a href="./policies.html" class="mobile-direct-link" style="color: var(--red-light);">Policies & Disclaimers <span>&rarr;</span></a>
+      <a href="./index.html#contact" class="mobile-direct-link">Contact & Location <span>&rarr;</span></a>
+
+      <div class="mobile-nav-actions">
+        <a href="./index.html#contact" class="btn btn-primary btn-lg">Join KAvach Cricket Club</a>
+        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20am%20interested%20in%20playing%20in%20KPL" target="_blank" rel="noopener" class="header-veer-chat" style="justify-content: center; padding: 12px;">
+          <svg class="wa-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <span>WhatsApp Us</span>
+        </a>
       </div>
     </div>
   </header>
@@ -298,7 +403,6 @@
                 <img src="./assets/images/kpl-team-hunkaar-logo.jpg" alt="Hunkaar KAvach Franchise Logo" loading="lazy">
               </div>
               <h4>Hunkaar KAvach</h4>
-              <span class="franchise-tagline">The Roaring Tigers • Red & Black</span>
             </div>
 
             <div class="kpl-franchise-card reveal delay-1">
@@ -306,7 +410,6 @@
                 <img src="./assets/images/kpl-team-rudra-logo.jpg" alt="Rudra KAvach Franchise Logo" loading="lazy">
               </div>
               <h4>Rudra KAvach</h4>
-              <span class="franchise-tagline">The Rising Phoenix • Orange & Fire</span>
             </div>
 
             <div class="kpl-franchise-card reveal delay-2">
@@ -314,7 +417,6 @@
                 <img src="./assets/images/kpl-team-sabyasachi-logo.jpg" alt="Sabyasachi KAvach Franchise Logo" loading="lazy">
               </div>
               <h4>Sabyasachi KAvach</h4>
-              <span class="franchise-tagline">Target & Arrow • Burgundy & Black</span>
             </div>
 
             <div class="kpl-franchise-card reveal">
@@ -322,7 +424,6 @@
                 <img src="./assets/images/kpl-team-atharva-logo.jpg" alt="Atharva KAvach Franchise Logo" loading="lazy">
               </div>
               <h4>Atharva KAvach</h4>
-              <span class="franchise-tagline">The Golden Tusker • Gold & Blue</span>
             </div>
 
             <div class="kpl-franchise-card reveal delay-1">
@@ -330,7 +431,6 @@
                 <img src="./assets/images/kpl-team-prithvi-logo.jpg" alt="Prithvi KAvach Franchise Logo" loading="lazy">
               </div>
               <h4>Prithvi KAvach</h4>
-              <span class="franchise-tagline">Winged Champions • Teal & Sky</span>
             </div>
           </div>
         </div>
@@ -364,7 +464,7 @@
           </div>
 
           <div class="gallery-grid">
-            <div class="gallery-item span-2 reveal">
+            <div class="gallery-item reveal">
               <img src="./assets/images/kpl-winner-prithvi.jpg" alt="KPL 1 Champions Prithvi KAvach celebrating with trophy" loading="lazy">
               <div class="gallery-overlay">
                 <h4>KPL 1 Champions: Prithvi KAvach</h4>
@@ -373,6 +473,14 @@
             </div>
 
             <div class="gallery-item reveal delay-1">
+              <img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KPL 3 Champions Hunkaar KAvach celebrating with trophy" loading="lazy">
+              <div class="gallery-overlay">
+                <h4>KPL 3 Champions: Hunkaar KAvach</h4>
+                <p>Medals, Trophies & Championship Glory</p>
+              </div>
+            </div>
+
+            <div class="gallery-item reveal delay-2">
               <img src="./assets/images/kpl-team-sabyasachi.jpg" alt="Sabyasachi KAvach squad in custom team jerseys" loading="lazy">
               <div class="gallery-overlay">
                 <h4>Sabyasachi KAvach</h4>
@@ -380,7 +488,7 @@
               </div>
             </div>
 
-            <div class="gallery-item reveal delay-2">
+            <div class="gallery-item reveal">
               <img src="./assets/images/kpl-team-rudra.jpg" alt="Rudra KAvach squad with team sponsors" loading="lazy">
               <div class="gallery-overlay">
                 <h4>Rudra KAvach</h4>
@@ -388,11 +496,19 @@
               </div>
             </div>
 
-            <div class="gallery-item span-2 reveal">
+            <div class="gallery-item reveal delay-1">
               <img src="./assets/images/kpl-anthem-lineup.jpg" alt="KPL match opening ceremony with both teams lined up" loading="lazy">
               <div class="gallery-overlay">
                 <h4>Match Opening Ceremony</h4>
                 <p>National Anthem & Squad Lineup on Turf Ground</p>
+              </div>
+            </div>
+
+            <div class="gallery-item reveal delay-2">
+              <img src="./assets/images/kpl-trophies-display.jpg" alt="Gleaming KPL Championship trophies, awards, and golden cups" loading="lazy">
+              <div class="gallery-overlay">
+                <h4>Championship Silverware & Caps</h4>
+                <p>Orange & Purple Caps, MVP Awards & Cups</p>
               </div>
             </div>
           </div>
@@ -425,11 +541,11 @@
           <ul class="footer-links">
             <li><a href="./index.html" class="footer-link">Home Page</a></li>
             <li><a href="./index.html#how-to-join" class="footer-link">How to Join (2 Paths)</a></li>
-            <li><a href="./index.html#programs" class="footer-link">Key Programs</a></li>
+            <li><a href="./about.html" class="footer-link" style="color: var(--yellow-accent);">About KAvach</a></li>
+            <li><a href="./index.html#about" class="footer-link">Our Story & Culture</a></li>
             <li><a href="./timeout.html" class="footer-link" style="color: #6ee7b7;">KAvach Timeout</a></li>
             <li><a href="./index.html#studio" class="footer-link">KAvach Studio Plans</a></li>
             <li><a href="./policies.html" class="footer-link">Liability Waiver & Policies</a></li>
-            <li><a href="./index.html#about" class="footer-link">About Our Club</a></li>
           </ul>
         </div>
 

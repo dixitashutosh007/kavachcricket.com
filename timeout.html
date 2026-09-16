@@ -33,36 +33,98 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Universal Site Header -->
   <header class="site-header">
     <div class="container header-container">
-      <a href="./index.html" class="brand-logo" aria-label="KAvach Cricket Club Home">
+      <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
         <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
-          <span class="brand-tagline">Timeout &bull; Family Day</span>
+          <span class="brand-tagline">Cricket for All</span>
         </div>
       </a>
 
-      <!-- Navigation -->
-      <nav class="nav-menu" aria-label="Timeout Navigation">
-        <a href="./index.html" class="nav-link">&larr; Main Club Site</a>
-        <a href="#sports" class="nav-link">The 6 Sports</a>
-        <a href="#teams" class="nav-link">Two-Team Showdown</a>
-        <a href="#gallery" class="nav-link">Photo Moments</a>
-        <a href="./kpl.html" class="nav-link">KPL</a>
-        <a href="./policies.html" class="nav-link">Policies</a>
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        
+        <div class="nav-item">
+          <a href="./index.html#home" class="nav-link">Home</a>
+        </div>
+
+        <!-- Dropdown: The Club (Active on this section) -->
+        <div class="nav-item">
+          <a href="#about-top" class="nav-link active">
+            <span>The Club</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="./about.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>About KAvach</span>
+            </a>
+            <a href="./index.html#about" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Our Story & Culture</span>
+            </a>
+            <a href="./index.html#rankings" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Rankings & Milestones</span>
+            </a>
+            <a href="./kpl.html" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KPL Tournament</span>
+            </a>
+            <a href="./timeout.html" class="dropdown-link" style="color: var(--yellow-accent);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>KAvach Timeout</span>
+            </a>
+            <a href="./index.html#gallery" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Photo Gallery</span>
+            </a>
+            <a href="./index.html#testimonials" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Player Stories</span>
+            </a>
+            <a href="./index.html#faq" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Frequently Asked Questions</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Studio Link -->
+        <div class="nav-item">
+          <a href="./index.html#studio" class="nav-link">Studio</a>
+        </div>
+
+        <!-- How to Join Link -->
+        <div class="nav-item">
+          <a href="./index.html#how-to-join" class="nav-link">How to Join</a>
+        </div>
+
+        <!-- Policies Link -->
+        <div class="nav-item">
+          <a href="./policies.html" class="nav-link">Policies</a>
+        </div>
+
+        <!-- Contact Link -->
+        <div class="nav-item">
+          <a href="./index.html#contact" class="nav-link">Contact</a>
+        </div>
+
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Clean Header Action: WhatsApp Us + Primary CTA -->
       <div class="header-actions">
         <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20have%20a%20question%20about%20KAvach%20Timeout%20Event" target="_blank" rel="noopener" class="header-veer-chat" aria-label="WhatsApp KAvach">
-          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
           <span>WhatsApp Us</span>
         </a>
         <a href="./index.html#contact" class="btn btn-primary btn-sm">Join the Club</a>
         
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation drawer">
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation drawer" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -70,14 +132,32 @@
       </div>
     </div>
 
-    <!-- Mobile Drawer -->
+    <!-- Mobile Navigation Drawer -->
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
-      <a href="./index.html" class="mobile-direct-link">&larr; Back to Main Site <span>&rarr;</span></a>
-      <a href="#sports" class="mobile-direct-link">The 6 Featured Sports <span>&rarr;</span></a>
-      <a href="#teams" class="mobile-direct-link">Two-Team Showdown <span>&rarr;</span></a>
-      <a href="#gallery" class="mobile-direct-link">Photo Moments <span>&rarr;</span></a>
-      <a href="./kpl.html" class="mobile-direct-link">KPL Tournament <span>&rarr;</span></a>
-      <a href="./policies.html" class="mobile-direct-link">Policies & Disclaimers <span>&rarr;</span></a>
+      <a href="./index.html#home" class="mobile-direct-link">Home <span>&rarr;</span></a>
+
+      <!-- Mobile Accordion: The Club -->
+      <div class="mobile-nav-item">
+        <button class="mobile-nav-header">
+          <span>The Club & Culture</span>
+          <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="mobile-sub-menu">
+          <a href="./about.html" class="mobile-sub-link">&bull; About KAvach</a>
+          <a href="./index.html#about" class="mobile-sub-link">&bull; Our Story & Culture</a>
+          <a href="./index.html#rankings" class="mobile-sub-link">&bull; Rankings & Milestones</a>
+          <a href="./kpl.html" class="mobile-sub-link">&bull; KPL Tournament</a>
+          <a href="./timeout.html" class="mobile-sub-link" style="color: var(--yellow-accent);">&bull; KAvach Timeout</a>
+          <a href="./index.html#gallery" class="mobile-sub-link">&bull; Photo Gallery</a>
+          <a href="./index.html#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
+          <a href="./index.html#faq" class="mobile-sub-link">&bull; Frequently Asked Questions</a>
+        </div>
+      </div>
+
+      <a href="./index.html#studio" class="mobile-direct-link">KAvach Studio Plans <span>&rarr;</span></a>
+      <a href="./index.html#how-to-join" class="mobile-direct-link">How to Join (2 Paths) <span>&rarr;</span></a>
+      <a href="./policies.html" class="mobile-direct-link" style="color: var(--red-light);">Policies & Disclaimers <span>&rarr;</span></a>
+      <a href="./index.html#contact" class="mobile-direct-link">Contact & Location <span>&rarr;</span></a>
 
       <div class="mobile-nav-actions">
         <a href="./index.html#contact" class="btn btn-primary btn-lg">Join KAvach Cricket Club</a>
@@ -135,7 +215,9 @@
             <div class="hero-visual-card">
               <img src="./assets/images/timeout-mega-family.jpg" alt="KAvach Timeout family sports day at Play Arena turf" class="hero-main-img" width="800" height="533">
               <div class="hero-floating-card">
-                <div class="floating-icon">👨‍👩‍👧‍👦</div>
+                <div class="floating-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
                 <div class="floating-text">
                   <span class="floating-title">Annual Family Festival</span>
                   <span class="floating-sub">Players, Spouses & Kids Competing Together</span>
@@ -153,14 +235,14 @@
       <div class="container">
         
         <div class="timeout-duel-banner reveal">
-          <h2>Two Teams Led by Families Battle for the Timeout Trophy 🏆</h2>
+          <h2>Two Teams Led by Families Battle for the Timeout Trophy</h2>
           <p>
             During KAvach Timeout, the entire club is divided into <strong>two dynamic family-led teams</strong>. Spouses, toddlers, teenagers, and seasoned cricketers join hands, score points across multi-sport challenges, and fight for glory to lift the coveted <strong>KAvach Timeout Trophy</strong>!
           </p>
           <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-            <span class="program-badge badge-scarlet" style="font-size: 0.95rem; padding: 8px 18px;">🔥 Friendly Family Rivalry</span>
-            <span class="program-badge badge-yellow" style="font-size: 0.95rem; padding: 8px 18px;">🏆 Official Trophy & Medals</span>
-            <span class="program-badge badge-scarlet" style="font-size: 0.95rem; padding: 8px 18px;">🍽️ Grand Celebration Banquet</span>
+            <span class="program-badge badge-scarlet" style="font-size: 0.95rem; padding: 8px 18px;">Friendly Family Rivalry</span>
+            <span class="program-badge badge-yellow" style="font-size: 0.95rem; padding: 8px 18px;">Official Trophy & Medals</span>
+            <span class="program-badge badge-scarlet" style="font-size: 0.95rem; padding: 8px 18px;">Grand Celebration Banquet</span>
           </div>
         </div>
 
@@ -182,7 +264,9 @@
           
           <!-- Sport 1: Mini Cricket -->
           <div class="timeout-sport-card reveal">
-            <div class="timeout-sport-icon">🏏</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+            </div>
             <h3>Mini Cricket</h3>
             <p>
               Fast-paced, high-voltage backyard-style cricket with modified soft-ball rules. Spouses hit boundaries, kids bowl decisive overs, and cricketers play as supporting anchors!
@@ -191,7 +275,9 @@
 
           <!-- Sport 2: Football -->
           <div class="timeout-sport-card reveal delay-1">
-            <div class="timeout-sport-icon">⚽</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 11 9.5 15 14.5 15 16 11 12 8"></polygon></svg>
+            </div>
             <h3>Football (Futsal)</h3>
             <p>
               A 5-a-side arena football clash filled with swift passing, teamwork, spectacular goalkeeping saves, and plenty of laughs across the pitch.
@@ -200,7 +286,9 @@
 
           <!-- Sport 3: Dodgeball -->
           <div class="timeout-sport-card reveal delay-2">
-            <div class="timeout-sport-icon">🎯</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
             <h3>Dodge Ball</h3>
             <p>
               Adrenaline-fueled dodging, diving, and lightning-fast throws. One of the most popular crowd favorites where youngsters and adults test their agility.
@@ -209,7 +297,9 @@
 
           <!-- Sport 4: Kho Kho -->
           <div class="timeout-sport-card reveal">
-            <div class="timeout-sport-icon">🏃</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            </div>
             <h3>Kho Kho</h3>
             <p>
               The legendary traditional Indian tag sport that brings pure childhood nostalgia. Fast sprints, clever dummy turns, and tactical chasing that electrifies the ground.
@@ -218,7 +308,9 @@
 
           <!-- Sport 5: Pitthu (Lagori / 7 Stones) -->
           <div class="timeout-sport-card reveal delay-1">
-            <div class="timeout-sport-icon">🧱</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="18" width="18" height="4" rx="1"></rect><rect x="5" y="13" width="14" height="4" rx="1"></rect><rect x="7" y="8" width="10" height="4" rx="1"></rect><rect x="9" y="3" width="6" height="4" rx="1"></rect></svg>
+            </div>
             <h3>Pitthu (Lagori / 7 Stones)</h3>
             <p>
               Targeting the 7-stone tower with precision, scrambling to rebuild it, and dodging the ball! A timeless street classic where whole families strategize together.
@@ -227,7 +319,9 @@
 
           <!-- Sport 6: Tug of War -->
           <div class="timeout-sport-card reveal delay-2">
-            <div class="timeout-sport-icon">🪢</div>
+            <div class="timeout-sport-icon">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16"></path><circle cx="4" cy="12" r="2"></circle><circle cx="20" cy="12" r="2"></circle><polyline points="10 8 12 12 10 16"></polyline><polyline points="14 8 12 12 14 16"></polyline></svg>
+            </div>
             <h3>Tug of War</h3>
             <p>
               The grand finale showdown of sheer strength and synchronized team pulling power! Player families line up behind the rope with roaring cheers from the sidelines.
@@ -292,7 +386,7 @@
 
         <div class="gallery-grid">
           
-          <div class="gallery-item span-2 reveal">
+          <div class="gallery-item reveal">
             <img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="The great Tug of War battle across the Play Arena turf" loading="lazy">
             <div class="gallery-overlay">
               <h4>The Tug of War Arena</h4>
@@ -316,7 +410,7 @@
             </div>
           </div>
 
-          <div class="gallery-item span-2 reveal">
+          <div class="gallery-item reveal">
             <img src="./assets/images/timeout-awards-dinner.jpg" alt="KAvach family dinner banquet and celebration" loading="lazy">
             <div class="gallery-overlay">
               <h4>Grand Family Banquet</h4>
@@ -351,11 +445,11 @@
         <div class="footer-col">
           <h4>Club Navigation</h4>
           <ul class="footer-links">
-            <li><a href="./index.html" class="footer-link">Main Club Home</a></li>
-            <li><a href="./index.html#programs" class="footer-link">Cricket Programs</a></li>
-            <li><a href="./index.html#studio" class="footer-link">Studio Subscriptions</a></li>
+            <li><a href="./index.html#home" class="footer-link">Main Club Home</a></li>
+            <li><a href="./about.html" class="footer-link" style="color: var(--yellow-accent);">About KAvach</a></li>
+            <li><a href="./index.html#about" class="footer-link">Our Story & Culture</a></li>
+            <li><a href="./index.html#studio" class="footer-link">KAvach Studio</a></li>
             <li><a href="./kpl.html" class="footer-link" style="color: var(--yellow-accent);">KPL Tournament</a></li>
-            <li><a href="./timeout.html" class="footer-link" style="color: var(--red-light);">KAvach Timeout</a></li>
             <li><a href="./policies.html" class="footer-link">Policies & Disclaimers</a></li>
           </ul>
         </div>
