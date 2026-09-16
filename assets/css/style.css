@@ -2397,10 +2397,10 @@ select.form-control {
 
 /* Base Jotform Registration Card in Tab 2 */
 .jotform-cta-card {
-  background: var(--dark-surface-card);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  padding: 36px 30px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 8px 0 0 0;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -2439,7 +2439,7 @@ select.form-control {
 .jotform-cta-card p {
   font-size: 0.95rem;
   color: var(--text-muted);
-  max-width: 580px;
+  max-width: 100%;
   line-height: 1.6;
 }
 
@@ -2449,7 +2449,7 @@ select.form-control {
   gap: 12px 20px;
   text-align: left;
   margin: 10px 0 16px;
-  max-width: 540px;
+  max-width: 100%;
   width: 100%;
   box-sizing: border-box;
 }
@@ -2638,7 +2638,9 @@ select.form-control {
     line-height: 1.35 !important;
   }
   .jotform-cta-card {
-    padding: 22px 14px !important;
+    padding: 6px 0 !important;
+    background: transparent !important;
+    border: none !important;
     text-align: center !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -2732,7 +2734,9 @@ select.form-control {
     padding: 16px 12px;
   }
   .jotform-cta-card {
-    padding: 18px 10px !important;
+    padding: 4px 0 !important;
+    background: transparent !important;
+    border: none !important;
   }
   .contact-card {
     padding: 14px 10px;
