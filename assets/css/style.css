@@ -82,14 +82,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   position: relative;
   background-color: var(--dark-bg);
   color: var(--text-secondary);
 }
 
-img, picture, video, canvas, svg {
+img, picture, video, canvas, svg, iframe {
   display: block;
   max-width: 100%;
   height: auto;
@@ -702,12 +708,62 @@ button {
   .nav-menu {
     display: none;
   }
-  .header-actions .btn-whatsapp-header {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-  }
   .mobile-toggle {
     display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    height: 66px;
+  }
+  .header-container {
+    height: 66px;
+  }
+  .brand-logo-img {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .brand-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  /* Hide the extra desktop Book Trial button in the sticky top bar on mobile so it never crumbles */
+  .header-actions > .btn {
+    display: none;
+  }
+  .header-veer-chat {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    gap: 5px;
+  }
+  .header-veer-chat svg.wa-icon {
+    width: 15px;
+    height: 15px;
+  }
+  .mobile-toggle {
+    width: 26px;
+    height: 18px;
+  }
+  .mobile-nav-drawer {
+    top: 66px;
+    height: calc(100vh - 66px);
+  }
+}
+
+@media (max-width: 380px) {
+  .header-veer-chat span {
+    display: none;
+  }
+  .header-veer-chat {
+    padding: 8px;
+    border-radius: 50%;
   }
 }
 
@@ -945,7 +1001,38 @@ button {
 @media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
+  }
+  .hero-text-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-badges-row {
+    justify-content: center;
+  }
+  .hero-title {
+    text-align: center;
+  }
+  .hero-desc {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-ctas {
+    justify-content: center;
+    width: 100%;
+  }
+  .hero-ctas .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-perks {
+    justify-content: center;
+    gap: 14px 18px;
   }
   .hero-main-img {
     height: 380px;
@@ -1207,9 +1294,40 @@ button {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .path-steps-row {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .path-step-card {
+    text-align: center;
+    align-items: center;
+    padding: 22px 18px;
+  }
+  .path-step-badge {
+    align-self: center;
+  }
+  .path-switcher-tabs {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .path-tab-btn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+  .admission-criteria-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .admission-criteria-box svg {
+    margin-top: 0;
   }
 }
 
@@ -1304,7 +1422,22 @@ button {
 @media (max-width: 900px) {
   .youth-scholarship-card {
     grid-template-columns: 1fr;
-    padding: 28px 20px;
+    padding: 24px 18px;
+    text-align: center;
+    gap: 24px;
+  }
+  .youth-badge {
+    margin: 0 auto 12px;
+  }
+  .youth-perks-list {
+    text-align: left;
+    display: inline-flex;
+    margin: 0 auto;
+  }
+  .youth-cta-wrap .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
   }
 }
 
@@ -1634,6 +1767,11 @@ button {
 @media (max-width: 992px) {
   .studio-intro-banner {
     grid-template-columns: 1fr;
+    padding: 28px 20px;
+    margin-bottom: 40px;
+  }
+  .studio-intro-text {
+    text-align: center;
   }
   .pricing-grid {
     grid-template-columns: 1fr;
@@ -1643,6 +1781,30 @@ button {
   }
   .pricing-card.popular:hover {
     transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 640px) {
+  .studio-intro-banner {
+    padding: 22px 16px;
+  }
+  .studio-perks-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+  .studio-perk-box {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    box-sizing: border-box;
+  }
+  .studio-perk-box span {
+    min-width: 0;
+    word-break: break-word;
+  }
+  .pricing-card {
+    padding: 28px 18px;
   }
 }
 
@@ -2283,9 +2445,70 @@ button {
 @media (max-width: 992px) {
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
   .form-row-2 {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form-card {
+    padding: 20px 16px;
+  }
+  .contact-tab-nav {
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px;
+  }
+  .contact-tab-btn {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .jotform-cta-card {
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .jotform-features-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+  }
+  .jotform-cta-card .btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+  .contact-card {
+    padding: 16px 14px;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+  .map-container {
+    height: 200px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .map-container iframe {
+    width: 100%;
+    max-width: 100%;
+  }
+  .native-inquiry-form .btn {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    justify-content: center;
   }
 }
 
@@ -2368,9 +2591,73 @@ button {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 38px 0 20px;
+  }
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+    margin-bottom: 24px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .footer-brand .brand-logo {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .footer-desc {
+    max-width: 100%;
+    margin: 0 auto 10px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .footer-slogan {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .footer-col h4 {
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+  }
+  .footer-links {
+    gap: 8px;
+  }
+  .footer-link {
+    font-size: 0.82rem;
+  }
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+    text-align: center;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 18px;
+    margin-top: 4px;
+  }
+  .footer-col:last-child .btn-whatsapp-header {
+    margin: 0 auto;
+    display: inline-flex;
+  }
+  .footer-bottom {
+    padding-top: 16px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    gap: 20px 12px;
+  }
+  .footer-link {
+    font-size: 0.8rem;
   }
 }
 
