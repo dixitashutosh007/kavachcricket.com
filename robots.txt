@@ -1,0 +1,6 @@
+# robots.txt for KAvach Cricket Club
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.kavachcricket.com/sitemap.xml

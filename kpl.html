@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>KAvach Premier League (KPL) | Flagship Tournament | KAvach Cricket Club</title>
+  <meta name="description" content="KAvach Premier League (KPL) is the flagship IPL-style auction-based tournament of KAvach Cricket Club, Bangalore. Live player auctions, franchise teams, colored kits, and championship trophies.">
+  <meta name="keywords" content="KPL, KAvach Premier League, amateur cricket auction Bangalore, corporate cricket tournament Bangalore, Play Arena cricket, KAvach Cricket Club">
+  <meta name="author" content="KAvach Cricket Club">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.kavachcricket.com/kpl.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kavachcricket.com/kpl.html">
+  <meta property="og:title" content="KAvach Premier League (KPL) | Flagship Tournament">
+  <meta property="og:description" content="IPL-style intra-club auction tournament in Bangalore. Live bidding, colored jerseys, KSCA umpires & live streaming.">
+  <meta property="og:image" content="./assets/images/kpl-trophy-champions.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/images/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+  <style>
+    .kpl-hero {
+      padding: 70px 0 80px;
+      background: radial-gradient(circle at 75% 20%, rgba(255, 193, 7, 0.18) 0%, transparent 50%),
+                  radial-gradient(circle at 20% 80%, rgba(217, 4, 41, 0.15) 0%, transparent 45%),
+                  var(--dark-bg);
+    }
+    .kpl-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .kpl-feature-card {
+      background: var(--dark-surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .kpl-feature-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-yellow);
+      box-shadow: var(--shadow-card);
+    }
+    .kpl-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 193, 7, 0.12);
+      border: 1px solid var(--border-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--yellow-accent);
+      margin-bottom: 20px;
+    }
+    .kpl-icon-wrap svg {
+      width: 26px;
+      height: 26px;
+    }
+    .kpl-feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .kpl-feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .kpl-showcase-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      margin-top: 60px;
+      align-items: center;
+    }
+    .kpl-showcase-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      height: 380px;
+    }
+    .kpl-showcase-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .kpl-showcase-text h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .kpl-showcase-text p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 992px) {
+      .kpl-features-grid {
+        grid-template-columns: 1fr;
+      }
+      .kpl-showcase-row {
+        grid-template-columns: 1fr;
+      }
+      .kpl-showcase-img {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          KPL: The Marquee Intra-Club Tournament
+        </span>
+        <span class="top-bar-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Play Arena & Turf Stadiums, Bangalore
+        </span>
+      </div>
+      <div class="top-bar-right">
+        <span class="top-bar-slogan shimmer-slogan">Go Get Them ! KAvach</span>
+        <a href="https://wa.me/918296211687?text=Hi%20Veer%2C%20I%20want%20to%20know%20more%20about%20the%20KPL%20Tournament" class="top-bar-link" target="_blank" rel="noopener">
+          Chat with Veer (AI): +91-8296211687
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Clean Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="./index.html" class="brand-logo" aria-label="KAvach Cricket Club Home">
+        <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
+        <div class="brand-info">
+          <span class="brand-name">K<span>A</span>VACH</span>
+          <span class="brand-tagline">Premier League</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" aria-label="KPL Navigation">
+        <a href="./index.html" class="nav-link">&larr; Main Club Site</a>
+        <a href="#overview" class="nav-link">Overview</a>
+        <a href="#auction" class="nav-link">Auction Draft</a>
+        <a href="#awards" class="nav-link">Awards & Caps</a>
+        <a href="#how-to-qualify" class="nav-link">How to Qualify</a>
+        <a href="./policies.html" class="nav-link">Policies</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://wa.me/918296211687?text=Hi%20Veer%2C%20I%20am%20interested%20in%20playing%20in%20KPL" target="_blank" rel="noopener" class="header-veer-chat" aria-label="Ask Veer about KPL">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <span>Ask Veer</span>
+        </a>
+        <a href="./index.html#contact" class="btn btn-primary btn-sm">Join Club to Play</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- KPL Hero -->
+    <section class="kpl-hero">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-text-content reveal">
+            <div class="hero-badge-slogan">
+              <span class="slogan-dot"></span>
+              <span class="slogan-text">Flagship Intra-Club Mega Event</span>
+            </div>
+
+            <h1 class="hero-title">
+              KAvach Premier League <span class="text-gradient-yellow">(KPL)</span>
+            </h1>
+
+            <p class="hero-desc">
+              The pinnacle of amateur cricket in Bangalore. An <strong>IPL-style auction-based tournament</strong> where club players are drafted by franchise owners, play in official colored kits, and compete for trophies, medals, and glory.
+            </p>
+
+            <div class="hero-ctas">
+              <a href="./index.html#contact" class="btn btn-primary btn-lg">Join KAvach & Get Drafted</a>
+              <a href="./index.html" class="btn btn-secondary btn-lg">Back to Main Club Site</a>
+            </div>
+
+            <div class="hero-perks">
+              <div class="hero-perk-item">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span>Live Auction Draft</span>
+              </div>
+              <div class="hero-perk-item">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span>Official Colored Kits</span>
+              </div>
+              <div class="hero-perk-item">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span>Live Streaming & KSCA Umpires</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-media-card reveal delay-1">
+            <div class="hero-image-wrapper">
+              <img src="./assets/images/kpl-trophy-champions.jpg" alt="KPL Champions with trophy and gold medals" class="hero-main-img" width="800" height="453">
+              <div class="hero-image-overlay"></div>
+              <div class="hero-caption">
+                <h4>KPL Championship Night</h4>
+                <p>Medals, Trophies & Pure Cricket Ecstasy</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Tournament Features -->
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag yellow-tag">Tournament Pillars</span>
+          <h2 class="section-title">What Makes <span class="text-gradient-red">KPL Extraordinary</span></h2>
+          <p class="section-subtitle">
+            KPL combines professional tournament production with the warmth and camaraderie of our corporate cricket family.
+          </p>
+        </div>
+
+        <div class="kpl-features-grid">
+          
+          <div class="kpl-feature-card reveal" id="auction">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            <h3>Grand Auction Night</h3>
+            <p>Every registered KAvach player is entered into an auction pool with base price ratings. Franchise team owners bid with virtual purse points to build balanced squads across batting, pace, spin, and all-round departments.</p>
+          </div>
+
+          <div class="kpl-feature-card reveal delay-1">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+            </div>
+            <h3>Colored Kits & Branding</h3>
+            <p>Each franchise wears bespoke colored jerseys featuring custom crests, names, and numbers. High-grade breathable athletic fabrics ensure players look and feel like international athletes.</p>
+          </div>
+
+          <div class="kpl-feature-card reveal delay-2">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            </div>
+            <h3>Live Digital Streaming</h3>
+            <p>Every match is broadcast live with multiple camera angles, digital on-screen graphics, ball-by-ball CricClubs scoring, and engaging commentary so your colleagues, friends, and family can watch your highlights.</p>
+          </div>
+
+          <div class="kpl-feature-card reveal" id="awards">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 17v-2.34"></path><path d="M8 22v-5"></path><path d="M16 22v-5"></path><rect x="6" y="2" width="12" height="12" rx="2"></rect></svg>
+            </div>
+            <h3>Orange & Purple Caps</h3>
+            <p>Individual excellence is recognized with official awards: Orange Cap for highest run-getter, Purple Cap for top wicket-taker, MVP of the Tournament, Best Fielder, and Maximum Sixes awards.</p>
+          </div>
+
+          <div class="kpl-feature-card reveal delay-1">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <h3>Top Turf Stadiums</h3>
+            <p>Matches are contested on manicured turf pitches across Bangalore equipped with sightscreens, 65+ meter boundary ropes, white balls, and KSCA-certified panel umpires.</p>
+          </div>
+
+          <div class="kpl-feature-card reveal delay-2">
+            <div class="kpl-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>Annual Gala Banquet</h3>
+            <p>KPL culminates in a grand awards presentation banquet with players, families, team owners, and sponsors. A memorable celebration of sportsmanship, dedication, and club brotherhood.</p>
+          </div>
+
+        </div>
+
+        <!-- Showcase Visuals -->
+        <div class="kpl-showcase-row">
+          <div class="kpl-showcase-img reveal">
+            <img src="./assets/images/kpl-franchise-team.jpg" alt="Hunkaar KAvach franchise squad" loading="lazy">
+          </div>
+          <div class="kpl-showcase-text reveal delay-1" id="how-to-qualify">
+            <span class="section-tag yellow-tag">Participation</span>
+            <h3>How to Qualify for the KPL Auction</h3>
+            <p>
+              Participation in KPL is exclusively open to active, registered members of <strong>KAvach Cricket Club</strong>. Members who regularly participate in our weekday morning practice sessions at Play Arena or our weekend leather-ball matches are drafted into the official auction catalog.
+            </p>
+            <p>
+              If you are a working professional in Bangalore looking to experience the rush of tournament cricket, book your trial session today to get started!
+            </p>
+            <a href="./index.html#contact" class="btn btn-primary btn-lg">Book Your Trial Practice Session &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="./index.html" class="brand-logo" aria-label="KAvach Cricket Club">
+            <img src="./assets/images/logo.png" alt="KAvach Crest" class="brand-logo-img" width="48" height="48">
+            <div class="brand-info">
+              <span class="brand-name">K<span>A</span>VACH</span>
+              <span class="brand-tagline">Cricket for All</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            The KAvach Premier League (KPL) is the flagship tournament of KAvach Cricket Club, Bangalore.
+          </p>
+          <div class="footer-slogan shimmer-slogan">Go Get Them ! KAvach</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Club Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html" class="footer-link">Home Page</a></li>
+            <li><a href="./index.html#how-to-join" class="footer-link">How to Join (2 Paths)</a></li>
+            <li><a href="./index.html#programs" class="footer-link">Key Programs</a></li>
+            <li><a href="./index.html#studio" class="footer-link">KAvach Studio Plans</a></li>
+            <li><a href="./policies.html" class="footer-link">Liability Waiver & Policies</a></li>
+            <li><a href="./index.html#about" class="footer-link">About Our Club</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tournament Info</h4>
+          <ul class="footer-links">
+            <li><a href="#overview" class="footer-link">Tournament Overview</a></li>
+            <li><a href="#auction" class="footer-link">Auction Draft System</a></li>
+            <li><a href="#awards" class="footer-link">Orange & Purple Caps</a></li>
+            <li><a href="#how-to-qualify" class="footer-link">Qualification Criteria</a></li>
+            <li><a href="./policies.html#liability-waiver" class="footer-link">Safety & Liability Terms</a></li>
+            <li><a href="./index.html#contact" class="footer-link">Register for Club</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact & Venue</h4>
+          <p class="footer-desc" style="margin-bottom: 8px;">
+            Inside Play Arena, Kasavanahalli, Off Sarjapur Road, Bangalore – 560035
+          </p>
+          <p class="footer-desc" style="color: var(--yellow-accent); margin-bottom: 12px;">
+            WhatsApp (Veer AI): +91-8296211687
+          </p>
+          <a href="https://wa.me/918296211687?text=Hi%20Veer%2C%20I%20have%20an%20inquiry%20about%20the%20KPL%20Tournament" class="btn-whatsapp-header" target="_blank" rel="noopener">
+            <span>Chat with Veer (AI)</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2022–2026 <strong>KAvach Cricket Club</strong>. All rights reserved. Slogan: <em>"Go Get Them ! KAvach"</em>
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="./policies.html" style="color: var(--text-muted); text-decoration: none;">Policies & Waivers</a>
+          <a href="./index.html" style="color: var(--yellow-accent); text-decoration: none;">Back to Club Home &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed Floating WhatsApp Button with Veer AI -->
+  <a href="https://wa.me/918296211687?text=Hi%20Veer%2C%20I%20would%20like%20to%20know%20more%20about%20KPL" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Chat with Veer on WhatsApp">
+    <div class="whatsapp-icon-pulse">
+      <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+    </div>
+    <span>Ask Veer (AI)</span>
+  </a>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

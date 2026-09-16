@@ -1,0 +1,229 @@
+/* ==========================================================================
+   KAvach Cricket Club - Animations Stylesheet
+   Smooth athletic transitions, glows, reveals, and micro-interactions
+   ========================================================================== */
+
+/* Fade & Slide In Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* WhatsApp Radar Pulse */
+@keyframes pulseGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.floating-whatsapp {
+  animation: pulseGreen 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Slogan Shimmer Highlight */
+@keyframes shimmerText {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-slogan {
+  background: linear-gradient(
+    90deg,
+    #FFC107 0%,
+    #FFF 50%,
+    #FFC107 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 4s linear infinite;
+}
+
+/* Subtle Hero Glow Pulse */
+@keyframes redGlowPulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scale(1.08);
+  }
+}
+
+.hero-glow-element {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--red-primary) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: redGlowPulse 7s ease-in-out infinite;
+}
+
+/* Scroll Reveal Classes (Driven by IntersectionObserver in main.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Children Delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* Interactive Hover Glows */
+.hover-glow-red {
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.hover-glow-red:hover {
+  border-color: var(--red-light);
+  box-shadow: 0 0 25px rgba(217, 4, 41, 0.25);
+}
+
+/* Trophy Medal Shine */
+@keyframes trophyShine {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 0px var(--yellow-accent));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 12px var(--yellow-accent));
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 0px var(--yellow-accent));
+  }
+}
+
+.shine-badge {
+  animation: trophyShine 3s ease-in-out infinite;
+}
+
+/* Image Modal Lightbox Animation */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 7, 9, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  position: relative;
+  transform: scale(0.92);
+  transition: transform var(--transition-smooth);
+}
+
+.modal-backdrop.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  transform: rotate(90deg);
+}
+
+/* Reduced Motion Override for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
