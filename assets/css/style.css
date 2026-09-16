@@ -716,12 +716,11 @@ button {
    -------------------------------------------------------------------------- */
 .hero-section {
   position: relative;
-  min-height: 86vh;
   display: flex;
   align-items: center;
-  padding: 80px 0 85px;
-  background: radial-gradient(circle at 80% 20%, rgba(217, 4, 41, 0.16) 0%, transparent 55%),
-              radial-gradient(circle at 15% 85%, rgba(255, 193, 7, 0.09) 0%, transparent 45%),
+  padding: 38px 0 46px;
+  background: radial-gradient(circle at 85% 15%, rgba(217, 4, 41, 0.09) 0%, transparent 45%),
+              radial-gradient(circle at 15% 85%, rgba(255, 193, 7, 0.06) 0%, transparent 40%),
               var(--dark-bg);
   overflow: hidden;
 }
@@ -865,17 +864,18 @@ button {
 .hero-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(10, 11, 14, 0.9) 100%);
+  background: linear-gradient(180deg, transparent 35%, rgba(10, 11, 14, 0.85) 85%, rgba(10, 11, 14, 0.98) 100%);
   pointer-events: none;
 }
 
 .hero-caption {
   position: absolute;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
+  bottom: 58px;
+  left: 20px;
+  right: 20px;
   z-index: 2;
   color: #FFFFFF;
+  text-align: center;
 }
 
 .hero-caption h4 {
@@ -891,27 +891,32 @@ button {
   color: var(--text-secondary);
 }
 
-/* Floating Stats Badge on Hero */
+/* Centered Floating Stats Badge on Hero */
 .hero-floating-badge {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
+  bottom: -18px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
   background: var(--dark-surface-elevated);
   border: 1px solid var(--border-red);
-  padding: 14px 20px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 16px rgba(217, 4, 41, 0.22);
   display: flex;
   align-items: center;
   gap: 14px;
   z-index: 3;
+  width: max-content;
+  max-width: 90%;
+  white-space: nowrap;
 }
 
 .floating-badge-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(217, 4, 41, 0.15);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(217, 4, 41, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -920,13 +925,13 @@ button {
 }
 
 .floating-badge-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .floating-badge-text h5 {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 0.96rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.1;
@@ -945,9 +950,41 @@ button {
   .hero-main-img {
     height: 380px;
   }
+  .hero-caption {
+    bottom: 54px;
+  }
   .hero-floating-badge {
-    bottom: -15px;
-    right: 10px;
+    bottom: -18px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-caption {
+    bottom: 50px;
+  }
+  .hero-caption h4 {
+    font-size: 1rem;
+  }
+  .hero-floating-badge {
+    padding: 8px 16px;
+    gap: 10px;
+    border-radius: var(--radius-md);
+    max-width: 94%;
+    white-space: normal;
+  }
+  .floating-badge-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .floating-badge-text h5 {
+    font-size: 0.88rem;
+  }
+  .floating-badge-text p {
+    font-size: 0.74rem;
   }
 }
 
