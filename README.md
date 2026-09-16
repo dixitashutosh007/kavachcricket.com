@@ -25,10 +25,12 @@ Modern, high-performance, single-page responsive website for **KAvach Cricket Cl
 .
 ├── index.html                   # Master single-page website
 ├── kpl.html                     # Dedicated KPL tournament page
+├── timeout.html                 # KAvach Timeout annual family sports evening page
 ├── policies.html                # Club policies, liability waiver & terms page
 ├── 404.html                     # Custom S3 404 error document
 ├── sitemap.xml                  # XML sitemap for search engines
 ├── robots.txt                   # Crawler directives
+├── deploy.sh                    # One-command Git push & AWS S3 sync script
 ├── README.md                    # Project documentation & AWS deployment guide
 └── assets/
     ├── css/
@@ -42,7 +44,10 @@ Modern, high-performance, single-page responsive website for **KAvach Cricket Cl
         ├── hero-team-scarlet.jpg# First XI squad in Scarlet Red jerseys
         ├── practice-nets.jpg    # Morning practice session at Play Arena
         ├── match-day-wickets.jpg# Match day pitch & stumps
-        ├── kpl-trophy-champions.jpg # KPL Trophy celebration
+        ├── kpl-hunkaar-winner.jpg # KPL 3 Champions (KAvach Hunkaar) with trophy
+        ├── timeout-tug-of-war.jpg # KAvach Timeout Tug of War showdown
+        ├── timeout-family-fun.jpg # KAvach Timeout family & kids sports
+        ├── timeout-awards-dinner.jpg # KAvach Timeout family dinner & awards
         ├── community-play-arena.jpg # Annual community gathering
         ├── cricket-whites-team.jpg  # Leather ball squad in cricket whites
         ├── kpl-franchise-team.jpg   # KPL franchise team (Hunkaar KAvach)
