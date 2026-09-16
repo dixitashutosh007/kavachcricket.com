@@ -3242,3 +3242,93 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* --------------------------------------------------------------------------
+   KPL Franchise Teams Showcase
+   -------------------------------------------------------------------------- */
+.kpl-franchises-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.kpl-franchise-card {
+  background: var(--dark-surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all var(--transition-normal);
+}
+
+.kpl-franchise-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-yellow);
+  box-shadow: var(--shadow-card);
+}
+
+.kpl-franchise-logo-wrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.kpl-franchise-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.kpl-franchise-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.franchise-tagline {
+  font-size: 0.8rem;
+  color: var(--yellow-accent);
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .kpl-franchises-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kpl-franchises-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .kpl-franchise-logo-wrap {
+    width: 80px;
+    height: 80px;
+    padding: 6px;
+  }
+  .kpl-franchise-card h4 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .kpl-franchises-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
