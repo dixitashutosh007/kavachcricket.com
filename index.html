@@ -11,7 +11,7 @@
   <meta name="description" content="KAvach Cricket Club is the best cricket club in Bangalore for adults, seniors, and working professionals. Premier leather ball cricket club based at Play Arena, Sarjapur Road, Bangalore South. Daily morning practice nets, weekend league matches & KPL. Join our evaluated cricket community today.">
   <meta name="keywords" content="Cricket Club in Bangalore, Cricket Club for Adults, Leather Ball Cricket Club, Cricket Club for Seniors, Cricket Club in Sarjapur Road, Cricket Club in Bangalore South, Best Cricket Club, Cricket for Working Professionals, KAvach Cricket Club, Play Arena Sarjapur Road, amateur cricket club Bangalore, cricket nets Bangalore">
   <meta name="author" content="KAvach Cricket Club">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.kavachcricket.com/">
 
   <!-- Geo Meta Tags for Local Bangalore SEO -->
@@ -39,6 +39,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
   <link rel="apple-touch-icon" href="./assets/images/logo.png">
+
+  <!-- Preload Critical LCP Hero Image -->
+  <link rel=preload as=image href=./assets/images/hero-team-scarlet.webp type=image/webp fetchpriority=high>
 
   <!-- Google Fonts: Montserrat & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,6 +199,18 @@
             }
           }
         ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.kavachcricket.com/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kavachcricket.com/"
+          }
+        ]
       }
     ]
   }
@@ -207,7 +222,7 @@
   <header class="site-header">
     <div class="container header-container">
       <a href="#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-        <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
+        <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48" decoding="async"></picture>
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
           <span class="brand-tagline">Cricket for All</span>
@@ -361,6 +376,7 @@
 
             <h1 class="hero-title">
               Where Passion Meets <span class="text-gradient-red">The Pitch</span>
+              <span class="sr-only"> — Best Leather Ball Cricket Club in Bangalore for Working Professionals, Adults &amp; Seniors</span>
             </h1>
 
             <p class="hero-desc">
@@ -391,7 +407,7 @@
           <!-- Hero Media Visual Card -->
           <div class="hero-media-card reveal delay-2">
             <div class="hero-image-wrapper">
-              <img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach Cricket Club First XI in Scarlet Red jerseys on the turf ground" class="hero-main-img" width="800" height="1067">
+              <picture><source type="image/webp" srcset="./assets/images/hero-team-scarlet.webp"><img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach Cricket Club First XI in Scarlet Red jerseys on the turf ground" class="hero-main-img" width="800" height="1067" fetchpriority="high" decoding="async"></picture>
               <div class="hero-image-overlay"></div>
               <div class="hero-caption">
                 <h4>KAvach Squad in Scarlet Red</h4>
@@ -578,7 +594,7 @@
           <!-- Program 1: Weekend Matches -->
           <div class="program-card reveal">
             <div class="program-img-wrap">
-              <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club team celebrating weekend tournament championship victory with trophy" loading="lazy">
+              <picture><source type="image/webp" srcset="./assets/images/kavach-winning-trophy.webp"><img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club team celebrating weekend tournament championship victory with trophy" width="1200" height="952" loading="lazy" decoding="async"></picture>
               <span class="program-badge badge-scarlet">Competitive</span>
             </div>
             <div class="program-content">
@@ -611,7 +627,7 @@
           <!-- Program 2: Daily Practice Sessions -->
           <div class="program-card featured-card reveal delay-1">
             <div class="program-img-wrap">
-              <img src="./assets/images/practice-nets.jpg" alt="Daily morning practice nets session at Play Arena" loading="lazy">
+              <picture><source type="image/webp" srcset="./assets/images/practice-nets.webp"><img src="./assets/images/practice-nets.jpg" alt="Daily morning practice nets session at Play Arena Sarjapur Road" width="800" height="450" loading="lazy" decoding="async"></picture>
               <span class="program-badge badge-yellow">Daily Tue–Fri</span>
             </div>
             <div class="program-content">
@@ -644,7 +660,7 @@
           <!-- Program 3: KPL Flagship Tournament -->
           <div class="program-card reveal delay-2">
             <div class="program-img-wrap">
-              <img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KAvach Premier League KPL 3 Champions - KAvach Hunkaar squad celebrating with trophy" loading="lazy">
+              <picture><source type="image/webp" srcset="./assets/images/kpl-hunkaar-winner.webp"><img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KAvach Premier League KPL 3 Champions - KAvach Hunkaar squad celebrating with trophy" width="1600" height="900" loading="lazy" decoding="async"></picture>
               <span class="program-badge badge-scarlet">Flagship Event</span>
             </div>
             <div class="program-content">
@@ -696,7 +712,7 @@
             </div>
           </div>
           <div class="timeout-teaser-img">
-            <img src="./assets/images/timeout-mega-family.jpg" alt="KAvach Timeout annual family sports festival with 40+ players, spouses, and children on Play Arena turf" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-mega-family.webp"><img src="./assets/images/timeout-mega-family.jpg" alt="KAvach Timeout annual family sports festival with 40+ players, spouses, and children on Play Arena turf" width="1200" height="800" loading="lazy" decoding="async"></picture>
           </div>
         </div>
 
@@ -771,7 +787,7 @@
             </div>
           </div>
           <div class="studio-intro-img">
-            <img src="./assets/images/studio-turf-warmup.jpg" alt="Morning practice warmup and conditioning at KAvach Studio, Play Arena" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/studio-turf-warmup.webp"><img src="./assets/images/studio-turf-warmup.jpg" alt="Morning practice warmup and conditioning at KAvach Studio, Play Arena" width="1200" height="900" loading="lazy" decoding="async"></picture>
           </div>
         </div>
 
@@ -944,14 +960,14 @@
           <!-- About Media Column -->
           <div class="about-media-column reveal delay-1">
             <div class="about-main-img">
-              <img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club community day with players and families at Play Arena" loading="lazy">
+              <picture><source type="image/webp" srcset="./assets/images/community-play-arena.webp"><img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club community day with players and families at Play Arena" width="800" height="534" loading="lazy" decoding="async"></picture>
             </div>
             <div class="about-sub-grid">
               <div class="about-sub-img">
-                <img src="./assets/images/cricket-whites-team.jpg" alt="KAvach Leather Ball squad in traditional cricket whites" loading="lazy">
+                <picture><source type="image/webp" srcset="./assets/images/cricket-whites-team.webp"><img src="./assets/images/cricket-whites-team.jpg" alt="KAvach Leather Ball squad in traditional cricket whites" width="800" height="600" loading="lazy" decoding="async"></picture>
               </div>
               <div class="about-sub-img">
-                <img src="./assets/images/play-arena-pitch-celebration.jpg" alt="KAvach squad medal celebration on Play Arena pitch" loading="lazy">
+                <picture><source type="image/webp" srcset="./assets/images/play-arena-pitch-celebration.webp"><img src="./assets/images/play-arena-pitch-celebration.jpg" alt="KAvach squad medal celebration on Play Arena pitch" width="1200" height="900" loading="lazy" decoding="async"></picture>
               </div>
             </div>
           </div>
@@ -974,7 +990,7 @@
         <div class="gallery-grid">
           
           <div class="gallery-item reveal">
-            <img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach squad in scarlet jerseys on match pitch" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/hero-team-scarlet.webp"><img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach squad in scarlet jerseys on match pitch" width="800" height="1067" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Match Day Lineup</h4>
               <p>Weekend League Fixture • Bangalore</p>
@@ -982,7 +998,7 @@
           </div>
 
           <div class="gallery-item reveal delay-1">
-            <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach team celebrating tournament championship victory with trophy in scarlet jerseys" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/kavach-winning-trophy.webp"><img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach team celebrating tournament championship victory with trophy in scarlet jerseys" width="1200" height="952" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Championship Glory</h4>
               <p>Hoisting the Cup in Scarlet Red</p>
@@ -990,7 +1006,7 @@
           </div>
 
           <div class="gallery-item reveal delay-2">
-            <img src="./assets/images/kpl-trophies-display.jpg" alt="KPL championship trophies, awards, and golden cups" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/kpl-trophies-display.webp"><img src="./assets/images/kpl-trophies-display.jpg" alt="KPL championship trophies, awards, and golden cups" width="1200" height="800" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>KPL Glitz & Honors</h4>
               <p>Championship Cups, Caps & MVP Stars</p>
@@ -998,7 +1014,7 @@
           </div>
 
           <div class="gallery-item reveal">
-            <img src="./assets/images/studio-turf-warmup.jpg" alt="Morning practice warmup and drills at Play Arena turf" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/studio-turf-warmup.webp"><img src="./assets/images/studio-turf-warmup.jpg" alt="Morning practice warmup and drills at Play Arena turf" width="1200" height="900" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>KAvach Studio at Play Arena</h4>
               <p>Tuesday–Friday Morning Conditioning (7–9 AM)</p>
@@ -1006,7 +1022,7 @@
           </div>
 
           <div class="gallery-item reveal delay-1">
-            <img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="KAvach Timeout Tug of War family competition across the turf" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-wide-tug-of-war.webp"><img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="KAvach Timeout Tug of War family competition across the turf" width="1200" height="676" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>KAvach Timeout: Tug of War</h4>
               <p>Annual Two-Team Family Championship</p>
@@ -1014,7 +1030,7 @@
           </div>
 
           <div class="gallery-item reveal delay-2">
-            <img src="./assets/images/timeout-night-trophy.jpg" alt="KAvach Timeout night trophy ceremony with families, spouses, and kids" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-night-trophy.webp"><img src="./assets/images/timeout-night-trophy.jpg" alt="KAvach Timeout night trophy ceremony with families, spouses, and kids" width="1200" height="676" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Family Night Awards</h4>
               <p>Spouses, Kids & Cricketers Celebrating Together</p>
@@ -1022,7 +1038,7 @@
           </div>
 
           <div class="gallery-item reveal">
-            <img src="./assets/images/timeout-celebration-hug.jpg" alt="Teammates celebrating with smiles and hugs" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-celebration-hug.webp"><img src="./assets/images/timeout-celebration-hug.jpg" alt="Teammates celebrating with smiles and hugs" width="1200" height="800" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Unbreakable Camaraderie</h4>
               <p>Brotherhood On & Off the Pitch</p>
@@ -1030,7 +1046,7 @@
           </div>
 
           <div class="gallery-item reveal delay-1">
-            <img src="./assets/images/community-play-arena.jpg" alt="KAvach Community gathering at Play Arena" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/community-play-arena.webp"><img src="./assets/images/community-play-arena.jpg" alt="KAvach Community gathering at Play Arena" width="800" height="534" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>The KAvach Family</h4>
               <p>Annual Community Gathering at Play Arena</p>
@@ -1458,6 +1474,9 @@
               <iframe 
                 title="KAvach Cricket Club Play Arena Location"
                 src="https://maps.google.com/maps?q=Play%20Arena,%20Kasavanahalli,%20Sarjapur%20Road,%20Bangalore&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="280" 
+                style="border:0;" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
               </iframe>
@@ -1478,7 +1497,7 @@
         
         <div class="footer-col footer-brand">
           <a href="#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-            <img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48">
+            <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async"></picture>
             <div class="brand-info">
               <span class="brand-name">K<span>A</span>VACH</span>
               <span class="brand-tagline">Cricket for All</span>

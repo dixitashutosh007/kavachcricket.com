@@ -3332,3 +3332,43 @@ button {
   }
 }
 
+/* ==========================================================================
+   Modern Web Performance: Core Web Vitals & Content Visibility
+   ========================================================================== */
+
+/* Defer layout and paint of heavy below-the-fold sections until near viewport */
+.gallery-section,
+.testimonials-section,
+.culture-section,
+.faq-section,
+.contact-section,
+.kpl-moments-section,
+.timeout-moments-section,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}
+
+/* Image containment & picture tag handling to eliminate Cumulative Layout Shift (CLS) */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+picture {
+  display: contents;
+}
+
+/* Accessible Screen Reader Only Utility for Semantic SEO */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+

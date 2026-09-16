@@ -9,15 +9,26 @@
   <meta name="description" content="KAvach Timeout is our signature annual family sports evening. Player families and kids compete across Mini Cricket, Football, Dodgeball, Kho Kho, Pitthu, and Tug of War, followed by a grand family dinner.">
   <meta name="keywords" content="KAvach Timeout, cricket club family event Bangalore, corporate cricket family day, Play Arena family sports, Tug of War, Lagori, Kho Kho, KAvach Cricket Club">
   <meta name="author" content="KAvach Cricket Club">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.kavachcricket.com/timeout.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kavachcricket.com/timeout.html">
-  <meta property="og:title" content="KAvach Timeout | Annual Family Sports Evening & Championship">
+  <meta property="og:title" content="KAvach Timeout | Annual Family Sports Evening & Championship | KAvach Cricket Club">
   <meta property="og:description" content="Mini Cricket, Football, Dodgeball, Kho Kho, Pitthu, Tug of War, and family dinner. Two family-led teams battle for the KAvach Timeout Trophy!">
-  <meta property="og:image" content="./assets/images/timeout-family-fun.jpg">
+  <meta property="og:image" content="https://www.kavachcricket.com/assets/images/timeout-mega-family.jpg">
+  <meta property="og:site_name" content="KAvach Cricket Club">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KAvach Timeout | Annual Family Sports Evening & Championship">
+  <meta name="twitter:description" content="Mini Cricket, Box Football, Tug of War, and multi-sport family championship at Play Arena Sarjapur Road.">
+  <meta name="twitter:image" content="https://www.kavachcricket.com/assets/images/timeout-mega-family.jpg">
+
+  <!-- Preload Critical LCP Hero Image -->
+  <link rel="preload" as="image" href="./assets/images/timeout-mega-family.webp" type="image/webp" fetchpriority="high">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
@@ -27,6 +38,57 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SportsEvent",
+        "@id": "https://www.kavachcricket.com/timeout.html#event",
+        "name": "KAvach Timeout Annual Family Sports Evening",
+        "description": "Annual multi-sport championship where KAvach players, spouses, and kids compete in friendly games (Mini Cricket, Box Football, Tug of War, Dodgeball, Pitthu, Kho Kho) followed by a family dinner banquet.",
+        "url": "https://www.kavachcricket.com/timeout.html",
+        "image": "https://www.kavachcricket.com/assets/images/timeout-mega-family.jpg",
+        "location": {
+          "@type": "Place",
+          "name": "Play Arena, Kasavanahalli",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Inside Play Arena, 1st Cross Road, Valliyamma Layout, Kasavanahalli, Off Sarjapur Road",
+            "addressLocality": "Bangalore",
+            "addressRegion": "Karnataka",
+            "postalCode": "560035",
+            "addressCountry": "IN"
+          }
+        },
+        "organizer": {
+          "@type": "SportsClub",
+          "name": "KAvach Cricket Club",
+          "url": "https://www.kavachcricket.com/"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.kavachcricket.com/timeout.html#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kavachcricket.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "KAvach Timeout",
+            "item": "https://www.kavachcricket.com/timeout.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <!-- CSS -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/animations.css">
@@ -37,7 +99,7 @@
   <header class="site-header">
     <div class="container header-container">
       <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-        <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
+        <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48" decoding="async"></picture>
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
           <span class="brand-tagline">Cricket for All</span>
@@ -213,7 +275,7 @@
 
           <div class="hero-visual reveal delay-1">
             <div class="hero-visual-card">
-              <img src="./assets/images/timeout-mega-family.jpg" alt="KAvach Timeout family sports day at Play Arena turf" class="hero-main-img" width="800" height="533">
+              <picture><source type="image/webp" srcset="./assets/images/timeout-mega-family.webp"><img src="./assets/images/timeout-mega-family.jpg" alt="KAvach Timeout family sports day at Play Arena turf" class="hero-main-img" width="1200" height="800" fetchpriority="high" decoding="async"></picture>
               <div class="hero-floating-card">
                 <div class="floating-icon">
                   <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -365,7 +427,7 @@
 
           <div class="reveal delay-1">
             <div style="border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-medium); box-shadow: var(--shadow-card);">
-              <img src="./assets/images/timeout-night-trophy.jpg" alt="KAvach Timeout trophy presentation ceremony under floodlights with families" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <picture><source type="image/webp" srcset="./assets/images/timeout-night-trophy.webp"><img src="./assets/images/timeout-night-trophy.jpg" alt="KAvach Timeout trophy presentation ceremony under floodlights with families" width="1200" height="676" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" decoding="async"></picture>
             </div>
           </div>
 
@@ -387,7 +449,7 @@
         <div class="gallery-grid">
           
           <div class="gallery-item reveal">
-            <img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="The great Tug of War battle across the Play Arena turf" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-wide-tug-of-war.webp"><img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="The great Tug of War battle across the Play Arena turf" width="1200" height="676" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>The Tug of War Arena</h4>
               <p>Two-Team Family Rivalry Across the Pitch</p>
@@ -395,7 +457,7 @@
           </div>
 
           <div class="gallery-item reveal delay-1">
-            <img src="./assets/images/timeout-celebration-hug.jpg" alt="Teammates and families laughing and celebrating" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-celebration-hug.webp"><img src="./assets/images/timeout-celebration-hug.jpg" alt="Teammates and families laughing and celebrating" width="1200" height="800" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Pure Joy & Brotherhood</h4>
               <p>Lifelong Memories Made on the Turf</p>
@@ -403,7 +465,7 @@
           </div>
 
           <div class="gallery-item reveal delay-2">
-            <img src="./assets/images/timeout-family-fun.jpg" alt="Kids and families participating at KAvach Timeout" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-family-fun.webp"><img src="./assets/images/timeout-family-fun.jpg" alt="Kids and families participating at KAvach Timeout" width="1600" height="1067" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Kids & Family Games</h4>
               <p>Smiles, Sprints & Multi-Sport Fun</p>
@@ -411,7 +473,7 @@
           </div>
 
           <div class="gallery-item reveal">
-            <img src="./assets/images/timeout-awards-dinner.jpg" alt="KAvach family dinner banquet and celebration" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/timeout-awards-dinner.webp"><img src="./assets/images/timeout-awards-dinner.jpg" alt="KAvach family dinner banquet and celebration" width="1600" height="1200" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
               <h4>Grand Family Banquet</h4>
               <p>Celebrating the Champions Over Delicious Food & Music</p>
@@ -430,7 +492,7 @@
       <div class="footer-grid">
         <div class="footer-col footer-brand">
           <a href="./index.html" class="brand-logo" aria-label="KAvach Cricket Club">
-            <img src="./assets/images/logo.png" alt="KAvach Crest" class="brand-logo-img" width="48" height="48">
+            <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Crest" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async"></picture>
             <div class="brand-info">
               <span class="brand-name">K<span>A</span>VACH</span>
               <span class="brand-tagline">Cricket for All</span>

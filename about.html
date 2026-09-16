@@ -28,6 +28,14 @@
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
   <link rel="apple-touch-icon" href="./assets/images/logo.png">
 
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- Preconnect & Preload Critical Image -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/images/community-play-arena.webp" type="image/webp" fetchpriority="high">
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/animations.css">
@@ -36,25 +44,46 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SportsClub",
-    "name": "KAvach Cricket Club",
-    "alternateName": ["KAvach Cricket Bangalore", "KAvach Club"],
-    "slogan": "Go Get Them ! KAvach",
-    "url": "https://www.kavachcricket.com/about.html",
-    "logo": "https://www.kavachcricket.com/assets/images/logo.png",
-    "image": "https://www.kavachcricket.com/assets/images/community-play-arena.jpg",
-    "description": "KAvach Cricket Club is Bangalore's leading leather-ball cricket club exclusively for working professionals. Founded in 2022 with 350+ active members and 900+ matches played.",
-    "sport": "Cricket",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Inside Play Arena, 1st Cross Road, Valliyamma Layout, Kasavanahalli, Off Sarjapur Road",
-      "addressLocality": "Bangalore",
-      "addressRegion": "Karnataka",
-      "postalCode": "560035",
-      "addressCountry": "IN"
-    },
-    "telephone": "+91-8296211687",
-    "email": "kavachcricketclub@gmail.com"
+    "@graph": [
+      {
+        "@type": "SportsClub",
+        "name": "KAvach Cricket Club",
+        "alternateName": ["KAvach Cricket Bangalore", "KAvach Club"],
+        "slogan": "Go Get Them ! KAvach",
+        "url": "https://www.kavachcricket.com/about.html",
+        "logo": "https://www.kavachcricket.com/assets/images/logo.png",
+        "image": "https://www.kavachcricket.com/assets/images/community-play-arena.jpg",
+        "description": "KAvach Cricket Club is Bangalore's leading leather-ball cricket club exclusively for working professionals. Founded in 2022 with 350+ active members and 900+ matches played.",
+        "sport": "Cricket",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Inside Play Arena, 1st Cross Road, Valliyamma Layout, Kasavanahalli, Off Sarjapur Road",
+          "addressLocality": "Bangalore",
+          "addressRegion": "Karnataka",
+          "postalCode": "560035",
+          "addressCountry": "IN"
+        },
+        "telephone": "+91-8296211687",
+        "email": "kavachcricketclub@gmail.com"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kavachcricket.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About KAvach",
+            "item": "https://www.kavachcricket.com/about.html"
+          }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -257,7 +286,7 @@
   <header class="site-header">
     <div class="container header-container">
       <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-        <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48">
+        <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48" decoding="async"></picture>
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
           <span class="brand-tagline">Cricket for All</span>
@@ -462,7 +491,7 @@
           </div>
 
           <div class="story-card-visual reveal delay-1">
-            <img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club community gathering at Play Arena" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/community-play-arena.webp"><img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club community gathering at Play Arena" width="800" height="534" fetchpriority="high" decoding="async"></picture>
           </div>
 
         </div>
@@ -601,7 +630,7 @@
         <div class="story-card-grid" style="align-items: center;">
           
           <div class="story-card-visual reveal">
-            <img src="./assets/images/play-arena-pitch-celebration.jpg" alt="KAvach squad medal celebration on Play Arena pitch" loading="lazy">
+            <picture><source type="image/webp" srcset="./assets/images/play-arena-pitch-celebration.webp"><img src="./assets/images/play-arena-pitch-celebration.jpg" alt="KAvach squad medal celebration on Play Arena pitch" width="1200" height="900" loading="lazy" decoding="async"></picture>
           </div>
 
           <div class="reveal delay-1">
@@ -635,7 +664,7 @@
         
         <div class="footer-col footer-brand">
           <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-            <img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48">
+            <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async"></picture>
             <div class="brand-info">
               <span class="brand-name">K<span>A</span>VACH</span>
               <span class="brand-tagline">Cricket for All</span>

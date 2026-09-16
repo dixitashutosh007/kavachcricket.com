@@ -27,9 +27,20 @@ echo "🚀 Pushing to GitHub (origin/${BRANCH})..."
 git push origin "$BRANCH"
 echo "✅ Pushed to GitHub successfully!"
 
-# 3. Sync to AWS S3
-echo "☁️  Syncing to AWS S3 bucket: s3://${BUCKET_NAME}/..."
-aws s3 sync . "s3://${BUCKET_NAME}/" --exclude ".git/*" --exclude ".github/*" --exclude "deploy.sh" --delete
+# 3. Sync to AWS S3 with High-Performance Cache-Control Headers
+echo "☁️  Syncing static assets (WebP images, CSS, JS) with 1-year immutable caching..."
+aws s3 sync assets "s3://${BUCKET_NAME}/assets" \
+  --cache-control "public, max-age=31536000, immutable" \
+  --delete
+
+echo "☁️  Syncing HTML pages, sitemaps, and manifests with smart revalidation..."
+aws s3 sync . "s3://${BUCKET_NAME}/" \
+  --exclude ".git/*" \
+  --exclude ".github/*" \
+  --exclude "deploy.sh" \
+  --exclude "assets/*" \
+  --cache-control "public, max-age=3600, must-revalidate" \
+  --delete
 
 echo ""
 echo "🎉 DEPLOYMENT COMPLETE!"
