@@ -588,13 +588,16 @@ button {
 .mobile-toggle {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 1100;
+  box-sizing: border-box;
 }
 
 .mobile-toggle span {
@@ -607,7 +610,7 @@ button {
 }
 
 .mobile-toggle.open span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .mobile-toggle.open span:nth-child(2) {
@@ -615,7 +618,7 @@ button {
 }
 
 .mobile-toggle.open span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Mobile Nav Drawer with Accordions */
@@ -762,8 +765,9 @@ button {
     height: 15px;
   }
   .mobile-toggle {
-    width: 26px;
-    height: 18px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
   }
   .mobile-nav-drawer {
     top: 66px;
@@ -3764,6 +3768,8 @@ select.form-control {
 .testimonials-section,
 .culture-section,
 .faq-section,
+.policies-section,
+.about-story-section,
 .kpl-moments-section,
 .timeout-moments-section,
 .site-footer {
@@ -3878,6 +3884,8 @@ section:has(.contact-action-dropdown.active),
 .site-footer.has-active-dropdown {
   z-index: 800 !important;
   overflow: visible !important;
+  content-visibility: visible !important;
+  contain: none !important;
 }
 
 .two-paths-container:has(.contact-action-dropdown.active),
@@ -3954,8 +3962,8 @@ section:has(.contact-action-dropdown.active),
   top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
-  min-width: 310px;
-  max-width: calc(100vw - 32px);
+  min-width: 0;
+  max-width: min(360px, calc(100vw - 24px));
   width: max-content;
   background: rgba(18, 22, 31, 0.98);
   border: 1px solid rgba(255, 193, 7, 0.35);
@@ -4117,9 +4125,9 @@ section:has(.contact-action-dropdown.active),
     max-width: 360px;
   }
   .action-dropdown-menu {
-    min-width: 280px;
+    min-width: 0;
     width: 100%;
-    max-width: 360px;
+    max-width: min(360px, calc(100vw - 24px));
   }
   .action-item-hint {
     white-space: normal;
