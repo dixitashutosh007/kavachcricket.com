@@ -236,25 +236,39 @@
           <a href="#home" class="nav-link active">Home</a>
         </div>
 
-        <!-- Dropdown: The Club (includes About, KPL, Timeout, Story, Gallery, FAQ) -->
+        <!-- Dropdown: About -->
         <div class="nav-item">
-          <a href="#about" class="nav-link">
-            <span>The Club</span>
+          <a href="./about.html" class="nav-link">
+            <span>About</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </a>
           <div class="nav-dropdown">
             <a href="./about.html" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>About KAvach</span>
+              <span>About Us</span>
             </a>
             <a href="#about" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Our Story & Culture</span>
             </a>
-            <a href="#rankings" class="dropdown-link">
+            <a href="./policies.html" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>Rankings & Milestones</span>
+              <span>Policies</span>
             </a>
+            <a href="#testimonials" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Player Stories</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dropdown: The Club -->
+        <div class="nav-item">
+          <a href="./kpl.html" class="nav-link">
+            <span>The Club</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown">
             <a href="./kpl.html" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>KPL</span>
@@ -267,10 +281,6 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Photo Gallery</span>
             </a>
-            <a href="#testimonials" class="dropdown-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>Player Stories</span>
-            </a>
             <a href="#faq" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Frequently Asked Questions</span>
@@ -281,16 +291,6 @@
         <!-- Studio Link -->
         <div class="nav-item">
           <a href="#studio" class="nav-link">Studio</a>
-        </div>
-
-        <!-- How to Join Link -->
-        <div class="nav-item">
-          <a href="#how-to-join" class="nav-link">How to Join</a>
-        </div>
-
-        <!-- Policies Link -->
-        <div class="nav-item">
-          <a href="./policies.html" class="nav-link">Policies</a>
         </div>
 
         <!-- Contact Link -->
@@ -321,33 +321,41 @@
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
       <a href="#home" class="mobile-direct-link">Home <span>&rarr;</span></a>
 
-      <!-- Mobile Accordion: The Club -->
+      <!-- Mobile Accordion: About -->
       <div class="mobile-nav-item">
         <button class="mobile-nav-header">
-          <span>The Club & Culture</span>
+          <span>About</span>
           <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="mobile-sub-menu">
-          <a href="./about.html" class="mobile-sub-link">&bull; About KAvach</a>
+          <a href="./about.html" class="mobile-sub-link">&bull; About Us</a>
           <a href="#about" class="mobile-sub-link">&bull; Our Story & Culture</a>
-          <a href="#rankings" class="mobile-sub-link">&bull; Rankings & Milestones</a>
+          <a href="./policies.html" class="mobile-sub-link">&bull; Policies</a>
+          <a href="#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
+        </div>
+      </div>
+
+      <!-- Mobile Accordion: The Club -->
+      <div class="mobile-nav-item">
+        <button class="mobile-nav-header">
+          <span>The Club</span>
+          <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="mobile-sub-menu">
           <a href="./kpl.html" class="mobile-sub-link">&bull; KPL</a>
           <a href="./timeout.html" class="mobile-sub-link">&bull; KAvach Timeout</a>
           <a href="#gallery" class="mobile-sub-link">&bull; Photo Gallery</a>
-          <a href="#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
           <a href="#faq" class="mobile-sub-link">&bull; Frequently Asked Questions</a>
         </div>
       </div>
 
       <a href="#studio" class="mobile-direct-link">KAvach Studio <span>&rarr;</span></a>
-      <a href="#how-to-join" class="mobile-direct-link">How to Join the Club <span>&rarr;</span></a>
-      <a href="./policies.html" class="mobile-direct-link" style="color: var(--red-light);">Policies & Disclaimers <span>&rarr;</span></a>
       <a href="#contact" class="mobile-direct-link">Contact & Location <span>&rarr;</span></a>
 
       <div class="mobile-nav-actions">
         <a href="#contact" class="btn btn-primary btn-lg">Book Trial Practice Session</a>
         <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" style="justify-content: center; padding: 12px;">
-          <svg class="wa-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
+          <svg class="wa-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
           <span>WhatsApp Us</span>
         </a>
       </div>
@@ -492,11 +500,11 @@
           <div class="path-switcher-tabs reveal">
             <button class="path-tab-btn active" data-path="practice">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>A: Interested in Daily Practice Session (Studio)</span>
+              <span>Join Weekdays Practice Sessions</span>
             </button>
             <button class="path-tab-btn" data-path="matches">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <span>B: Just Weekend Matches</span>
+              <span>Join Weekend Club Matches</span>
             </button>
           </div>
 
@@ -560,6 +568,16 @@
               </div>
 
             </div>
+          </div>
+
+          <!-- Action Buttons for Registration & Trial Booking -->
+          <div class="how-to-join-actions reveal" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px;">
+            <a href="https://form.jotform.com/231925336416153" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+              <span>Fill Registration to Join &rarr;</span>
+            </a>
+            <a href="#contact" class="btn btn-primary btn-lg">
+              <span>Book Trial Session</span>
+            </a>
           </div>
 
           <!-- Admission Criteria & Right of Admission Callout -->
@@ -1204,6 +1222,25 @@
           
           <div class="faq-item active">
             <button class="faq-question" aria-expanded="true">
+              <span>How do I join KAvach Cricket Club?</span>
+              <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Joining KAvach Cricket Club is simple and structured around your goals and weekly schedule:
+              </p>
+              <ol style="margin: 8px 0 12px 20px; color: var(--text-secondary); line-height: 1.75;">
+                <li><strong>Join Weekdays Practice Sessions (KAvach Studio):</strong> If you want regular morning training and skill development, book a trial net session (Tue–Fri, 7:00 AM – 9:00 AM at Play Arena, Sarjapur Road) by filling our <a href="#contact" style="color: var(--yellow-accent); text-decoration: underline; font-weight: 600;">Trial Booking Form</a> below.</li>
+                <li><strong>Join Weekend Club Matches:</strong> If you are match-ready and want to play competitive Saturday/Sunday 20 or 30-over leather ball matches, complete our <a href="https://form.jotform.com/231925336416153" target="_blank" rel="noopener" style="color: var(--red-light); text-decoration: underline; font-weight: 600;">Official Registration Form ↗</a>. Share your cricketing background or CricHeroes profile link.</li>
+              </ol>
+              <p>
+                Once submitted, our Think Tank committee will review your profile and connect with you on WhatsApp to confirm your trial slot or match assessment.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
               <span>Which is the best cricket club in Bangalore for adults and working professionals?</span>
               <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>

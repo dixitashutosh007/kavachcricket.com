@@ -97,25 +97,39 @@
           <a href="./index.html#home" class="nav-link">Home</a>
         </div>
 
-        <!-- Dropdown: The Club -->
+        <!-- Dropdown: About (Active on this page) -->
         <div class="nav-item">
-          <a href="./index.html#about" class="nav-link">
-            <span>The Club</span>
+          <a href="./about.html" class="nav-link active">
+            <span>About</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </a>
           <div class="nav-dropdown">
             <a href="./about.html" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>About KAvach</span>
+              <span>About Us</span>
             </a>
             <a href="./index.html#about" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Our Story & Culture</span>
             </a>
-            <a href="./index.html#rankings" class="dropdown-link">
+            <a href="./policies.html" class="dropdown-link" style="color: var(--yellow-accent);">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>Rankings & Milestones</span>
+              <span>Policies</span>
             </a>
+            <a href="./index.html#testimonials" class="dropdown-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span>Player Stories</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dropdown: The Club -->
+        <div class="nav-item">
+          <a href="./kpl.html" class="nav-link">
+            <span>The Club</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown">
             <a href="./kpl.html" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>KPL</span>
@@ -128,10 +142,6 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Photo Gallery</span>
             </a>
-            <a href="./index.html#testimonials" class="dropdown-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <span>Player Stories</span>
-            </a>
             <a href="./index.html#faq" class="dropdown-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               <span>Frequently Asked Questions</span>
@@ -142,16 +152,6 @@
         <!-- Studio Link -->
         <div class="nav-item">
           <a href="./index.html#studio" class="nav-link">Studio</a>
-        </div>
-
-        <!-- How to Join Link -->
-        <div class="nav-item">
-          <a href="./index.html#how-to-join" class="nav-link">How to Join</a>
-        </div>
-
-        <!-- Policies Link (Active) -->
-        <div class="nav-item">
-          <a href="./policies.html" class="nav-link active">Policies</a>
         </div>
 
         <!-- Contact Link -->
@@ -181,27 +181,35 @@
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
       <a href="./index.html#home" class="mobile-direct-link">Home <span>&rarr;</span></a>
 
-      <!-- Mobile Accordion: The Club -->
+      <!-- Mobile Accordion: About -->
       <div class="mobile-nav-item">
         <button class="mobile-nav-header">
-          <span>The Club & Culture</span>
+          <span>About</span>
           <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="mobile-sub-menu">
-          <a href="./about.html" class="mobile-sub-link">&bull; About KAvach</a>
+          <a href="./about.html" class="mobile-sub-link">&bull; About Us</a>
           <a href="./index.html#about" class="mobile-sub-link">&bull; Our Story & Culture</a>
-          <a href="./index.html#rankings" class="mobile-sub-link">&bull; Rankings & Milestones</a>
+          <a href="./policies.html" class="mobile-sub-link" style="color: var(--yellow-accent);">&bull; Policies</a>
+          <a href="./index.html#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
+        </div>
+      </div>
+
+      <!-- Mobile Accordion: The Club -->
+      <div class="mobile-nav-item">
+        <button class="mobile-nav-header">
+          <span>The Club</span>
+          <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="mobile-sub-menu">
           <a href="./kpl.html" class="mobile-sub-link">&bull; KPL</a>
           <a href="./timeout.html" class="mobile-sub-link">&bull; KAvach Timeout</a>
           <a href="./index.html#gallery" class="mobile-sub-link">&bull; Photo Gallery</a>
-          <a href="./index.html#testimonials" class="mobile-sub-link">&bull; Player Stories</a>
           <a href="./index.html#faq" class="mobile-sub-link">&bull; Frequently Asked Questions</a>
         </div>
       </div>
 
       <a href="./index.html#studio" class="mobile-direct-link">KAvach Studio <span>&rarr;</span></a>
-      <a href="./index.html#how-to-join" class="mobile-direct-link">How to Join the Club <span>&rarr;</span></a>
-      <a href="./policies.html" class="mobile-direct-link" style="color: var(--red-light);">Policies & Disclaimers <span>&rarr;</span></a>
       <a href="./index.html#contact" class="mobile-direct-link">Contact Us <span>&rarr;</span></a>
 
       <div class="mobile-nav-actions">

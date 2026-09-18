@@ -42,6 +42,12 @@ aws s3 sync . "s3://${BUCKET_NAME}/" \
   --cache-control "public, max-age=3600, must-revalidate" \
   --delete
 
+echo "☁️  Uploading clean extensionless routing objects for S3 (/about, /kpl, /timeout, /policies)..."
+aws s3 cp about.html "s3://${BUCKET_NAME}/about" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+aws s3 cp kpl.html "s3://${BUCKET_NAME}/kpl" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+aws s3 cp timeout.html "s3://${BUCKET_NAME}/timeout" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+aws s3 cp policies.html "s3://${BUCKET_NAME}/policies" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+
 echo ""
 echo "🎉 DEPLOYMENT COMPLETE!"
 echo "🌐 Live S3 Website Endpoint:"

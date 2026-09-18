@@ -339,3 +339,15 @@ Looking forward to confirmation!`;
     window.open(whatsappUrl, '_blank');
   });
 }
+
+// Window load anchor realignment to ensure accurate sticky nav clearance
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+    }
+  }
+});
