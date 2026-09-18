@@ -1,23 +1,23 @@
 User-agent: *
 Allow: /
 
-# Allow AI crawlers for AI Search Engine Optimization (AEO / GEO)
+# Allow AI Search Engines and LLM Crawlers
 User-agent: GPTBot
 Allow: /
 
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Applebot-Extended
+User-agent: PerplexityBot
 Allow: /
 
-User-agent: CCBot
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
 Allow: /
 
 Sitemap: https://www.kavachcricket.com/sitemap.xml

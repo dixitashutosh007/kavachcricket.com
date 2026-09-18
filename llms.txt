@@ -1,56 +1,12 @@
 # KAvach Cricket Club
 
-> "Go Get Them ! KAvach" — Bangalore's Premier Leather Ball Cricket Club for Working Professionals, Adults, and Seniors.
+> Bangalore's premier leather-ball cricket club exclusively designed for working professionals, adults, and seniors. Headquartered at Play Arena, Sarjapur Road, the club features daily morning practice nets, competitive weekend matches, and flagship tournaments like the KAvach Premier League (KPL).
 
-## About KAvach Cricket Club
-KAvach Cricket Club is an amateur leather-ball cricket club based in Bangalore, Karnataka, India. Founded in February 2022, the club has played over 900 matches and has a member base of 400 corporate executives, software architects, engineers, doctors, entrepreneurs, civil servants, and university players.
+## Core Information
+- [Home](https://www.kavachcricket.com/) - Main landing page, player pathways, and club overview.
+- [About KAvach](https://www.kavachcricket.com/about.html) - Our history, 6 defining pillars, and official in-house franchise teams.
+- [Policies & Code of Conduct](https://www.kavachcricket.com/policies.html) - Mandatory safety gear, strict no-refund policy, liability waivers, and disciplinary rules.
 
-- **Ranking**: Ranked among India's Top 20 and Bangalore's Top 5 amateur cricket clubs.
-- **Home Ground / Practice Facility**: KAvach Studio at Play Arena, 1st Cross Road, Valliyamma Layout, Kasavanahalli, Off Sarjapur Road, Bangalore South, Karnataka 560035.
-- **Sport Format**: 100% Leather Ball Cricket (20-over, 30-over, and 40-over weekend matches, weekday practice nets). No tennis ball cricket.
-- **Core Motto / Slogan**: "Go Get Them ! KAvach"
-- **Tagline**: Cricket for All | Cricket for Working Professionals
-
-## Target Demographics & Target Search Keywords
-- Best Cricket Club in Bangalore
-- Cricket Club for Adults in Bangalore
-- Leather Ball Cricket Club Bangalore
-- Cricket Club for Seniors & Veterans Bangalore
-- Cricket Club in Sarjapur Road / Bangalore South / Bellandur / HSR Layout
-- Cricket for Working Professionals
-
-## Key Programs & Offerings
-1. **Daily Practice Sessions (KAvach Studio)**:
-   - Schedule: Tuesday to Friday, 7:00 AM – 9:00 AM (ideal before office hours).
-   - Facilities: Dedicated outdoor turf/matting cricket nets at Play Arena, high-speed automated bowling machine throwdowns, fielding drills, and fitness conditioning.
-   - Membership Plans: Studio 1M (₹2,399/month), Studio 3M (₹6,499/quarter), Studio 6M (₹9,999/half-year).
-2. **Weekend Leather Ball Cricket Matches**:
-   - Schedule: Saturdays and Sundays across standard turf cricket grounds in Bangalore.
-   - Formats: 20-over and 30-over league and friendly matches with certified match umpires and live ball-by-ball digital scoring on CricClubs.
-3. **KAvach Premier League (KPL)**:
-   - Annual marquee intra-club tournament with IPL-style player auctions, franchise team owners, custom colored team kits, live commentary, video streaming, and grand player awards (Orange Cap, Purple Cap, MVP, Championship Trophy).
-4. **KAvach Timeout**:
-   - Annual family carnival evening featuring competitive multi-sport games for players, spouses, and kids (Mini Cricket, Box Football, Tug of War, Dodgeball, Pitthu, Kho Kho) followed by family dinner and celebration.
-5. **Youth Cricket Scholarship Initiative**:
-   - Non-earning full-time students practice at zero cost; top division performers (Karnataka Division 4 and above) receive subsidized or fully sponsored match fees.
-
-## Admission & Selection Process
-KAvach Cricket Club is an evaluated, selective sports community. Rights of admission and membership are strictly reserved by club management.
-- **Eligibility**: Open to players aged 16 and onwards (adults and seniors welcome).
-- **Trial Session**: Prospective players must attend an evaluated trial net session (booked online with zero trial fee) or submit their verified CricHeroes match statistics.
-- **Requirements**: Foundational cricket skills, safety compliance, physical fitness, discipline, and commitment to the club code of conduct. Full leather-ball gear (except personal abdominal guard) is provided during trial sessions.
-
-## Safety & Legal Policies
-All participants must adhere to club safety guidelines, wear full protective gear when batting or wicket-keeping against leather balls, and execute the club's comprehensive liability and injury waiver. KAvach maintains a strict zero-tolerance policy against toxicity and unsportsmanlike behavior.
-
-## Official Web Pages & Links
-- Website: https://www.kavachcricket.com/
-- About KAvach: https://www.kavachcricket.com/about.html
-- How to Join: https://www.kavachcricket.com/#how-to-join
-- Programs: https://www.kavachcricket.com/#programs
-- Studio Plans: https://www.kavachcricket.com/#studio
-- KPL: https://www.kavachcricket.com/kpl.html
-- KPL Auction Registration: https://form.jotform.com/252223927769063
-- KAvach Timeout: https://www.kavachcricket.com/timeout.html
-- Policies, Code of Conduct & Liability Waiver: https://www.kavachcricket.com/policies.html
-- WhatsApp Inquiry: https://wa.me/918296211687 (Club Coordinator / Captain Ashutosh)
+## Programs & Tournaments
+- [KAvach Premier League (KPL)](https://www.kavachcricket.com/kpl.html) - Our flagship IPL-style amateur tournament featuring live auction drafts and bespoke colored kits.
+- [KAvach Timeout](https://www.kavachcricket.com/timeout.html) - Our signature annual family sports evening including mini cricket, tug of war, and a family banquet.
