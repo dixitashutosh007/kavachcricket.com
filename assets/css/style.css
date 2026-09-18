@@ -792,7 +792,7 @@ button {
   background: radial-gradient(circle at 85% 15%, rgba(217, 4, 41, 0.09) 0%, transparent 45%),
               radial-gradient(circle at 15% 85%, rgba(255, 193, 7, 0.06) 0%, transparent 40%),
               var(--dark-bg);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-grid {
@@ -3861,6 +3861,73 @@ picture {
 .contact-action-dropdown {
   position: relative;
   display: inline-flex;
+  z-index: 20;
+}
+
+.contact-action-dropdown.active {
+  z-index: 1200 !important;
+}
+
+/* Elevate any section, card, or container that holds an active dropdown so it floats above all subsequent sections */
+section:has(.contact-action-dropdown.active),
+.section.has-active-dropdown,
+.hero.has-active-dropdown,
+.hero:has(.contact-action-dropdown.active),
+.join-flow-section.has-active-dropdown,
+.join-flow-section:has(.contact-action-dropdown.active),
+.site-footer.has-active-dropdown {
+  z-index: 800 !important;
+  overflow: visible !important;
+}
+
+.two-paths-container:has(.contact-action-dropdown.active),
+.two-paths-container.has-active-dropdown,
+.path-content-panel:has(.contact-action-dropdown.active),
+.path-content-panel.has-active-dropdown,
+.path-panel-cta:has(.contact-action-dropdown.active),
+.path-panel-cta.has-active-dropdown,
+.hero-content:has(.contact-action-dropdown.active),
+.hero-content.has-active-dropdown,
+.hero-ctas:has(.contact-action-dropdown.active),
+.hero-ctas.has-active-dropdown,
+.youth-scholarship-card:has(.contact-action-dropdown.active),
+.youth-scholarship-card.has-active-dropdown,
+.policy-agreement-card:has(.contact-action-dropdown.active),
+.policy-agreement-card.has-active-dropdown,
+.kpl-showcase-text:has(.contact-action-dropdown.active),
+.kpl-showcase-text.has-active-dropdown {
+  z-index: 850 !important;
+  position: relative;
+  overflow: visible !important;
+}
+
+/* Neutralize transform on active container so it doesn't trap stacking context */
+.reveal:has(.contact-action-dropdown.active),
+.reveal.has-active-dropdown {
+  transform: none !important;
+  will-change: auto !important;
+  z-index: 900 !important;
+}
+
+/* Ensure sibling elements inside the same section stay underneath */
+.admission-criteria-box {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-perks {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-ctas {
+  position: relative;
+  z-index: 50;
+}
+
+.path-panel-cta {
+  position: relative;
+  z-index: 50;
 }
 
 .dropdown-action-btn {
@@ -3869,6 +3936,8 @@ picture {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 .dropdown-action-btn .dropdown-arrow {
@@ -3889,13 +3958,13 @@ picture {
   max-width: calc(100vw - 32px);
   width: max-content;
   background: rgba(18, 22, 31, 0.98);
-  border: 1px solid rgba(255, 193, 7, 0.3);
+  border: 1px solid rgba(255, 193, 7, 0.35);
   border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 193, 7, 0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 193, 7, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 8px;
-  z-index: 1050;
+  z-index: 9999 !important;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -3930,6 +3999,33 @@ picture {
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Dropup Support (Opens Upwards when space below is tight) */
+.contact-action-dropdown.dropup .action-dropdown-menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(6px);
+}
+
+.contact-action-dropdown.dropup.align-right .action-dropdown-menu {
+  left: auto;
+  right: 0;
+  transform: translateY(6px);
+}
+
+.contact-action-dropdown.dropup.align-left .action-dropdown-menu {
+  left: 0;
+  transform: translateY(6px);
+}
+
+.contact-action-dropdown.dropup.active .action-dropdown-menu {
+  transform: translateX(-50%) translateY(0);
+}
+
+.contact-action-dropdown.dropup.align-right.active .action-dropdown-menu,
+.contact-action-dropdown.dropup.align-left.active .action-dropdown-menu {
+  transform: translateY(0);
 }
 
 .action-dropdown-item {

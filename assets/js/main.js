@@ -360,8 +360,11 @@ function initActionDropdowns() {
   if (!dropdowns.length) return;
 
   const closeAll = () => {
+    document.querySelectorAll('.has-active-dropdown').forEach(el => {
+      el.classList.remove('has-active-dropdown');
+    });
     dropdowns.forEach(dd => {
-      dd.classList.remove('active');
+      dd.classList.remove('active', 'dropup');
       const btn = dd.querySelector('.dropdown-action-btn');
       if (btn) btn.setAttribute('aria-expanded', 'false');
     });
@@ -376,8 +379,41 @@ function initActionDropdowns() {
       const isActive = dd.classList.contains('active');
       closeAll();
       if (!isActive) {
+        // Smart Viewport Height check: flip to dropup if tight below
+        const menu = dd.querySelector('.action-dropdown-menu');
+        const rect = btn.getBoundingClientRect();
+        const menuHeight = menu ? (menu.offsetHeight || 230) : 230;
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const spaceAbove = rect.top;
+
+        if (spaceBelow < menuHeight + 20 && spaceAbove > menuHeight) {
+          dd.classList.add('dropup');
+        } else {
+          dd.classList.remove('dropup');
+        }
+
         dd.classList.add('active');
         btn.setAttribute('aria-expanded', 'true');
+
+        // Elevate all parent containers and sections
+        let parent = dd.parentElement;
+        while (parent && parent !== document.body) {
+          if (
+            parent.tagName === 'SECTION' ||
+            parent.tagName === 'HEADER' ||
+            parent.tagName === 'FOOTER' ||
+            parent.classList.contains('section') ||
+            parent.classList.contains('hero') ||
+            parent.classList.contains('path-content-panel') ||
+            parent.classList.contains('two-paths-container') ||
+            parent.classList.contains('policy-agreement-card') ||
+            parent.classList.contains('youth-scholarship-card') ||
+            parent.classList.contains('reveal')
+          ) {
+            parent.classList.add('has-active-dropdown');
+          }
+          parent = parent.parentElement;
+        }
       }
     });
 
