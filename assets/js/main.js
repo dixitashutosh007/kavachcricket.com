@@ -73,16 +73,27 @@ function initHeaderScroll() {
   const header = document.querySelector('.site-header');
   if (!header) return;
 
+  let ticking = false;
+  let lastScrollY = window.scrollY || 0;
+
+  const updateHeader = () => {
+    // DOM Write batched inside requestAnimationFrame
+    const isScrolled = lastScrollY > 30;
+    header.classList.toggle('scrolled', isScrolled);
+    ticking = false;
+  };
+
   const onScroll = () => {
-    if (window.scrollY > 30) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+    // DOM Read
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
     }
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  requestAnimationFrame(updateHeader);
 }
 
 /* --------------------------------------------------------------------------
@@ -96,7 +107,9 @@ function initScrollReveal() {
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
+          requestAnimationFrame(() => {
+            entry.target.classList.add('revealed');
+          });
           obs.unobserve(entry.target);
         }
       });
@@ -107,7 +120,9 @@ function initScrollReveal() {
 
     reveals.forEach(el => observer.observe(el));
   } else {
-    reveals.forEach(el => el.classList.add('revealed'));
+    requestAnimationFrame(() => {
+      reveals.forEach(el => el.classList.add('revealed'));
+    });
   }
 }
 
@@ -281,11 +296,20 @@ function initBackToTop() {
   const backBtn = document.getElementById('backToTop');
   if (!backBtn) return;
 
+  let ticking = false;
+  let lastScrollY = window.scrollY || 0;
+
+  const applyBackToTopState = () => {
+    const isVisible = lastScrollY > 400;
+    backBtn.classList.toggle('visible', isVisible);
+    ticking = false;
+  };
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
-      backBtn.classList.add('visible');
-    } else {
-      backBtn.classList.remove('visible');
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      requestAnimationFrame(applyBackToTopState);
+      ticking = true;
     }
   }, { passive: true });
 
@@ -380,40 +404,40 @@ function initActionDropdowns() {
       closeAll();
       if (!isActive) {
         // Smart Viewport Height check: flip to dropup if tight below
+        // Batch DOM Reads first
         const menu = dd.querySelector('.action-dropdown-menu');
         const rect = btn.getBoundingClientRect();
         const menuHeight = menu ? (menu.offsetHeight || 230) : 230;
         const spaceBelow = window.innerHeight - rect.bottom;
         const spaceAbove = rect.top;
+        const shouldDropup = spaceBelow < menuHeight + 20 && spaceAbove > menuHeight;
 
-        if (spaceBelow < menuHeight + 20 && spaceAbove > menuHeight) {
-          dd.classList.add('dropup');
-        } else {
-          dd.classList.remove('dropup');
-        }
+        // Batch DOM Writes inside requestAnimationFrame
+        requestAnimationFrame(() => {
+          dd.classList.toggle('dropup', shouldDropup);
+          dd.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
 
-        dd.classList.add('active');
-        btn.setAttribute('aria-expanded', 'true');
-
-        // Elevate all parent containers and sections
-        let parent = dd.parentElement;
-        while (parent && parent !== document.body) {
-          if (
-            parent.tagName === 'SECTION' ||
-            parent.tagName === 'HEADER' ||
-            parent.tagName === 'FOOTER' ||
-            parent.classList.contains('section') ||
-            parent.classList.contains('hero') ||
-            parent.classList.contains('path-content-panel') ||
-            parent.classList.contains('two-paths-container') ||
-            parent.classList.contains('policy-agreement-card') ||
-            parent.classList.contains('youth-scholarship-card') ||
-            parent.classList.contains('reveal')
-          ) {
-            parent.classList.add('has-active-dropdown');
+          // Elevate all parent containers and sections
+          let parent = dd.parentElement;
+          while (parent && parent !== document.body) {
+            if (
+              parent.tagName === 'SECTION' ||
+              parent.tagName === 'HEADER' ||
+              parent.tagName === 'FOOTER' ||
+              parent.classList.contains('section') ||
+              parent.classList.contains('hero') ||
+              parent.classList.contains('path-content-panel') ||
+              parent.classList.contains('two-paths-container') ||
+              parent.classList.contains('policy-agreement-card') ||
+              parent.classList.contains('youth-scholarship-card') ||
+              parent.classList.contains('reveal')
+            ) {
+              parent.classList.add('has-active-dropdown');
+            }
+            parent = parent.parentElement;
           }
-          parent = parent.parentElement;
-        }
+        });
       }
     });
 

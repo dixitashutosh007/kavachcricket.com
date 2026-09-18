@@ -36,15 +36,18 @@
 
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   
-  <!-- Preconnect & Preload Critical Image -->
+  <!-- Preload Critical Web Fonts to Break Request Chain -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="./assets/images/community-play-arena.webp" type="image/webp" fetchpriority="high">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=5.5">
-  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="stylesheet" href="./assets/css/style.css?v=5.6">
+  <link rel="stylesheet" href="./assets/css/animations.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./assets/css/animations.css"></noscript>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -292,7 +295,11 @@
   <header class="site-header">
     <div class="container header-container">
       <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-        <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48" decoding="async"></picture>
+        <picture>
+          <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/logo-mobile.webp">
+          <source type="image/webp" srcset="./assets/images/logo.webp">
+          <img src="./assets/images/logo.png" alt="KAvach Cricket Club Crest Logo" class="brand-logo-img" width="48" height="48" decoding="async">
+        </picture>
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
           <span class="brand-tagline">Cricket for All</span>
@@ -782,7 +789,11 @@
         
         <div class="footer-col footer-brand">
           <a href="./index.html#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-            <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async"></picture>
+            <picture>
+              <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/logo-mobile.webp">
+              <source type="image/webp" srcset="./assets/images/logo.webp">
+              <img src="./assets/images/logo.png" alt="KAvach Club Crest" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async">
+            </picture>
             <div class="brand-info">
               <span class="brand-name">K<span>A</span>VACH</span>
               <span class="brand-tagline">Cricket for All</span>
@@ -859,6 +870,6 @@
     <span class="floating-whatsapp-tooltip">Chat with KAvach</span>
   </a>
 
-  <script src="./assets/js/main.js?v=5.5"></script>
+  <script src="./assets/js/main.js?v=5.6"></script>
 </body>
 </html>

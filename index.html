@@ -40,17 +40,24 @@
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
   <link rel="apple-touch-icon" href="./assets/images/logo.png">
 
-  <!-- Preload Critical LCP Hero Image -->
-  <link rel=preload as=image href=./assets/images/hero-team-scarlet.webp type=image/webp fetchpriority=high>
+  <!-- Preload Critical LCP Hero Image (Responsive for Mobile & Desktop) -->
+  <link rel="preload" as="image" href="./assets/images/hero-team-scarlet-mobile.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/images/hero-team-scarlet.webp" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
 
   <!-- Google Fonts: Montserrat & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload Critical Web Fonts to Break Request Chain -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=5.5">
-  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="stylesheet" href="./assets/css/style.css?v=5.6">
+  <link rel="stylesheet" href="./assets/css/animations.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./assets/css/animations.css"></noscript>
 
   <!-- JSON-LD Structured Data for SEO & AI Search Engines (GEO / AEO) -->
   <script type="application/ld+json">
@@ -230,7 +237,11 @@
   <header class="site-header">
     <div class="container header-container">
       <a href="#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-        <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club logo - Bangalore corporate cricket club" class="brand-logo-img" width="48" height="48" decoding="async"></picture>
+        <picture>
+          <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/logo-mobile.webp">
+          <source type="image/webp" srcset="./assets/images/logo.webp">
+          <img src="./assets/images/logo.png" alt="KAvach Cricket Club logo - Bangalore corporate cricket club" class="brand-logo-img" width="48" height="48" decoding="async">
+        </picture>
         <div class="brand-info">
           <span class="brand-name">K<span>A</span>VACH</span>
           <span class="brand-tagline">Cricket for All</span>
@@ -523,7 +534,11 @@
           <!-- Hero Media Visual Card -->
           <div class="hero-media-card reveal delay-2">
             <div class="hero-image-wrapper">
-              <picture><source type="image/webp" srcset="./assets/images/hero-team-scarlet.webp"><img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore in Scarlet Red match jerseys" class="hero-main-img" width="800" height="1067" fetchpriority="high" decoding="async"></picture>
+              <picture>
+                <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/hero-team-scarlet-mobile.webp">
+                <source type="image/webp" srcset="./assets/images/hero-team-scarlet.webp">
+                <img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore in Scarlet Red match jerseys" class="hero-main-img" width="800" height="1067" fetchpriority="high" decoding="async">
+              </picture>
               <div class="hero-image-overlay"></div>
               <div class="hero-caption">
                 <h4>KAvach Squad in Scarlet Red</h4>
@@ -608,6 +623,7 @@
             <div class="kpl-promo-logo-col reveal delay-1">
               <div class="kpl-logo-frame">
                 <picture>
+                  <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/kpl-v-logo-mobile.webp">
                   <source type="image/webp" srcset="./assets/images/kpl-v-logo.webp">
                   <img src="./assets/images/kpl-v-logo.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL Season 5 official tournament crest" width="844" height="1024" loading="lazy" decoding="async" class="kpl-v-logo-img">
                 </picture>
@@ -1855,7 +1871,11 @@
         
         <div class="footer-col footer-brand">
           <a href="#home" class="brand-logo" aria-label="KAvach Cricket Club Home">
-            <picture><source type="image/webp" srcset="./assets/images/logo.webp"><img src="./assets/images/logo.png" alt="KAvach Cricket Club logo - Bangalore corporate cricket club" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async"></picture>
+            <picture>
+              <source media="(max-width: 600px)" type="image/webp" srcset="./assets/images/logo-mobile.webp">
+              <source type="image/webp" srcset="./assets/images/logo.webp">
+              <img src="./assets/images/logo.png" alt="KAvach Cricket Club logo - Bangalore corporate cricket club" class="brand-logo-img" width="48" height="48" loading="lazy" decoding="async">
+            </picture>
             <div class="brand-info">
               <span class="brand-name">K<span>A</span>VACH</span>
               <span class="brand-tagline">Cricket for All</span>
@@ -1946,6 +1966,6 @@
   </div>
 
   <!-- Main JavaScript File -->
-  <script src="./assets/js/main.js?v=5.5"></script>
+  <script src="./assets/js/main.js?v=5.6"></script>
 </body>
 </html>
