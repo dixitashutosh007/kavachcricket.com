@@ -1822,6 +1822,206 @@ button {
 }
 
 /* --------------------------------------------------------------------------
+   KPL (V) Season 5.0 Promo Section (Homepage Showcase)
+   -------------------------------------------------------------------------- */
+.kpl-promo-section {
+  background: radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.08) 0%, rgba(10, 11, 14, 1) 65%),
+              linear-gradient(180deg, var(--dark-surface) 0%, var(--dark-bg) 100%);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 80px 0;
+}
+
+.kpl-promo-card {
+  background: linear-gradient(135deg, rgba(26, 29, 39, 0.9) 0%, rgba(18, 20, 26, 0.98) 100%);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 193, 7, 0.08);
+}
+
+.kpl-promo-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.kpl-season-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 193, 7, 0.15);
+  color: var(--yellow-accent);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.kpl-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(229, 57, 53, 0.15);
+  color: var(--red-light);
+  border: 1px solid var(--border-red);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.kpl-status-pill::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red-light);
+  box-shadow: 0 0 8px var(--red-light);
+  animation: redGlowPulse 2s ease-in-out infinite;
+}
+
+.kpl-promo-content-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.kpl-promo-logo-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kpl-logo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kpl-v-logo-img {
+  width: 100%;
+  height: auto;
+  max-width: 280px;
+  border-radius: var(--radius-md);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 193, 7, 0.25));
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
+}
+
+.kpl-v-logo-img:hover {
+  transform: scale(1.03) translateY(-4px);
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 193, 7, 0.45));
+}
+
+.kpl-promo-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 8px 0 16px;
+  color: var(--text-primary);
+}
+
+.kpl-promo-desc {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.kpl-promo-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.kpl-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.kpl-feature-item strong {
+  color: var(--yellow-light);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.kpl-feat-icon {
+  color: var(--yellow-accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.kpl-feat-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.kpl-promo-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.kpl-promo-disclaimer {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+@media (max-width: 992px) {
+  .kpl-promo-content-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 32px;
+  }
+  .kpl-promo-logo-col {
+    order: -1;
+  }
+  .kpl-promo-features {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .kpl-promo-actions {
+    justify-content: center;
+  }
+  .kpl-promo-card {
+    padding: 32px 20px;
+  }
+  .kpl-promo-badge-row {
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
    About Us Section
    -------------------------------------------------------------------------- */
 .about-section {
