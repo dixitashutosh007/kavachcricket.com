@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGalleryModal();
   initBackToTop();
   initTrialForm();
+  initActionDropdowns();
 });
 
 /* --------------------------------------------------------------------------
@@ -350,3 +351,60 @@ window.addEventListener('load', () => {
     }
   }
 });
+
+/* --------------------------------------------------------------------------
+   Golden Setup: Multi-Channel Action Dropdown Controller
+   -------------------------------------------------------------------------- */
+function initActionDropdowns() {
+  const dropdowns = document.querySelectorAll('.contact-action-dropdown');
+  if (!dropdowns.length) return;
+
+  const closeAll = () => {
+    dropdowns.forEach(dd => {
+      dd.classList.remove('active');
+      const btn = dd.querySelector('.dropdown-action-btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  dropdowns.forEach(dd => {
+    const btn = dd.querySelector('.dropdown-action-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isActive = dd.classList.contains('active');
+      closeAll();
+      if (!isActive) {
+        dd.classList.add('active');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    const items = dd.querySelectorAll('.action-dropdown-item');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        closeAll();
+      });
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.contact-action-dropdown')) {
+      closeAll();
+    }
+  });
+
+  // Close on Escape key press and restore focus to trigger
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const activeDd = document.querySelector('.contact-action-dropdown.active');
+      if (activeDd) {
+        const btn = activeDd.querySelector('.dropdown-action-btn');
+        closeAll();
+        if (btn) btn.focus();
+      }
+    }
+  });
+}
