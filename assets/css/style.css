@@ -1994,14 +1994,26 @@ button {
 }
 
 .kpl-feat-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  max-width: 20px;
   color: var(--yellow-accent);
   flex-shrink: 0;
   margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .kpl-feat-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
+  display: block;
 }
 
 .kpl-promo-actions {

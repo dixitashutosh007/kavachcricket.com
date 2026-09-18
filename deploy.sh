@@ -28,9 +28,17 @@ git push origin "$BRANCH"
 echo "✅ Pushed to GitHub successfully!"
 
 # 3. Sync to AWS S3 with High-Performance Cache-Control Headers
-echo "☁️  Syncing static assets (WebP images, CSS, JS) with 1-year immutable caching..."
-aws s3 sync assets "s3://${BUCKET_NAME}/assets" \
+echo "☁️  Syncing image assets (WebP, JPG, PNG) with 1-year immutable caching..."
+aws s3 sync assets/images "s3://${BUCKET_NAME}/assets/images" \
   --cache-control "public, max-age=31536000, immutable" \
+  --delete
+
+echo "☁️  Syncing CSS & JS with short revalidation caching (max-age=300)..."
+aws s3 sync assets/css "s3://${BUCKET_NAME}/assets/css" \
+  --cache-control "public, max-age=300, must-revalidate" \
+  --delete
+aws s3 sync assets/js "s3://${BUCKET_NAME}/assets/js" \
+  --cache-control "public, max-age=300, must-revalidate" \
   --delete
 
 echo "☁️  Syncing HTML pages, sitemaps, and manifests with smart revalidation..."
