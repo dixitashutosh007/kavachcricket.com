@@ -1,8 +1,13 @@
 /**
- * KAvach Cricket Club - Main JavaScript (V2 Refined)
+ * KAvach Cricket Club - Main JavaScript (V2 Performance Optimized)
  * Interactivity: Sub-menus, Mobile Accordion Navigation, 2-Path Journey Switcher,
  * Contact Tab Switcher, Animated Number Counters, FAQ Accordions, Lightbox,
- * and Trial Booking Slot Handler.
+ * Trial Booking Slot Handler, and Multi-Channel Action Dropdowns.
+ * 
+ * Performance:
+ * - Batched DOM reads before DOM writes.
+ * - All DOM writes scheduled inside requestAnimationFrame() to eliminate layout thrashing.
+ * - Passive scroll listeners with rAF throttling.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,10 +33,16 @@ function initMobileNav() {
   if (!toggleBtn || !drawer) return;
 
   const toggleDrawer = () => {
-    const isOpen = drawer.classList.toggle('active');
-    toggleBtn.classList.toggle('open', isOpen);
-    toggleBtn.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    // DOM Read
+    const willOpen = !drawer.classList.contains('active');
+
+    // DOM Writes batched inside requestAnimationFrame
+    requestAnimationFrame(() => {
+      drawer.classList.toggle('active', willOpen);
+      toggleBtn.classList.toggle('open', willOpen);
+      toggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      document.body.style.overflow = willOpen ? 'hidden' : '';
+    });
   };
 
   toggleBtn.addEventListener('click', toggleDrawer);
@@ -44,14 +55,15 @@ function initMobileNav() {
       const parent = btn.closest('.mobile-nav-item');
       if (!parent) return;
 
+      // DOM Read
       const wasOpen = parent.classList.contains('open');
+      const otherItems = Array.from(drawer.querySelectorAll('.mobile-nav-item')).filter(item => item !== parent);
 
-      // Close other mobile accordion items
-      drawer.querySelectorAll('.mobile-nav-item').forEach(item => {
-        if (item !== parent) item.classList.remove('open');
+      // DOM Writes batched inside requestAnimationFrame
+      requestAnimationFrame(() => {
+        otherItems.forEach(item => item.classList.remove('open'));
+        parent.classList.toggle('open', !wasOpen);
       });
-
-      parent.classList.toggle('open', !wasOpen);
     });
   });
 
@@ -67,14 +79,14 @@ function initMobileNav() {
 }
 
 /* --------------------------------------------------------------------------
-   Sticky Header on Scroll
+   Sticky Header on Scroll (Zero Forced Reflows)
    -------------------------------------------------------------------------- */
 function initHeaderScroll() {
   const header = document.querySelector('.site-header');
   if (!header) return;
 
   let ticking = false;
-  let lastScrollY = window.scrollY || 0;
+  let lastScrollY = 0;
 
   const updateHeader = () => {
     // DOM Write batched inside requestAnimationFrame
@@ -85,7 +97,7 @@ function initHeaderScroll() {
 
   const onScroll = () => {
     // DOM Read
-    lastScrollY = window.scrollY;
+    lastScrollY = window.scrollY || 0;
     if (!ticking) {
       requestAnimationFrame(updateHeader);
       ticking = true;
@@ -93,7 +105,12 @@ function initHeaderScroll() {
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  requestAnimationFrame(updateHeader);
+
+  // Initial read & write deferred inside rAF to eliminate DOMContentLoaded forced reflow
+  requestAnimationFrame(() => {
+    lastScrollY = window.scrollY || 0;
+    updateHeader();
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -137,8 +154,9 @@ function initAnimatedCounters() {
     const target = parseInt(el.getAttribute('data-target'), 10);
     if (isNaN(target)) return;
 
-    // Reset to 0 only when script execution and observer confirm viewport entrance
-    el.textContent = '0';
+    requestAnimationFrame(() => {
+      el.textContent = '0';
+    });
 
     const duration = 1800; // ms
     const stepTime = 25; // ms
@@ -149,10 +167,15 @@ function initAnimatedCounters() {
     const timer = setInterval(() => {
       current += increment;
       if (current >= target) {
-        el.textContent = target;
+        requestAnimationFrame(() => {
+          el.textContent = target;
+        });
         clearInterval(timer);
       } else {
-        el.textContent = Math.floor(current);
+        const val = Math.floor(current);
+        requestAnimationFrame(() => {
+          el.textContent = val;
+        });
       }
     }, stepTime);
   };
@@ -182,13 +205,15 @@ function initPathSwitcher() {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetPath = btn.getAttribute('data-path');
-
-      tabBtns.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      btn.classList.add('active');
       const activePanel = document.getElementById(`path-${targetPath}`);
-      if (activePanel) activePanel.classList.add('active');
+
+      requestAnimationFrame(() => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        if (activePanel) activePanel.classList.add('active');
+      });
     });
   });
 }
@@ -204,13 +229,15 @@ function initContactTabs() {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
-
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
-
-      btn.classList.add('active');
       const activePanel = document.getElementById(`contact-tab-${targetTab}`);
-      if (activePanel) activePanel.classList.add('active');
+
+      requestAnimationFrame(() => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        if (activePanel) activePanel.classList.add('active');
+      });
     });
   });
 }
@@ -229,18 +256,20 @@ function initFaqAccordion() {
     questionBtn.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
 
-      // Close others
-      faqItems.forEach(other => {
-        if (other !== item) {
-          other.classList.remove('active');
-          const otherBtn = other.querySelector('.faq-question');
-          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
+      requestAnimationFrame(() => {
+        // Close others
+        faqItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('active');
+            const otherBtn = other.querySelector('.faq-question');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
 
-      // Toggle current
-      item.classList.toggle('active', !isActive);
-      questionBtn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        // Toggle current
+        item.classList.toggle('active', !isActive);
+        questionBtn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+      });
     });
   });
 }
@@ -257,16 +286,20 @@ function initGalleryModal() {
   if (!galleryItems.length || !modalBackdrop || !modalImg) return;
 
   const openModal = (src, alt) => {
-    modalImg.src = src;
-    modalImg.alt = alt || 'KAvach Cricket Club Gallery Photo';
-    modalBackdrop.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      modalImg.src = src;
+      modalImg.alt = alt || 'KAvach Cricket Club Gallery Photo';
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
   };
 
   const closeModal = () => {
-    modalBackdrop.classList.remove('active');
-    document.body.style.overflow = '';
-    modalImg.src = '';
+    requestAnimationFrame(() => {
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+    });
   };
 
   galleryItems.forEach(item => {
@@ -290,14 +323,14 @@ function initGalleryModal() {
 }
 
 /* --------------------------------------------------------------------------
-   Back to Top Button
+   Back to Top Button (Passive Scroll & rAF Throttled)
    -------------------------------------------------------------------------- */
 function initBackToTop() {
   const backBtn = document.getElementById('backToTop');
   if (!backBtn) return;
 
   let ticking = false;
-  let lastScrollY = window.scrollY || 0;
+  let lastScrollY = 0;
 
   const applyBackToTopState = () => {
     const isVisible = lastScrollY > 400;
@@ -306,12 +339,18 @@ function initBackToTop() {
   };
 
   window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY;
+    lastScrollY = window.scrollY || 0;
     if (!ticking) {
       requestAnimationFrame(applyBackToTopState);
       ticking = true;
     }
   }, { passive: true });
+
+  // Initial read & write deferred in rAF
+  requestAnimationFrame(() => {
+    lastScrollY = window.scrollY || 0;
+    applyBackToTopState();
+  });
 
   backBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -378,6 +417,7 @@ window.addEventListener('load', () => {
 
 /* --------------------------------------------------------------------------
    Golden Setup: Multi-Channel Action Dropdown Controller
+   Strictly batches all DOM reads BEFORE executing DOM writes inside rAF
    -------------------------------------------------------------------------- */
 function initActionDropdowns() {
   const dropdowns = document.querySelectorAll('.contact-action-dropdown');
@@ -400,51 +440,55 @@ function initActionDropdowns() {
 
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isActive = dd.classList.contains('active');
-      closeAll();
-      if (!isActive) {
-        // Smart Viewport Height check: flip to dropup if tight below
-        // Batch DOM Reads first
-        const menu = dd.querySelector('.action-dropdown-menu');
-        const rect = btn.getBoundingClientRect();
-        const menuHeight = menu ? (menu.offsetHeight || 230) : 230;
-        const spaceBelow = window.innerHeight - rect.bottom;
-        const spaceAbove = rect.top;
-        const shouldDropup = spaceBelow < menuHeight + 20 && spaceAbove > menuHeight;
 
-        // Batch DOM Writes inside requestAnimationFrame
-        requestAnimationFrame(() => {
+      // --- PHASE 1: STRICT DOM READS FIRST (no prior write operations) ---
+      const isActive = dd.classList.contains('active');
+      const menu = dd.querySelector('.action-dropdown-menu');
+      const rect = btn.getBoundingClientRect();
+      const menuHeight = menu ? (menu.offsetHeight || 230) : 230;
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const shouldDropup = spaceBelow < menuHeight + 20 && spaceAbove > menuHeight;
+
+      // Identify parents to elevate in read phase
+      const parentsToElevate = [];
+      let parent = dd.parentElement;
+      while (parent && parent !== document.body) {
+        if (
+          parent.tagName === 'SECTION' ||
+          parent.tagName === 'HEADER' ||
+          parent.tagName === 'FOOTER' ||
+          parent.classList.contains('section') ||
+          parent.classList.contains('hero') ||
+          parent.classList.contains('path-content-panel') ||
+          parent.classList.contains('two-paths-container') ||
+          parent.classList.contains('policy-agreement-card') ||
+          parent.classList.contains('youth-scholarship-card') ||
+          parent.classList.contains('reveal')
+        ) {
+          parentsToElevate.push(parent);
+        }
+        parent = parent.parentElement;
+      }
+
+      // --- PHASE 2: BATCHED DOM WRITES IN requestAnimationFrame ---
+      requestAnimationFrame(() => {
+        closeAll();
+
+        if (!isActive) {
           dd.classList.toggle('dropup', shouldDropup);
           dd.classList.add('active');
           btn.setAttribute('aria-expanded', 'true');
 
-          // Elevate all parent containers and sections
-          let parent = dd.parentElement;
-          while (parent && parent !== document.body) {
-            if (
-              parent.tagName === 'SECTION' ||
-              parent.tagName === 'HEADER' ||
-              parent.tagName === 'FOOTER' ||
-              parent.classList.contains('section') ||
-              parent.classList.contains('hero') ||
-              parent.classList.contains('path-content-panel') ||
-              parent.classList.contains('two-paths-container') ||
-              parent.classList.contains('policy-agreement-card') ||
-              parent.classList.contains('youth-scholarship-card') ||
-              parent.classList.contains('reveal')
-            ) {
-              parent.classList.add('has-active-dropdown');
-            }
-            parent = parent.parentElement;
-          }
-        });
-      }
+          parentsToElevate.forEach(p => p.classList.add('has-active-dropdown'));
+        }
+      });
     });
 
     const items = dd.querySelectorAll('.action-dropdown-item');
     items.forEach(item => {
       item.addEventListener('click', () => {
-        closeAll();
+        requestAnimationFrame(closeAll);
       });
     });
   });
@@ -452,7 +496,7 @@ function initActionDropdowns() {
   // Close when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.contact-action-dropdown')) {
-      closeAll();
+      requestAnimationFrame(closeAll);
     }
   });
 
@@ -462,8 +506,10 @@ function initActionDropdowns() {
       const activeDd = document.querySelector('.contact-action-dropdown.active');
       if (activeDd) {
         const btn = activeDd.querySelector('.dropdown-action-btn');
-        closeAll();
-        if (btn) btn.focus();
+        requestAnimationFrame(() => {
+          closeAll();
+          if (btn) btn.focus();
+        });
       }
     }
   });
