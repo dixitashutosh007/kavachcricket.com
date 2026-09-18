@@ -121,6 +121,9 @@ function initAnimatedCounters() {
     const target = parseInt(el.getAttribute('data-target'), 10);
     if (isNaN(target)) return;
 
+    // Reset to 0 only when script execution and observer confirm viewport entrance
+    el.textContent = '0';
+
     const duration = 1800; // ms
     const stepTime = 25; // ms
     const totalSteps = duration / stepTime;
@@ -149,10 +152,6 @@ function initAnimatedCounters() {
     }, { threshold: 0.4 });
 
     statNumbers.forEach(num => observer.observe(num));
-  } else {
-    statNumbers.forEach(num => {
-      num.textContent = num.getAttribute('data-target');
-    });
   }
 }
 

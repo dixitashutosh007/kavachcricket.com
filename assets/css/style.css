@@ -1216,6 +1216,22 @@ button {
   display: block;
 }
 
+.path-panel-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 800;
+  color: var(--yellow-accent);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+}
+
+.path-panel-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
 .path-steps-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1327,10 +1343,16 @@ button {
   }
   .path-tab-btn {
     width: 100%;
-    max-width: 320px;
+    max-width: 360px;
     text-align: center;
     padding: 12px 18px;
     font-size: 0.9rem;
+  }
+  .path-panel-cta .btn {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    justify-content: center;
   }
   .admission-criteria-box {
     flex-direction: column;
