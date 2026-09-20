@@ -20,7 +20,7 @@ jobs:
 
       - name: Sync Static Website to S3
         run: |
-          aws s3 sync . s3://kavachcricket.com/ \
+          aws s3 sync . s3://www.kavachcricket.com/ \
             --exclude ".git/*" \
             --exclude ".github/*" \
             --exclude "deploy.sh" \
