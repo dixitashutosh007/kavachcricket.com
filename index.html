@@ -45,8 +45,8 @@
   <link rel="preload" as="image" href="./assets/images/hero-team-scarlet.webp" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
 
   <!-- Preload Self-Hosted Critical Fonts (Zero Third-Party Request Chain) -->
-  <link rel="preload" href="./assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="./assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/montserrat-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Critical Above-the-Fold Inline CSS (Eliminates Render-Blocking Delays for FCP & LCP) -->
   <style>
@@ -59,11 +59,27 @@
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
     @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('./assets/fonts/inter-600.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
       font-family: 'Montserrat';
       font-style: normal;
       font-weight: 700;
       font-display: swap;
       src: url('./assets/fonts/montserrat-700.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 900;
+      font-display: swap;
+      src: url('./assets/fonts/montserrat-900.woff2') format('woff2');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
     :root {
@@ -347,7 +363,9 @@
       color: #FFFFFF;
       text-align: center;
     }
-    .hero-caption h4 {
+    .hero-caption h3,
+    .hero-caption h4,
+    .hero-caption .hero-caption-title {
       font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 800;
@@ -385,7 +403,8 @@
       flex-shrink: 0;
     }
     .floating-badge-icon svg { width: 22px; height: 22px; }
-    .floating-badge-text h5 {
+    .floating-badge-text h5,
+    .floating-badge-text .floating-badge-title {
       font-family: var(--font-display);
       font-size: 0.96rem;
       font-weight: 800;
@@ -427,16 +446,19 @@
     }
     @media (max-width: 480px) {
       .hero-caption { bottom: 50px; }
-      .hero-caption h4 { font-size: 1rem; }
+      .hero-caption h3,
+      .hero-caption h4,
+      .hero-caption .hero-caption-title { font-size: 1rem; }
       .hero-floating-badge { padding: 8px 16px; gap: 10px; border-radius: var(--radius-md); max-width: 94%; white-space: normal; }
       .floating-badge-icon { width: 36px; height: 36px; }
-      .floating-badge-text h5 { font-size: 0.88rem; }
+      .floating-badge-text h5,
+      .floating-badge-text .floating-badge-title { font-size: 0.88rem; }
     }
   </style>
 
   <!-- Defer Non-Critical Stylesheets to Unblock First Contentful Paint (FCP) -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=5.6" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="./assets/css/style.css?v=5.6"></noscript>
+  <link rel="stylesheet" href="./assets/css/style.min.css?v=5.7" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./assets/css/style.min.css?v=5.7"></noscript>
   <link rel="stylesheet" href="./assets/css/animations.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./assets/css/animations.css"></noscript>
 
@@ -701,7 +723,7 @@
 
       <!-- Clean Header Action: WhatsApp Us + Primary CTA -->
       <div class="header-actions">
-        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" aria-label="WhatsApp KAvach Cricket Club">
+        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" aria-label="Chat with Veer on WhatsApp for quick inquiries">
           <svg class="wa-icon" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
           <span>WhatsApp Us</span>
         </a>
@@ -711,7 +733,7 @@
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="action-dropdown-menu" role="menu">
-            <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+            <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Book a free practice trial slot via WhatsApp">
               <div class="action-item-icon wa-icon-color">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
               </div>
@@ -792,7 +814,7 @@
             <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="action-dropdown-menu" role="menu">
-            <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+            <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Book morning trial session via mobile menu WhatsApp">
               <div class="action-item-icon wa-icon-color">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
               </div>
@@ -821,7 +843,7 @@
             </a>
           </div>
         </div>
-        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" style="justify-content: center; padding: 12px;">
+        <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" class="header-veer-chat" style="justify-content: center; padding: 12px;" aria-label="Chat with Veer on WhatsApp from mobile menu">
           <svg class="wa-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
           <span>WhatsApp Us</span>
         </a>
@@ -865,7 +887,7 @@
                   <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
                 <div class="action-dropdown-menu" role="menu">
-                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20want%20to%20join%20the%20club.%20Please%20share%20details%20on%20practice%20sessions%20and%20upcoming%20matches." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20want%20to%20join%20the%20club.%20Please%20share%20details%20on%20practice%20sessions%20and%20upcoming%20matches." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Chat with admissions team on WhatsApp to join KAvach">
                     <div class="action-item-icon wa-icon-color">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
                     </div>
@@ -922,7 +944,7 @@
               </picture>
               <div class="hero-image-overlay"></div>
               <div class="hero-caption">
-                <h4>KAvach Squad in Scarlet Red</h4>
+                <p class="hero-caption-title">KAvach Squad in Scarlet Red</p>
                 <p>Play Arena, Sarjapur Road • Bangalore</p>
               </div>
             </div>
@@ -933,7 +955,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
               </div>
               <div class="floating-badge-text">
-                <h5>India's Top 20 Club</h5>
+                <p class="floating-badge-title">India's Top 20 Club</p>
                 <p>Bangalore's Top 5 Amateur Club</p>
               </div>
             </div>
@@ -1146,7 +1168,7 @@
                   <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
                 <div class="action-dropdown-menu" role="menu">
-                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20practice%20session%20at%20Play%20Arena%2C%20Sarjapur%20Road.%20Please%20let%20me%20know%20the%20available%20weekday%20morning%20slots." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Book morning trial session on WhatsApp via practice pathway">
                     <div class="action-item-icon wa-icon-color">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
                     </div>
@@ -1217,7 +1239,7 @@
                   <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
                 <div class="action-dropdown-menu" role="menu">
-                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20submit%20my%20player%20credentials%20(CricHeroes%20profile%20%2F%20match%20record)%20for%20weekend%20league%20matches." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+                  <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20would%20like%20to%20submit%20my%20player%20credentials%20(CricHeroes%20profile%20%2F%20match%20record)%20for%20weekend%20league%20matches." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Submit player credentials and CricHeroes profile on WhatsApp">
                     <div class="action-item-icon wa-icon-color">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
                     </div>
@@ -1432,7 +1454,7 @@
                 <svg class="dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
               <div class="action-dropdown-menu" role="menu">
-                <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20am%20interested%20in%20applying%20for%20the%20Youth%20Cricket%20Scholarship%20Program." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem">
+                <a href="https://wa.me/918296211687?text=Hi%20KAvach%2C%20I%20am%20interested%20in%20applying%20for%20the%20Youth%20Cricket%20Scholarship%20Program." target="_blank" rel="noopener" class="action-dropdown-item" role="menuitem" aria-label="Apply for Youth Cricket Scholarship on WhatsApp">
                   <div class="action-item-icon wa-icon-color">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.768 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
                   </div>
@@ -1565,7 +1587,7 @@
                 <span>Eligibility for club weekend matches</span>
               </li>
             </ul>
-            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%201M%20Plan%20(Rs%202,399)" target="_blank" rel="noopener" class="btn btn-secondary">Select Studio 1M</a>
+            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%201M%20Plan%20(Rs%202,399)" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Subscribe to Studio 1 Month Training Plan on WhatsApp">Select Studio 1M</a>
           </div>
 
           <!-- Studio 3M (Popular) -->
@@ -1604,7 +1626,7 @@
                 <span>Think Tank mentor feedback & match readiness</span>
               </li>
             </ul>
-            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%203M%20Plan%20(Rs%206,499)" target="_blank" rel="noopener" class="btn btn-primary">Select Studio 3M</a>
+            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%203M%20Plan%20(Rs%206,499)" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Subscribe to Studio 3 Months High Performance Plan on WhatsApp">Select Studio 3M</a>
           </div>
 
           <!-- Studio 6M -->
@@ -1642,7 +1664,7 @@
                 <span>Priority registration for club tournament squads</span>
               </li>
             </ul>
-            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%206M%20Plan%20(Rs%209,999)" target="_blank" rel="noopener" class="btn btn-secondary">Select Studio 6M</a>
+            <a href="https://wa.me/918296211687?text=Hi%2C%20I%20want%20to%20subscribe%20to%20Studio%206M%20Plan%20(Rs%209,999)" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Subscribe to Studio 6 Months Elite Training Plan on WhatsApp">Select Studio 6M</a>
           </div>
 
         </div>
@@ -1728,7 +1750,7 @@
           <div class="gallery-item reveal">
             <picture><source type="image/webp" srcset="./assets/images/hero-team-scarlet.webp"><img src="./assets/images/hero-team-scarlet.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore in scarlet match jerseys" width="800" height="1067" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>Match Day Lineup</h4>
+              <h3>Match Day Lineup</h3>
               <p>Weekend League Fixture • Bangalore</p>
             </div>
           </div>
@@ -1736,7 +1758,7 @@
           <div class="gallery-item reveal delay-1">
             <picture><source type="image/webp" srcset="./assets/images/kavach-winning-trophy.webp"><img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament cup victory" width="1200" height="952" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>Championship Glory</h4>
+              <h3>Championship Glory</h3>
               <p>Hoisting the Cup in Scarlet Red</p>
             </div>
           </div>
@@ -1744,7 +1766,7 @@
           <div class="gallery-item reveal delay-2">
             <picture><source type="image/webp" srcset="./assets/images/kpl-trophies-display.webp"><img src="./assets/images/kpl-trophies-display.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL tournament trophies" width="1200" height="800" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>KPL Glitz & Honors</h4>
+              <h3>KPL Glitz & Honors</h3>
               <p>Championship Cups, Caps & MVP Stars</p>
             </div>
           </div>
@@ -1752,7 +1774,7 @@
           <div class="gallery-item reveal">
             <picture><source type="image/webp" srcset="./assets/images/studio-turf-warmup.webp"><img src="./assets/images/studio-turf-warmup.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore morning fitness drills" width="1200" height="900" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>KAvach Studio at Play Arena</h4>
+              <h3>KAvach Studio at Play Arena</h3>
               <p>Tuesday–Friday Morning Conditioning (7–9 AM)</p>
             </div>
           </div>
@@ -1760,7 +1782,7 @@
           <div class="gallery-item reveal delay-1">
             <picture><source type="image/webp" srcset="./assets/images/timeout-wide-tug-of-war.webp"><img src="./assets/images/timeout-wide-tug-of-war.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore annual festival tug of war" width="1200" height="676" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>KAvach Timeout: Tug of War</h4>
+              <h3>KAvach Timeout: Tug of War</h3>
               <p>Annual Two-Team Family Championship</p>
             </div>
           </div>
@@ -1768,7 +1790,7 @@
           <div class="gallery-item reveal delay-2">
             <picture><source type="image/webp" srcset="./assets/images/timeout-night-trophy.webp"><img src="./assets/images/timeout-night-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore night award ceremony" width="1200" height="676" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>Family Night Awards</h4>
+              <h3>Family Night Awards</h3>
               <p>Spouses, Kids & Cricketers Celebrating Together</p>
             </div>
           </div>
@@ -1776,7 +1798,7 @@
           <div class="gallery-item reveal">
             <picture><source type="image/webp" srcset="./assets/images/timeout-celebration-hug.webp"><img src="./assets/images/timeout-celebration-hug.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating match victory" width="1200" height="800" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>Unbreakable Camaraderie</h4>
+              <h3>Unbreakable Camaraderie</h3>
               <p>Brotherhood On & Off the Pitch</p>
             </div>
           </div>
@@ -1784,7 +1806,7 @@
           <div class="gallery-item reveal delay-1">
             <picture><source type="image/webp" srcset="./assets/images/community-play-arena.webp"><img src="./assets/images/community-play-arena.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore community gathering" width="800" height="534" loading="lazy" decoding="async"></picture>
             <div class="gallery-overlay">
-              <h4>The KAvach Family</h4>
+              <h3>The KAvach Family</h3>
               <p>Annual Community Gathering at Play Arena</p>
             </div>
           </div>
@@ -1814,7 +1836,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">PL</div>
               <div class="author-info">
-                <h4>Partha Lodha</h4>
+                <h3>Partha Lodha</h3>
                 <p class="author-role">HR Executive</p>
                 <p class="author-badge">Returned after 15-Year Break</p>
               </div>
@@ -1829,7 +1851,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">SK</div>
               <div class="author-info">
-                <h4>Subhash Kumar</h4>
+                <h3>Subhash Kumar</h3>
                 <p class="author-role">IT Professional</p>
                 <p class="author-badge">Returned after 10-Year Break</p>
               </div>
@@ -1844,7 +1866,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">NC</div>
               <div class="author-info">
-                <h4>Nilabhro Chakraborty</h4>
+                <h3>Nilabhro Chakraborty</h3>
                 <p class="author-role">Software Engineer</p>
                 <p class="author-badge">Weekend League Batsman</p>
               </div>
@@ -2192,7 +2214,7 @@
               <div class="contact-card-body">
                 <h4>Chat with Us on WhatsApp</h4>
                 <p>Instant answers on trial bookings, studio slots, match availability, and ground location.</p>
-                <a href="https://wa.me/918296211687?text=Hi%2C%20I%20have%20an%20inquiry%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener">+91-8296211687 &rarr;</a>
+                <a href="https://wa.me/918296211687?text=Hi%2C%20I%20have%20an%20inquiry%20about%20KAvach%20Cricket%20Club" target="_blank" rel="noopener" aria-label="Chat directly with KAvach Coordinator on WhatsApp at 8296211687">+91-8296211687 &rarr;</a>
               </div>
             </div>
 
@@ -2269,7 +2291,7 @@
         </div>
 
         <div class="footer-col">
-          <h4>Cricket & Programs</h4>
+          <h3>Cricket & Programs</h3>
           <ul class="footer-links">
             <li><a href="#how-to-join" class="footer-link">How to Join the Club</a></li>
             <li><a href="#programs" class="footer-link">Daily Practice Sessions</a></li>
@@ -2281,7 +2303,7 @@
         </div>
 
         <div class="footer-col">
-          <h4>The Club & Rules</h4>
+          <h3>The Club & Rules</h3>
           <ul class="footer-links">
             <li><a href="./about.html" class="footer-link">About KAvach</a></li>
             <li><a href="#about" class="footer-link">Our Story & Culture</a></li>
@@ -2296,7 +2318,7 @@
         </div>
 
         <div class="footer-col">
-          <h4>Venue & Hours</h4>
+          <h3>Venue & Hours</h3>
           <p class="footer-desc" style="margin-bottom: 8px;">
             Inside Play Arena, Kasavanahalli, Off Sarjapur Road, Bangalore – 560035
           </p>
@@ -2304,7 +2326,7 @@
             <strong>Daily Practice:</strong> Tue–Fri, 7:00 AM – 9:00 AM<br>
             <strong>Weekend Matches:</strong> Sat & Sun
           </p>
-          <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" class="btn-whatsapp-header" target="_blank" rel="noopener">
+          <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20KAvach%20Cricket%20Club" class="btn-whatsapp-header" target="_blank" rel="noopener" aria-label="Contact KAvach management team via WhatsApp from footer">
             <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
             <span>WhatsApp Us</span>
           </a>
@@ -2326,7 +2348,7 @@
   </footer>
 
   <!-- Fixed Floating WhatsApp Button -->
-  <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20joining%20KAvach%20Cricket%20Club" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp KAvach Cricket Club">
+  <a href="https://wa.me/918296211687?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20joining%20KAvach%20Cricket%20Club" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Open WhatsApp chat with KAvach Cricket Club">
     <div class="whatsapp-icon-pulse">
       <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.529 1.79.814 2.791.814 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.768-5.768-5.768zm3.387 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.074-2.148-.528-1.733-.718-2.853-2.482-2.939-2.597-.087-.115-.703-.935-.703-1.783 0-.848.442-1.265.599-1.439.157-.174.343-.217.457-.217.115 0 .23 0 .331.005.106.006.248-.04.388.297.144.348.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.288l-.26.307c-.087.086-.178.181-.077.355.101.173.449.742.964 1.201.662.59 1.221.773 1.394.86.173.086.274.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.389-.086.158.058 1.002.472 1.175.558.173.087.288.13.331.202.044.073.044.419-.1.824z"/></svg>
     </div>
@@ -2342,11 +2364,11 @@
   <div class="modal-backdrop" id="galleryModal" role="dialog" aria-modal="true" aria-label="Enlarged photo preview">
     <div class="modal-content">
       <button class="modal-close-btn" id="modalClose" aria-label="Close photo preview">&times;</button>
-      <img id="modalImage" src="" alt="Enlarged gallery photo">
+      <img id="modalImage" src="" alt="Enlarged gallery photo" width="800" height="600">
     </div>
   </div>
 
   <!-- Main JavaScript File -->
-  <script src="./assets/js/main.js?v=5.6"></script>
+  <script src="./assets/js/main.js?v=5.6" defer></script>
 </body>
 </html>

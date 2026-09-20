@@ -52,6 +52,7 @@
 
 .floating-whatsapp {
   animation: pulseGreen 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  will-change: transform;
 }
 
 /* Slogan Shimmer Highlight */
@@ -98,6 +99,7 @@
   filter: blur(80px);
   pointer-events: none;
   animation: redGlowPulse 7s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 /* Scroll Reveal Classes (Driven by IntersectionObserver in main.js) */
@@ -111,7 +113,7 @@
 
 .reveal.revealed {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
   will-change: auto;
 }
 
@@ -146,6 +148,7 @@
 
 .shine-badge {
   animation: trophyShine 3s ease-in-out infinite;
+  will-change: filter;
 }
 
 /* Image Modal Lightbox Animation */
@@ -162,7 +165,8 @@
   padding: 20px;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-normal);
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+  will-change: opacity, visibility;
 }
 
 .modal-backdrop.active {
@@ -177,6 +181,7 @@
   position: relative;
   transform: scale(0.92);
   transition: transform var(--transition-smooth);
+  will-change: transform;
 }
 
 .modal-backdrop.active .modal-content {
@@ -206,7 +211,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  will-change: transform;
 }
 
 .modal-close-btn:hover {
