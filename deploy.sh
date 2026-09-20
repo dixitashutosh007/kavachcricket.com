@@ -35,6 +35,12 @@ aws s3 sync assets/images "s3://${BUCKET_NAME}/assets/images" \
   --cache-control "public, max-age=31536000, immutable" \
   --delete
 
+echo "☁️  Syncing self-hosted font assets (WOFF2) with 1-year immutable caching..."
+aws s3 sync assets/fonts "s3://${BUCKET_NAME}/assets/fonts" \
+  --region "${REGION}" \
+  --cache-control "public, max-age=31536000, immutable" \
+  --delete
+
 echo "☁️  Syncing CSS & JS with short revalidation caching (max-age=300)..."
 aws s3 sync assets/css "s3://${BUCKET_NAME}/assets/css" \
   --region "${REGION}" \
