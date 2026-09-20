@@ -200,6 +200,8 @@
   </style>
 </head>
 <body>
+  <div id="header-sentinel" aria-hidden="true"></div>
+  <div id="backtotop-sentinel" aria-hidden="true"></div>
 
   <!-- Universal Site Header -->
   <header class="site-header">
@@ -491,8 +493,12 @@
           </div>
 
           <div class="hero-media-card reveal delay-1">
-            <div class="hero-image-wrapper">
-              <picture><source type="image/webp" srcset="./assets/images/kpl-hunkaar-winner.webp"><img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KPL 3 Champions KAvach Hunkaar squad celebrating with trophy" class="hero-main-img" width="1600" height="900" fetchpriority="high" decoding="async"></picture>
+            <div class="hero-image-wrapper" style="aspect-ratio: 16 / 9; max-width: 600px;">
+              <picture>
+                <source media="(max-width: 600px)" srcset="./assets/images/kpl-hunkaar-winner-mobile.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./assets/images/kpl-hunkaar-winner.webp" type="image/webp">
+                <img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KPL 3 Champions KAvach Hunkaar squad celebrating with trophy" class="hero-main-img" width="800" height="450" style="aspect-ratio: 16 / 9;" fetchpriority="high" decoding="async">
+              </picture>
               <div class="hero-image-overlay"></div>
               <div class="hero-caption">
                 <p class="hero-caption-title">KPL 3 Champions: KAvach Hunkaar</p>

@@ -86,22 +86,17 @@ function initHeaderScroll() {
   if (!header) return;
 
   if ('IntersectionObserver' in window) {
-    let sentinel = document.getElementById('header-sentinel');
-    if (!sentinel) {
-      sentinel = document.createElement('div');
-      sentinel.id = 'header-sentinel';
-      sentinel.style.cssText = 'position:absolute;top:30px;left:0;height:1px;width:1px;pointer-events:none;opacity:0;visibility:hidden;';
-      document.body.prepend(sentinel);
+    const sentinel = document.getElementById('header-sentinel');
+    if (sentinel) {
+      const observer = new IntersectionObserver(([entry]) => {
+        const isScrolled = !entry.isIntersecting;
+        requestAnimationFrame(() => {
+          header.classList.toggle('scrolled', isScrolled);
+        });
+      }, { threshold: 0 });
+
+      observer.observe(sentinel);
     }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      const isScrolled = !entry.isIntersecting;
-      requestAnimationFrame(() => {
-        header.classList.toggle('scrolled', isScrolled);
-      });
-    }, { threshold: 0 });
-
-    observer.observe(sentinel);
   } else {
     // Fallback for legacy browsers without IntersectionObserver
     let ticking = false;
@@ -189,9 +184,17 @@ function initAnimatedCounters() {
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.5 });
 
-    statNumbers.forEach(num => observer.observe(num));
+    const startObserving = () => {
+      statNumbers.forEach(num => observer.observe(num));
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startObserving);
+    } else {
+      setTimeout(startObserving, 200);
+    }
   }
 }
 
@@ -331,22 +334,17 @@ function initBackToTop() {
   if (!backBtn) return;
 
   if ('IntersectionObserver' in window) {
-    let sentinel = document.getElementById('backtotop-sentinel');
-    if (!sentinel) {
-      sentinel = document.createElement('div');
-      sentinel.id = 'backtotop-sentinel';
-      sentinel.style.cssText = 'position:absolute;top:400px;left:0;height:1px;width:1px;pointer-events:none;opacity:0;visibility:hidden;';
-      document.body.prepend(sentinel);
+    const sentinel = document.getElementById('backtotop-sentinel');
+    if (sentinel) {
+      const observer = new IntersectionObserver(([entry]) => {
+        const isVisible = !entry.isIntersecting;
+        requestAnimationFrame(() => {
+          backBtn.classList.toggle('visible', isVisible);
+        });
+      }, { threshold: 0 });
+
+      observer.observe(sentinel);
     }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      const isVisible = !entry.isIntersecting;
-      requestAnimationFrame(() => {
-        backBtn.classList.toggle('visible', isVisible);
-      });
-    }, { threshold: 0 });
-
-    observer.observe(sentinel);
   } else {
     let ticking = false;
     window.addEventListener('scroll', () => {
