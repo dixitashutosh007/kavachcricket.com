@@ -45,8 +45,8 @@
   <link rel="preload" as="image" href="./assets/images/hero-team-scarlet.webp" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
 
   <!-- Preload Self-Hosted Critical Fonts (Zero Third-Party Request Chain) -->
-  <link rel="preload" href="./assets/fonts/montserrat-900.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="./assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Critical Above-the-Fold Inline CSS (Eliminates Render-Blocking Delays for FCP & LCP) -->
   <style>
@@ -935,7 +935,7 @@
           </div>
 
           <!-- Hero Media Visual Card -->
-          <div class="hero-media-card reveal delay-2">
+          <div class="hero-media-card">
             <div class="hero-image-wrapper">
               <picture>
                 <source media="(max-width: 600px)" srcset="./assets/images/hero-team-scarlet-mobile.webp" type="image/webp">
@@ -1302,7 +1302,11 @@
           <!-- Program 1: Weekend Matches -->
           <div class="program-card reveal">
             <div class="program-img-wrap">
-              <picture><source type="image/webp" srcset="./assets/images/kavach-winning-trophy.webp"><img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament championship victory with trophy" width="1200" height="952" loading="lazy" decoding="async"></picture>
+              <picture>
+                <source media="(max-width: 600px)" srcset="./assets/images/kavach-winning-trophy-mobile.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./assets/images/kavach-winning-trophy.webp" type="image/webp">
+                <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament championship victory with trophy" width="1200" height="952" loading="lazy" decoding="async">
+              </picture>
               <span class="program-badge badge-scarlet">Competitive</span>
             </div>
             <div class="program-content">
@@ -1335,7 +1339,11 @@
           <!-- Program 2: Daily Practice Sessions -->
           <div class="program-card featured-card reveal delay-1">
             <div class="program-img-wrap">
-              <picture><source type="image/webp" srcset="./assets/images/practice-nets.webp"><img src="./assets/images/practice-nets.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore during morning weekday practice nets session" width="800" height="450" loading="lazy" decoding="async"></picture>
+              <picture>
+                <source media="(max-width: 600px)" srcset="./assets/images/practice-nets-mobile.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./assets/images/practice-nets.webp" type="image/webp">
+                <img src="./assets/images/practice-nets.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore during morning weekday practice nets session" width="800" height="450" loading="lazy" decoding="async">
+              </picture>
               <span class="program-badge badge-yellow">Daily Tue–Fri</span>
             </div>
             <div class="program-content">
@@ -1368,7 +1376,11 @@
           <!-- Program 3: KPL Flagship Tournament -->
           <div class="program-card reveal delay-2">
             <div class="program-img-wrap">
-              <picture><source type="image/webp" srcset="./assets/images/kpl-hunkaar-winner.webp"><img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL Hunkaar champions celebrating with trophy" width="1600" height="900" loading="lazy" decoding="async"></picture>
+              <picture>
+                <source media="(max-width: 600px)" srcset="./assets/images/kpl-hunkaar-winner-mobile.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./assets/images/kpl-hunkaar-winner.webp" type="image/webp">
+                <img src="./assets/images/kpl-hunkaar-winner.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL Hunkaar champions celebrating with trophy" width="1600" height="900" loading="lazy" decoding="async">
+              </picture>
               <span class="program-badge badge-scarlet">Flagship Event</span>
             </div>
             <div class="program-content">
@@ -1756,7 +1768,11 @@
           </div>
 
           <div class="gallery-item reveal delay-1">
-            <picture><source type="image/webp" srcset="./assets/images/kavach-winning-trophy.webp"><img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament cup victory" width="1200" height="952" loading="lazy" decoding="async"></picture>
+            <picture>
+              <source media="(max-width: 600px)" srcset="./assets/images/kavach-winning-trophy-mobile.webp" type="image/webp">
+              <source media="(min-width: 601px)" srcset="./assets/images/kavach-winning-trophy.webp" type="image/webp">
+              <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament cup victory" width="1200" height="952" loading="lazy" decoding="async">
+            </picture>
             <div class="gallery-overlay">
               <h3>Championship Glory</h3>
               <p>Hoisting the Cup in Scarlet Red</p>

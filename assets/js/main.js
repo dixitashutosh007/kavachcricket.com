@@ -79,42 +79,47 @@ function initMobileNav() {
 }
 
 /* --------------------------------------------------------------------------
-   Sticky Header on Scroll (Zero Forced Reflows)
+   Sticky Header on Scroll (Zero Forced Reflows via IntersectionObserver)
    -------------------------------------------------------------------------- */
 function initHeaderScroll() {
   const header = document.querySelector('.site-header');
   if (!header) return;
 
-  let ticking = false;
-  let lastScrollY = 0;
-
-  const updateHeader = () => {
-    // DOM Write batched inside requestAnimationFrame
-    const isScrolled = lastScrollY > 30;
-    header.classList.toggle('scrolled', isScrolled);
-    ticking = false;
-  };
-
-  const onScroll = () => {
-    // DOM Read
-    lastScrollY = window.scrollY || 0;
-    if (!ticking) {
-      requestAnimationFrame(updateHeader);
-      ticking = true;
+  if ('IntersectionObserver' in window) {
+    let sentinel = document.getElementById('header-sentinel');
+    if (!sentinel) {
+      sentinel = document.createElement('div');
+      sentinel.id = 'header-sentinel';
+      sentinel.style.cssText = 'position:absolute;top:30px;left:0;height:1px;width:1px;pointer-events:none;opacity:0;visibility:hidden;';
+      document.body.prepend(sentinel);
     }
-  };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+    const observer = new IntersectionObserver(([entry]) => {
+      const isScrolled = !entry.isIntersecting;
+      requestAnimationFrame(() => {
+        header.classList.toggle('scrolled', isScrolled);
+      });
+    }, { threshold: 0 });
 
-  // Initial read & write deferred inside rAF to eliminate DOMContentLoaded forced reflow
-  requestAnimationFrame(() => {
-    lastScrollY = window.scrollY || 0;
-    updateHeader();
-  });
+    observer.observe(sentinel);
+  } else {
+    // Fallback for legacy browsers without IntersectionObserver
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const isScrolled = (window.pageYOffset || document.documentElement.scrollTop || 0) > 30;
+          header.classList.toggle('scrolled', isScrolled);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 }
 
 /* --------------------------------------------------------------------------
-   Scroll Reveal with IntersectionObserver
+   Scroll Reveal with IntersectionObserver (Asynchronous, Zero Reflows)
    -------------------------------------------------------------------------- */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
@@ -144,7 +149,7 @@ function initScrollReveal() {
 }
 
 /* --------------------------------------------------------------------------
-   Animated Number Counters
+   Animated Number Counters (60fps rAF Animation, Zero Layout Thrashing)
    -------------------------------------------------------------------------- */
 function initAnimatedCounters() {
   const statNumbers = document.querySelectorAll('.stat-number');
@@ -154,30 +159,26 @@ function initAnimatedCounters() {
     const target = parseInt(el.getAttribute('data-target'), 10);
     if (isNaN(target)) return;
 
-    requestAnimationFrame(() => {
-      el.textContent = '0';
-    });
+    let startTimestamp = null;
+    const duration = 1600; // ms
 
-    const duration = 1800; // ms
-    const stepTime = 25; // ms
-    const totalSteps = duration / stepTime;
-    const increment = target / totalSteps;
-    let current = 0;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // Cubic ease-out
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeOut * target);
 
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        requestAnimationFrame(() => {
-          el.textContent = target;
-        });
-        clearInterval(timer);
+      el.textContent = current;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
       } else {
-        const val = Math.floor(current);
-        requestAnimationFrame(() => {
-          el.textContent = val;
-        });
+        el.textContent = target;
       }
-    }, stepTime);
+    };
+
+    requestAnimationFrame(step);
   };
 
   if ('IntersectionObserver' in window) {
@@ -323,34 +324,42 @@ function initGalleryModal() {
 }
 
 /* --------------------------------------------------------------------------
-   Back to Top Button (Passive Scroll & rAF Throttled)
+   Back to Top Button (IntersectionObserver, Zero Forced Reflows)
    -------------------------------------------------------------------------- */
 function initBackToTop() {
   const backBtn = document.getElementById('backToTop');
   if (!backBtn) return;
 
-  let ticking = false;
-  let lastScrollY = 0;
-
-  const applyBackToTopState = () => {
-    const isVisible = lastScrollY > 400;
-    backBtn.classList.toggle('visible', isVisible);
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY || 0;
-    if (!ticking) {
-      requestAnimationFrame(applyBackToTopState);
-      ticking = true;
+  if ('IntersectionObserver' in window) {
+    let sentinel = document.getElementById('backtotop-sentinel');
+    if (!sentinel) {
+      sentinel = document.createElement('div');
+      sentinel.id = 'backtotop-sentinel';
+      sentinel.style.cssText = 'position:absolute;top:400px;left:0;height:1px;width:1px;pointer-events:none;opacity:0;visibility:hidden;';
+      document.body.prepend(sentinel);
     }
-  }, { passive: true });
 
-  // Initial read & write deferred in rAF
-  requestAnimationFrame(() => {
-    lastScrollY = window.scrollY || 0;
-    applyBackToTopState();
-  });
+    const observer = new IntersectionObserver(([entry]) => {
+      const isVisible = !entry.isIntersecting;
+      requestAnimationFrame(() => {
+        backBtn.classList.toggle('visible', isVisible);
+      });
+    }, { threshold: 0 });
+
+    observer.observe(sentinel);
+  } else {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const isVisible = (window.pageYOffset || document.documentElement.scrollTop || 0) > 400;
+          backBtn.classList.toggle('visible', isVisible);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 
   backBtn.addEventListener('click', (e) => {
     e.preventDefault();
