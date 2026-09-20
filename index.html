@@ -250,7 +250,7 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 48px;
-      align-items: center;
+      align-items: start;
     }
     .hero-badges-row {
       display: flex;
@@ -336,7 +336,7 @@
       color: var(--text-muted);
     }
     .hero-perk-item svg { width: 18px; height: 18px; color: var(--yellow-accent); flex-shrink: 0; }
-    .hero-media-card { position: relative; }
+    .hero-media-card { position: relative; align-self: start; }
     .hero-image-wrapper {
       aspect-ratio: 800 / 1067;
       width: 100%;
@@ -346,6 +346,8 @@
       overflow: hidden;
       border: 1px solid var(--border-medium);
       box-shadow: var(--shadow-elevated);
+      align-self: start;
+      margin-top: 0;
     }
     .hero-main-img {
       width: 100%;
@@ -1035,7 +1037,7 @@
                 <picture>
                   <source media="(max-width: 600px)" srcset="./assets/images/kpl-v-logo-mobile.webp" type="image/webp">
                   <source media="(min-width: 601px)" srcset="./assets/images/kpl-v-logo.webp" type="image/webp">
-                  <img src="./assets/images/kpl-v-logo.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL Season 5 official tournament crest" width="560" height="679" loading="lazy" decoding="async" class="kpl-v-logo-img">
+                  <img src="./assets/images/kpl-v-logo.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore - KPL Season 5 official tournament crest" width="560" height="679" style="height: auto; aspect-ratio: 560 / 679;" loading="lazy" decoding="async" class="kpl-v-logo-img">
                 </picture>
               </div>
             </div>
@@ -1312,7 +1314,7 @@
               <picture>
                 <source media="(max-width: 600px)" srcset="./assets/images/kavach-winning-trophy-mobile.webp" type="image/webp">
                 <source media="(min-width: 601px)" srcset="./assets/images/kavach-winning-trophy.webp" type="image/webp">
-                <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament championship victory with trophy" width="800" height="635" loading="lazy" decoding="async">
+                <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament championship victory with trophy" width="800" height="635" style="height: auto; aspect-ratio: 800 / 635;" loading="lazy" decoding="async">
               </picture>
               <span class="program-badge badge-scarlet">Competitive</span>
             </div>
@@ -1778,7 +1780,7 @@
             <picture>
               <source media="(max-width: 600px)" srcset="./assets/images/kavach-winning-trophy-mobile.webp" type="image/webp">
               <source media="(min-width: 601px)" srcset="./assets/images/kavach-winning-trophy.webp" type="image/webp">
-              <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament cup victory" width="800" height="635" loading="lazy" decoding="async">
+              <img src="./assets/images/kavach-winning-trophy.jpg" alt="KAvach Cricket Club players at Play Arena Bangalore celebrating tournament cup victory" width="800" height="635" style="height: auto; aspect-ratio: 800 / 635;" loading="lazy" decoding="async">
             </picture>
             <div class="gallery-overlay">
               <h3>Championship Glory</h3>
