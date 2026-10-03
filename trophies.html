@@ -223,257 +223,170 @@
   <main id="mainContent">
 
     <!-- =======================================================================
-         IMMERSIVE 3D FIRST-PERSON POV VIRTUAL TROPHY ROOM TOUR
+         INTERACTIVE VIRTUAL TROPHY ROOM TOUR
          ======================================================================= -->
     <section class="tour-section" id="tourSection">
-      <div class="tour-outer-container">
+      <div class="tour-stage-container" id="tourStageContainer">
         
-        <!-- Viewport Container -->
-        <div class="tour-viewport" id="tourViewport" tabindex="0" role="region" aria-label="3D Virtual Trophy Room Experience">
-          
-          <!-- Cinematic Lens Vignette & Ambient Glow -->
-          <div class="tour-lens-vignette" aria-hidden="true"></div>
-
-          <!-- Crosshair Reticle (Discreet center indicator) -->
-          <div class="tour-center-reticle" aria-hidden="true"></div>
-
-          <!-- 3D World Scene -->
-          <div class="tour-world-scene" id="tourWorldScene">
-            
-            <!-- Camera Rig -->
-            <div class="tour-camera" id="tourCamera">
-              
-              <!-- 3D Room Box -->
-              <div class="tour-room-box" id="tourRoomBox">
-                
-                <!-- 1. FLOOR (Reflective Mahogany & Interactive Waypoints) -->
-                <div class="room-plane plane-floor" id="roomFloor">
-                  <div class="floor-tile-grid"></div>
-                  <div class="floor-spot-pools-north"></div>
-                  <div class="floor-spot-pools-west"></div>
-                  <div class="floor-spot-pools-east"></div>
-                  
-                  <!-- Center Floor Insignia Seal -->
-                  <div class="floor-center-seal">
-                    <img src="./assets/images/logo.png" alt="KAvach Crest" width="80" height="80">
-                    <span class="seal-text">KAVACH CRICKET CLUB • EST. 2022</span>
+        <!-- =====================================================================
+             STAGE 1: CLOSED VAULT ENTRANCE (PoV Outside Room)
+             ===================================================================== -->
+        <div class="vault-entrance-stage" id="vaultEntranceStage">
+          <div class="vault-portal-frame">
+            <!-- 3D Double Doors -->
+            <div class="vault-doors-wrapper" id="vaultDoorsWrapper">
+              <div class="vault-door vault-door-left">
+                <div class="door-plate">
+                  <div class="door-bolts"></div>
+                  <div class="door-emblem-badge">
+                    <img src="./assets/images/logo.png" alt="KAvach Crest" width="52" height="52">
                   </div>
-
-                  <!-- Clickable Floor Waypoints (Walk Targets) -->
-                  <button type="button" class="floor-waypoint waypoint-north" data-vantage="center" aria-label="Walk to Center Stage (KPL Cups)">
-                    <span class="waypoint-pulse"></span>
-                    <span class="waypoint-label">📍 KPL Center Stage</span>
-                  </button>
-
-                  <button type="button" class="floor-waypoint waypoint-west" data-vantage="left" aria-label="Walk to Left Gallery (Weekend & Corporate)">
-                    <span class="waypoint-pulse"></span>
-                    <span class="waypoint-label">📍 Left Showcase</span>
-                  </button>
-
-                  <button type="button" class="floor-waypoint waypoint-east" data-vantage="right" aria-label="Walk to Right Honors (Plate & Sportsmanship)">
-                    <span class="waypoint-pulse"></span>
-                    <span class="waypoint-label">📍 Right Honors</span>
-                  </button>
-
-                  <button type="button" class="floor-waypoint waypoint-center" data-vantage="roomCenter" aria-label="Stand in Room Center for 360 view">
-                    <span class="waypoint-pulse"></span>
-                    <span class="waypoint-label">📍 360° Room Center</span>
-                  </button>
+                  <div class="door-lock-bar"></div>
+                  <div class="door-grab-handle"></div>
                 </div>
-
-                <!-- 2. CEILING (Coffered Ceiling & Directional Spotlights) -->
-                <div class="room-plane plane-ceiling" id="roomCeiling">
-                  <div class="ceiling-grid"></div>
-                  <div class="ceiling-fixtures-north"></div>
-                  <div class="ceiling-fixtures-west"></div>
-                  <div class="ceiling-fixtures-east"></div>
-                  <div class="ceiling-center-fixture"></div>
-                </div>
-
-                <!-- 3. FRONT WALL (NORTH): KPL Marquee Championship Showcase -->
-                <div class="room-plane plane-wall plane-front" id="roomWallNorth">
-                  <div class="wall-header-ribbon">
-                    <span class="wall-badge">🏆 Marquee Tournaments</span>
-                    <h2 class="wall-title">KAvach Premier League (KPL) Showcase</h2>
-                    <span class="wall-desc">5 Flagship League Trophies</span>
-                  </div>
-                  <!-- 5 Pedestals for Trophies 1-5 -->
-                  <div class="wall-pedestals-track" id="wallNorthPedestals">
-                    <!-- Populated dynamically from trophies-data.js -->
-                  </div>
-                  <div class="wall-base-plinth"></div>
-                </div>
-
-                <!-- 4. LEFT WALL (WEST): Weekend & Corporate League Silverware -->
-                <div class="room-plane plane-wall plane-left" id="roomWallWest">
-                  <div class="wall-header-ribbon">
-                    <span class="wall-badge">🛡️ League Championships</span>
-                    <h2 class="wall-title">Corporate & Weekend Championship Shields</h2>
-                    <span class="wall-desc">5 Invitational Silverware Cups</span>
-                  </div>
-                  <!-- 5 Pedestals for Trophies 6-10 -->
-                  <div class="wall-pedestals-track" id="wallWestPedestals">
-                    <!-- Populated dynamically from trophies-data.js -->
-                  </div>
-                  <div class="wall-base-plinth"></div>
-                </div>
-
-                <!-- 5. RIGHT WALL (EAST): Plate, Veterans & Sportsmanship Honors -->
-                <div class="room-plane plane-wall plane-right" id="roomWallEast">
-                  <div class="wall-header-ribbon">
-                    <span class="wall-badge">🎖️ Club Honors & Lore</span>
-                    <h2 class="wall-title">Plate, Veterans & Sportsmanship Honors</h2>
-                    <span class="wall-desc">5 Club Milestone Awards</span>
-                  </div>
-                  <!-- 5 Pedestals for Trophies 11-15 -->
-                  <div class="wall-pedestals-track" id="wallEastPedestals">
-                    <!-- Populated dynamically from trophies-data.js -->
-                  </div>
-                  <div class="wall-base-plinth"></div>
-                </div>
-
-                <!-- 6. BACK WALL (SOUTH): Grand Vault Doors & Entrance Arch -->
-                <div class="room-plane plane-wall plane-back" id="roomWallSouth">
-                  <div class="south-portal-frame">
-                    <div class="vault-portal-arch">
-                      <div class="portal-crest">
-                        <img src="./assets/images/logo.png" alt="KAvach Crest" width="46" height="46">
-                      </div>
-                      <span class="portal-text">KAvach Hall of Fame Portal</span>
-                    </div>
-
-                    <!-- 3D Swing Double Doors -->
-                    <div class="portal-doors-hinge-wrapper">
-                      <div class="portal-door door-left" id="tourDoorLeft">
-                        <div class="door-face">
-                          <div class="door-roundel">
-                            <img src="./assets/images/logo.png" alt="KAvach Logo" width="36" height="36">
-                          </div>
-                          <div class="door-lock-bar"></div>
-                          <div class="door-pull-handle"></div>
-                        </div>
-                      </div>
-                      <div class="portal-door door-right" id="tourDoorRight">
-                        <div class="door-face">
-                          <div class="door-roundel">
-                            <img src="./assets/images/logo.png" alt="KAvach Logo" width="36" height="36">
-                          </div>
-                          <div class="door-lock-bar"></div>
-                          <div class="door-pull-handle"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="wall-base-plinth"></div>
-                </div>
-
-              </div> <!-- /tour-room-box -->
-            </div> <!-- /tour-camera -->
-          </div> <!-- /tour-world-scene -->
-
-          <!-- ===================================================================
-               HUD OVERLAYS & CONTROLS (Fixed over the 3D tour)
-               =================================================================== -->
-          
-          <!-- Top HUD Bar -->
-          <div class="tour-hud-top">
-            <div class="tour-status-tag">
-              <span class="status-pulse-dot"></span>
-              <span class="status-title">3D Virtual Trophy Tour</span>
-            </div>
-
-            <div class="tour-hud-controls-right">
-              <!-- Radar Compass -->
-              <div class="tour-radar-compass" id="tourRadarCompass" title="Radar Compass: Click directions to face that wall">
-                <div class="radar-disc" id="radarDisc">
-                  <div class="radar-fov-cone"></div>
-                  <span class="radar-mark mark-n" data-vantage="center" title="Face North (KPL Showcase)">N</span>
-                  <span class="radar-mark mark-w" data-vantage="left" title="Face West (Left Gallery)">W</span>
-                  <span class="radar-mark mark-e" data-vantage="right" title="Face East (Right Honors)">E</span>
-                  <span class="radar-mark mark-s" data-vantage="entrance" title="Face South (Vault Doors)">S</span>
-                  <div class="radar-blip"></div>
-                </div>
-                <span class="radar-label" id="radarHeadingLabel">Center Stage (N)</span>
               </div>
-
-              <!-- Fullscreen Button -->
-              <button type="button" class="tour-hud-btn" id="tourFullscreenBtn" aria-label="Toggle Fullscreen Tour" title="Toggle Fullscreen">
-                <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                <svg class="fs-icon-compress" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
-              </button>
+              <div class="vault-door vault-door-right">
+                <div class="door-plate">
+                  <div class="door-bolts"></div>
+                  <div class="door-emblem-badge">
+                    <img src="./assets/images/logo.png" alt="KAvach Crest" width="52" height="52">
+                  </div>
+                  <div class="door-lock-bar"></div>
+                  <div class="door-grab-handle"></div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <!-- Entrance Overlay Screen (Initial state before entering) -->
-          <div class="tour-entrance-overlay" id="tourEntranceOverlay">
-            <div class="entrance-dialog-card">
-              <span class="entrance-gold-kicker">★ Interactive Virtual Tour ★</span>
-              <h1 class="entrance-title">Step Inside Our <span>Trophy Room</span></h1>
-              <p class="entrance-desc">
-                Experience the championship glory of KAvach Cricket Club in a full 3D first-person point of view. Pan 360°, walk between showcases, and inspect all 15 trophies with victory stories and celebration photo galleries.
+            <!-- Light spill burst when doors open -->
+            <div class="vault-light-spill" id="vaultLightSpill"></div>
+
+            <!-- Entrance Invitation Card -->
+            <div class="vault-card-overlay" id="vaultCardOverlay">
+              <span class="vault-kicker">★ Championship Hall of Fame ★</span>
+              <h1 class="vault-title">Enter Our <span>Trophy Room</span></h1>
+              <p class="vault-desc">
+                Step inside the official virtual trophy room of KAvach Cricket Club. Experience our 15 championship triumphs from an immersive point of view, exploring victory stories and celebration photos across every tournament wing.
               </p>
-              <button type="button" class="btn-enter-room-main" id="btnEnterTour" aria-label="Enter the 3D Trophy Room">
+              <button type="button" class="btn-unlock-vault" id="btnUnlockVault" aria-label="Unlock and enter the virtual trophy room">
                 <span>Enter Trophy Room</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </button>
-              <div class="entrance-meta-pills">
-                <span>🖐️ 360° Drag / Swipe</span>
+              <div class="vault-feature-tags">
+                <span>🚪 3D Vault Entrance</span>
                 <span>•</span>
-                <span>📍 Walkable Waypoints</span>
+                <span>🏆 15 Silverware Trophies</span>
                 <span>•</span>
                 <span>📸 5 Photos Per Trophy</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Bottom HUD Bar -->
-          <div class="tour-hud-bottom" id="tourHudBottom">
-            
-            <!-- Vantage Point Teleport Pills -->
-            <div class="tour-vantage-pills" role="tablist" aria-label="Room Vantage Points">
-              <button type="button" class="tour-vantage-btn active" data-vantage="center" aria-label="Face KPL Center Stage">
-                <span>🏆 Center Stage</span>
-              </button>
-              <button type="button" class="tour-vantage-btn" data-vantage="left" aria-label="Face Left Showcase">
-                <span>🛡️ Left Showcase</span>
-              </button>
-              <button type="button" class="tour-vantage-btn" data-vantage="right" aria-label="Face Right Honors">
-                <span>🎖️ Right Honors</span>
-              </button>
-              <button type="button" class="tour-vantage-btn" data-vantage="roomCenter" aria-label="Stand in 360 Center">
-                <span>🔄 360° Center</span>
-              </button>
-              <button type="button" class="tour-vantage-btn" data-vantage="entrance" aria-label="Look toward Entrance Vault Doors">
-                <span>🚪 Entrance</span>
-              </button>
+        <!-- =====================================================================
+             STAGE 2: INSIDE THE VIRTUAL TROPHY ROOM (Showroom Chamber)
+             ===================================================================== -->
+        <div class="showroom-stage" id="showroomStage" style="display: none;">
+          
+          <!-- Top HUD Control Bar -->
+          <div class="showroom-top-hud">
+            <div class="hud-left-meta">
+              <span class="hud-pulse-dot"></span>
+              <span class="hud-heading-text" id="hudWallHeading">🏆 Center Stage: KAvach Premier League (KPL)</span>
             </div>
 
-            <!-- Directional Navigation Buttons -->
-            <div class="tour-nav-cluster">
-              <button type="button" class="tour-dir-btn" id="btnTurnLeft" aria-label="Turn Left 45 degrees">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                <span>Turn Left</span>
-              </button>
+            <div class="hud-right-controls">
+              <!-- Wall Switcher Navigation Pills -->
+              <div class="showroom-nav-pills" role="tablist" aria-label="Trophy Room Showcases">
+                <button type="button" class="nav-pill-btn active" data-wall="center" aria-label="View Center Stage (KPL Cups)">
+                  <span>🏆 Center Stage</span>
+                  <span class="pill-count">5</span>
+                </button>
+                <button type="button" class="nav-pill-btn" data-wall="left" aria-label="View Left Showcase (Corporate & Weekend)">
+                  <span>🛡️ Left Showcase</span>
+                  <span class="pill-count">5</span>
+                </button>
+                <button type="button" class="nav-pill-btn" data-wall="right" aria-label="View Right Honors (Plate & Sportsmanship)">
+                  <span>🎖️ Right Honors</span>
+                  <span class="pill-count">5</span>
+                </button>
+              </div>
 
-              <button type="button" class="tour-dir-btn" id="btnStepForward" aria-label="Step Closer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                <span>Step Closer</span>
-              </button>
-
-              <button type="button" class="tour-dir-btn" id="btnTurnRight" aria-label="Turn Right 45 degrees">
-                <span>Turn Right</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <!-- Exit Back to Vault Doors -->
+              <button type="button" class="btn-exit-showroom" id="btnExitShowroom" aria-label="Exit back to the vault doors">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                <span>Exit Room</span>
               </button>
             </div>
-
-            <!-- Helper Instruction Line -->
-            <div class="tour-gesture-instructions">
-              <span>🖐️ <strong>Drag or Swipe</strong> in any direction to look around 360° • Click any trophy on the walls to inspect story &amp; photos</span>
-            </div>
-
           </div>
 
-        </div> <!-- /tour-viewport -->
+          <!-- Main Chamber Viewport with Smooth Perspective Transitions -->
+          <div class="showroom-viewport" id="showroomViewport">
+            
+            <!-- Left / Right Nav Turn Arrows -->
+            <button type="button" class="chamber-turn-btn turn-left" id="btnTurnLeft" aria-label="Turn View to Left Wall">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="chamber-turn-btn turn-right" id="btnTurnRight" aria-label="Turn View to Right Wall">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <!-- Chamber Walls Container (Rotates / Slides smoothly) -->
+            <div class="chamber-track" id="chamberTrack">
+              
+              <!-- WALL 1: CENTER STAGE (KPL Marquee Cups) -->
+              <div class="chamber-wall wall-pane active-wall" id="wallCenterPane">
+                <div class="wall-header-banner">
+                  <span class="banner-kicker">Marquee Flagship Tournaments</span>
+                  <h2 class="banner-title">KAvach Premier League (KPL) Showcase</h2>
+                  <p class="banner-subtitle">Official tournament silverware celebrated under the floodlights at Play Arena.</p>
+                </div>
+                <!-- 5 Pedestals Grid -->
+                <div class="pedestals-showcase-grid" id="gridPedestalsCenter">
+                  <!-- Dynamically populated from trophies-data.js -->
+                </div>
+              </div>
+
+              <!-- WALL 2: LEFT SHOWCASE (Corporate & Weekend Leagues) -->
+              <div class="chamber-wall wall-pane" id="wallLeftPane">
+                <div class="wall-header-banner">
+                  <span class="banner-kicker">Competitive Weekend Circuits</span>
+                  <h2 class="banner-title">Corporate & Weekend Championship Shields</h2>
+                  <p class="banner-subtitle">Silverware won across Bangalore's premier corporate and invitational leagues.</p>
+                </div>
+                <!-- 5 Pedestals Grid -->
+                <div class="pedestals-showcase-grid" id="gridPedestalsLeft">
+                  <!-- Dynamically populated from trophies-data.js -->
+                </div>
+              </div>
+
+              <!-- WALL 3: RIGHT SHOWCASE (Plate & Sportsmanship Honors) -->
+              <div class="chamber-wall wall-pane" id="wallRightPane">
+                <div class="wall-header-banner">
+                  <span class="banner-kicker">Club Lore & Heritage</span>
+                  <h2 class="banner-title">Plate, Veterans & Sportsmanship Honors</h2>
+                  <p class="banner-subtitle">Honoring club resilience, veteran milestones, and uncompromising fair play ethics.</p>
+                </div>
+                <!-- 5 Pedestals Grid -->
+                <div class="pedestals-showcase-grid" id="gridPedestalsRight">
+                  <!-- Dynamically populated from trophies-data.js -->
+                </div>
+              </div>
+
+            </div> <!-- /chamber-track -->
+
+            <!-- Polished Floor with Reflections -->
+            <div class="chamber-reflective-floor"></div>
+
+          </div> <!-- /showroom-viewport -->
+
+          <!-- Bottom Gesture Tip -->
+          <div class="showroom-bottom-bar">
+            <div class="gesture-tip-pill">
+              <span>🖐️ <strong>Swipe or Click Arrows</strong> to turn your view • Click any trophy to inspect story &amp; 5 celebration photos</span>
+            </div>
+          </div>
+
+        </div> <!-- /showroom-stage -->
 
       </div>
     </section>

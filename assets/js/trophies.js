@@ -1,12 +1,12 @@
 /**
- * KAvach Cricket Club - 3D Virtual Trophy Room First-Person PoV Tour Engine
+ * KAvach Cricket Club - Virtual Trophy Room Interactive Engine
  * 
  * Features:
- * 1. Web Audio API Synthesizer (0 KB external audio, zero-latency effects)
- * 2. 3D First-Person PoV Camera Rig with 360° Drag & Smooth Damping
- * 3. 3D Architectural Room Box with Floor, Ceiling, and 3 Thematic Gallery Walls
- * 4. Interactive Clickable Floor Waypoints & Radar Compass Heading
- * 5. Dynamic 3D Trophy Pedestals with Ceiling Spotlights
+ * 1. Web Audio API Synthesizer (Zero-latency sound effects, 0 KB external downloads)
+ * 2. 3D Vault Entrance Transition with Double-Door Swing Animation
+ * 3. Spatial Showroom Carousel (Center Stage, Left Showcase, Right Honors)
+ * 4. Touch Swipe & Arrow Navigation for Mobile & Desktop
+ * 5. Dynamic Pedestal Generation with Spotlights & Hover Feedback
  * 6. Detailed Victory Story Lightbox Modal with 5-Photo Gallery Carousel
  */
 
@@ -19,41 +19,26 @@
   let audioCtx = null;
   let isMuted = localStorage.getItem('kavach_trophy_muted') === 'true';
 
-  // Camera PoV Coordinates
-  // 0 = North (Center Stage), 90 = West (Left Gallery), 180 = South (Vault Entrance), -90/270 = East (Right Honors)
-  let currentX = 0;
-  let currentY = 0;
-  let currentZ = 750; // Initially in front of closed vault doors
-  let targetX = 0;
-  let targetY = 0;
-  let targetZ = 750;
-
-  let currentYaw = 0;
-  let targetYaw = 0;
-  let currentPitch = 0;
-  let targetPitch = 0;
-
-  let isInsideRoom = false;
-  let isDragging = false;
-  let dragStartX = 0;
-  let dragStartY = 0;
-  let startYaw = 0;
-  let startPitch = 0;
+  const WALL_ORDER = ['left', 'center', 'right'];
+  let currentWall = 'center';
 
   let currentTrophyId = null;
   let currentPhotoIndex = 0;
 
   // DOM Elements Cache
-  const viewport = document.getElementById('tourViewport');
-  const camera = document.getElementById('tourCamera');
-  const radarDisc = document.getElementById('radarDisc');
-  const radarHeadingLabel = document.getElementById('radarHeadingLabel');
-  const entranceOverlay = document.getElementById('tourEntranceOverlay');
-  const vaultPortal = document.getElementById('roomWallSouth');
-  const btnEnterTour = document.getElementById('btnEnterTour');
-  const fullscreenBtn = document.getElementById('tourFullscreenBtn');
-  const audioBtn = document.getElementById('tourAudioBtn');
+  const vaultStage = document.getElementById('vaultEntranceStage');
+  const vaultDoorsWrapper = document.getElementById('vaultDoorsWrapper');
+  const btnUnlockVault = document.getElementById('btnUnlockVault');
+
+  const showroomStage = document.getElementById('showroomStage');
+  const showroomViewport = document.getElementById('showroomViewport');
+  const hudWallHeading = document.getElementById('hudWallHeading');
+  const btnExitShowroom = document.getElementById('btnExitShowroom');
+  const btnTurnLeft = document.getElementById('btnTurnLeft');
+  const btnTurnRight = document.getElementById('btnTurnRight');
+
   const modal = document.getElementById('trophyModal');
+  const audioToggleBtn = document.getElementById('audioToggleBtn');
 
   /* --------------------------------------------------------------------------
      1. Web Audio API Synthesizer
@@ -71,7 +56,7 @@
     return audioCtx;
   }
 
-  // Vault Door Opening Mechanical Rumble & Ethereal Chord
+  // Vault Door Opening Heavy Rumble & Shimmering Chord
   function playDoorOpenSound() {
     if (isMuted) return;
     try {
@@ -87,7 +72,7 @@
       osc1.frequency.exponentialRampToValueAtTime(32, now + 1.2);
 
       gain1.gain.setValueAtTime(0.01, now);
-      gain1.gain.linearRampToValueAtTime(0.2, now + 0.2);
+      gain1.gain.linearRampToValueAtTime(0.22, now + 0.2);
       gain1.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
 
       const filter = ctx.createBiquadFilter();
@@ -112,7 +97,7 @@
     }
   }
 
-  // Shimmering Chime on Trophy Inspection
+  // Golden Chime on Trophy Inspection
   function playTrophyClickSound() {
     if (isMuted) return;
     try {
@@ -120,7 +105,7 @@
     } catch (e) {}
   }
 
-  // Subtle Tactile Click
+  // Soft Tactile Click
   function playPhotoClickSound() {
     if (isMuted) return;
     try {
@@ -145,7 +130,7 @@
     } catch (e) {}
   }
 
-  // Soft Glide Whoosh when Walking / Teleporting
+  // Soft Glide Whoosh when Turning View
   function playGlideSound() {
     if (isMuted) return;
     try {
@@ -156,22 +141,22 @@
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(240, now);
-      osc.frequency.exponentialRampToValueAtTime(140, now + 0.35);
+      osc.frequency.setValueAtTime(260, now);
+      osc.frequency.exponentialRampToValueAtTime(130, now + 0.3);
 
       gain.gain.setValueAtTime(0.01, now);
       gain.gain.linearRampToValueAtTime(0.07, now + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.4);
+      osc.stop(now + 0.35);
     } catch (e) {}
   }
 
-  // Harmonic chord synthesizer
+  // Harmonic Chord Synthesizer
   function playChimeChord(frequencies, masterVol, duration) {
     const ctx = getAudioContext();
     if (!ctx) return;
@@ -197,260 +182,155 @@
   }
 
   /* --------------------------------------------------------------------------
-     2. 3D First-Person PoV Camera Render Loop (60fps LERP)
+     2. Stage 1: Vault Entrance Transitions
      -------------------------------------------------------------------------- */
-  function updateCameraLoop() {
-    // Smooth position interpolation
-    currentX += (targetX - currentX) * 0.1;
-    currentY += (targetY - currentY) * 0.1;
-    currentZ += (targetZ - currentZ) * 0.1;
+  function initVaultEntrance() {
+    if (!btnUnlockVault || !vaultDoorsWrapper) return;
 
-    // Smooth angle interpolation
-    currentYaw += (targetYaw - currentYaw) * 0.12;
-    currentPitch += (targetPitch - currentPitch) * 0.12;
+    btnUnlockVault.addEventListener('click', () => {
+      playDoorOpenSound();
+      vaultDoorsWrapper.classList.add('doors-open');
 
-    if (camera) {
-      camera.style.transform = `translateZ(380px) rotateX(${currentPitch}deg) rotateY(${currentYaw}deg) translate3d(${-currentX}px, ${-currentY}px, ${-currentZ}px)`;
+      // Seamlessly transition to showroom chamber
+      setTimeout(() => {
+        if (vaultStage) vaultStage.style.display = 'none';
+        if (showroomStage) {
+          showroomStage.style.display = 'block';
+          switchWall('center');
+          window.scrollTo({ top: showroomStage.offsetTop - 80, behavior: 'smooth' });
+        }
+      }, 750);
+    });
+
+    if (btnExitShowroom) {
+      btnExitShowroom.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (showroomStage) showroomStage.style.display = 'none';
+        if (vaultStage) {
+          vaultStage.style.display = 'flex';
+          vaultDoorsWrapper.classList.remove('doors-open');
+          window.scrollTo({ top: vaultStage.offsetTop - 80, behavior: 'smooth' });
+        }
+      });
     }
-
-    // Update Radar Compass rotation
-    if (radarDisc) {
-      radarDisc.style.transform = `rotate(${-currentYaw}deg)`;
-    }
-
-    // Update Heading Label text based on normalized yaw
-    if (radarHeadingLabel) {
-      let normalized = ((currentYaw % 360) + 360) % 360;
-      if (normalized >= 315 || normalized < 45) {
-        radarHeadingLabel.textContent = 'Center Stage (N)';
-      } else if (normalized >= 45 && normalized < 135) {
-        radarHeadingLabel.textContent = 'Left Showcase (W)';
-      } else if (normalized >= 135 && normalized < 225) {
-        radarHeadingLabel.textContent = 'Vault Doors (S)';
-      } else {
-        radarHeadingLabel.textContent = 'Right Honors (E)';
-      }
-    }
-
-    requestAnimationFrame(updateCameraLoop);
   }
 
   /* --------------------------------------------------------------------------
-     3. Pointer / Touch 360° Drag Look Around
+     3. Stage 2: Spatial Showroom Wall Switching & Navigation
      -------------------------------------------------------------------------- */
-  function initPointerLook() {
-    if (!viewport) return;
-
-    const onPointerDown = (e) => {
-      // Don't drag if clicking buttons, waypoints, or modal
-      if (e.target.closest('button') || e.target.closest('.wall-pedestal-card') || e.target.closest('.trophy-modal')) {
-        return;
-      }
-      isDragging = true;
-      dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-      dragStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-      startYaw = targetYaw;
-      startPitch = targetPitch;
-    };
-
-    const onPointerMove = (e) => {
-      if (!isDragging) return;
-
-      const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-      const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-
-      const deltaX = clientX - dragStartX;
-      const deltaY = clientY - dragStartY;
-
-      targetYaw = startYaw - deltaX * 0.28;
-      targetPitch = Math.max(-20, Math.min(18, startPitch + deltaY * 0.22));
-    };
-
-    const onPointerUp = () => {
-      isDragging = false;
-    };
-
-    viewport.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-
-    viewport.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('touchend', onPointerUp, { passive: true });
-  }
-
-  /* --------------------------------------------------------------------------
-     4. Vantage Point Teleportation & Navigation
-     -------------------------------------------------------------------------- */
-  function goToVantage(vantageName) {
-    if (!isInsideRoom) {
-      enterTrophyRoom();
-    }
+  function switchWall(targetWall) {
+    if (!WALL_ORDER.includes(targetWall)) return;
+    currentWall = targetWall;
 
     // Update navigation pill buttons
-    document.querySelectorAll('.tour-vantage-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-vantage') === vantageName);
+    document.querySelectorAll('.nav-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-wall') === targetWall);
     });
+
+    // Update wall panes
+    const paneCenter = document.getElementById('wallCenterPane');
+    const paneLeft = document.getElementById('wallLeftPane');
+    const paneRight = document.getElementById('wallRightPane');
+
+    if (paneCenter) {
+      paneCenter.classList.toggle('active-wall', targetWall === 'center');
+      paneCenter.classList.toggle('wall-prev', targetWall === 'right');
+    }
+    if (paneLeft) {
+      paneLeft.classList.toggle('active-wall', targetWall === 'left');
+      paneLeft.classList.toggle('wall-prev', targetWall === 'center' || targetWall === 'right');
+    }
+    if (paneRight) {
+      paneRight.classList.toggle('active-wall', targetWall === 'right');
+      paneRight.classList.toggle('wall-prev', false);
+    }
+
+    // Update HUD heading
+    if (hudWallHeading) {
+      if (targetWall === 'center') {
+        hudWallHeading.textContent = '🏆 Center Stage: KAvach Premier League (KPL)';
+      } else if (targetWall === 'left') {
+        hudWallHeading.textContent = '🛡️ Left Showcase: Corporate & Weekend Leagues';
+      } else if (targetWall === 'right') {
+        hudWallHeading.textContent = '🎖️ Right Honors: Plate, Veterans & Sportsmanship';
+      }
+    }
 
     playGlideSound();
-
-    switch (vantageName) {
-      case 'center':
-        // Stand right in front of KPL Center Showcase
-        targetX = 0;
-        targetY = 0;
-        targetZ = -340;
-        targetYaw = 0;
-        targetPitch = 0;
-        break;
-
-      case 'left':
-        // Stand in front of Weekend & Corporate Showcase
-        targetX = -340;
-        targetY = 0;
-        targetZ = 0;
-        targetYaw = 90;
-        targetPitch = 0;
-        break;
-
-      case 'right':
-        // Stand in front of Plate & Honors Showcase
-        targetX = 340;
-        targetY = 0;
-        targetZ = 0;
-        targetYaw = -90;
-        targetPitch = 0;
-        break;
-
-      case 'roomCenter':
-        // Stand in center of hall for 360° overview
-        targetX = 0;
-        targetY = 0;
-        targetZ = 0;
-        targetPitch = 0;
-        break;
-
-      case 'entrance':
-        // Turn to look back at the grand vault entrance
-        targetX = 0;
-        targetY = 0;
-        targetZ = 340;
-        targetYaw = 180;
-        targetPitch = 0;
-        break;
-    }
   }
 
-  function initVantageControls() {
+  function initShowroomNavigation() {
     // Navigation Pills
-    document.querySelectorAll('.tour-vantage-btn').forEach(btn => {
+    document.querySelectorAll('.nav-pill-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const vantage = btn.getAttribute('data-vantage');
-        goToVantage(vantage);
+        const wall = btn.getAttribute('data-wall');
+        switchWall(wall);
       });
     });
 
-    // Floor Waypoints
-    document.querySelectorAll('.floor-waypoint').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const vantage = btn.getAttribute('data-vantage');
-        goToVantage(vantage);
-      });
-    });
-
-    // Directional Turn Buttons
-    const btnTurnLeft = document.getElementById('btnTurnLeft');
-    const btnTurnRight = document.getElementById('btnTurnRight');
-    const btnStepForward = document.getElementById('btnStepForward');
-
+    // Left / Right Turn Arrows
     if (btnTurnLeft) {
       btnTurnLeft.addEventListener('click', () => {
-        targetYaw += 45;
-        playGlideSound();
+        const currentIndex = WALL_ORDER.indexOf(currentWall);
+        const prevIndex = (currentIndex - 1 + WALL_ORDER.length) % WALL_ORDER.length;
+        switchWall(WALL_ORDER[prevIndex]);
       });
     }
 
     if (btnTurnRight) {
       btnTurnRight.addEventListener('click', () => {
-        targetYaw -= 45;
-        playGlideSound();
+        const currentIndex = WALL_ORDER.indexOf(currentWall);
+        const nextIndex = (currentIndex + 1) % WALL_ORDER.length;
+        switchWall(WALL_ORDER[nextIndex]);
       });
     }
 
-    if (btnStepForward) {
-      btnStepForward.addEventListener('click', () => {
-        const rad = targetYaw * (Math.PI / 180);
-        targetX += Math.sin(rad) * -160;
-        targetZ += Math.cos(rad) * -160;
+    // Horizontal Touch Swipe Handling on Viewport
+    if (showroomViewport) {
+      let touchStartX = 0;
+      let touchEndX = 0;
 
-        // Clamp inside room boundary
-        targetX = Math.max(-360, Math.min(360, targetX));
-        targetZ = Math.max(-360, Math.min(360, targetZ));
+      showroomViewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
 
-        playGlideSound();
-      });
-    }
-
-    // Radar Marks Clicks (N, W, E, S)
-    document.querySelectorAll('.radar-mark').forEach(mark => {
-      mark.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const vantage = mark.getAttribute('data-vantage');
-        goToVantage(vantage);
-      });
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     5. Vault Entrance Sequence ("Enter Trophy Room")
-     -------------------------------------------------------------------------- */
-  function enterTrophyRoom() {
-    playDoorOpenSound();
-
-    if (vaultPortal) {
-      vaultPortal.classList.add('doors-open');
-    }
-
-    if (entranceOverlay) {
-      entranceOverlay.classList.add('hidden');
-    }
-
-    // Smooth camera glide forward through open doors into center of the room
-    setTimeout(() => {
-      targetZ = 0;
-      targetX = 0;
-      targetYaw = 0;
-      targetPitch = 0;
-      isInsideRoom = true;
-    }, 400);
-  }
-
-  function initEntrance() {
-    if (btnEnterTour) {
-      btnEnterTour.addEventListener('click', enterTrophyRoom);
+      showroomViewport.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (diff > 50) {
+          // Swipe Right -> previous wall
+          const currentIndex = WALL_ORDER.indexOf(currentWall);
+          const prevIndex = (currentIndex - 1 + WALL_ORDER.length) % WALL_ORDER.length;
+          switchWall(WALL_ORDER[prevIndex]);
+        } else if (diff < -50) {
+          // Swipe Left -> next wall
+          const currentIndex = WALL_ORDER.indexOf(currentWall);
+          const nextIndex = (currentIndex + 1) % WALL_ORDER.length;
+          switchWall(WALL_ORDER[nextIndex]);
+        }
+      }, { passive: true });
     }
   }
 
   /* --------------------------------------------------------------------------
-     6. Dynamic Pedestal Generation on 3D Gallery Walls
+     4. Dynamic Pedestal Generation
      -------------------------------------------------------------------------- */
   function renderTrophyPedestals() {
     if (!window.TROPHY_COLLECTION || !Array.isArray(window.TROPHY_COLLECTION)) return;
 
-    const northTrack = document.getElementById('wallNorthPedestals');
-    const westTrack = document.getElementById('wallWestPedestals');
-    const eastTrack = document.getElementById('wallEastPedestals');
+    const gridCenter = document.getElementById('gridPedestalsCenter');
+    const gridLeft = document.getElementById('gridPedestalsLeft');
+    const gridRight = document.getElementById('gridPedestalsRight');
 
-    if (!northTrack || !westTrack || !eastTrack) return;
+    if (!gridCenter || !gridLeft || !gridRight) return;
 
-    northTrack.innerHTML = '';
-    westTrack.innerHTML = '';
-    eastTrack.innerHTML = '';
+    gridCenter.innerHTML = '';
+    gridLeft.innerHTML = '';
+    gridRight.innerHTML = '';
 
     window.TROPHY_COLLECTION.forEach(trophy => {
       const card = document.createElement('div');
-      card.className = 'wall-pedestal-card';
+      card.className = 'pedestal-item-card';
       card.setAttribute('data-id', trophy.id);
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
@@ -459,19 +339,18 @@
       const photoCount = (trophy.photos && trophy.photos.length) ? trophy.photos.length : 1;
 
       card.innerHTML = `
-        <div class="pedestal-spotlight-beam"></div>
-        <div class="pedestal-trophy-wrap">
+        <div class="spotlight-beam-cone"></div>
+        <div class="trophy-media-wrap">
           <img src="${trophy.image}" alt="${trophy.title}" loading="lazy" decoding="async">
-          <div class="trophy-ambient-halo"></div>
         </div>
-        <div class="pedestal-shelf-base"></div>
-        <div class="pedestal-brass-plaque">
-          <div class="plaque-year-badge">${trophy.year} • ${trophy.badge}</div>
-          <h3 class="plaque-title">${trophy.title}</h3>
-          <div class="plaque-subtitle">${trophy.subtitle}</div>
-          <div class="plaque-action-hint">
-            <span class="photos-tag">📸 ${photoCount} Photos</span>
-            <span class="inspect-text">Inspect &rarr;</span>
+        <div class="pedestal-marble-base"></div>
+        <div class="pedestal-brass-plate">
+          <div class="plate-status-badge">${trophy.year} • ${trophy.badge}</div>
+          <h3 class="plate-trophy-name">${trophy.title}</h3>
+          <div class="plate-franchise-sub">${trophy.subtitle}</div>
+          <div class="plate-action-tag">
+            <span class="photo-count-pill">📸 ${photoCount} Photos</span>
+            <span class="inspect-cta-text">Story &rarr;</span>
           </div>
         </div>
       `;
@@ -493,17 +372,17 @@
       });
 
       if (trophy.wing === 'center') {
-        northTrack.appendChild(card);
+        gridCenter.appendChild(card);
       } else if (trophy.wing === 'left') {
-        westTrack.appendChild(card);
+        gridLeft.appendChild(card);
       } else if (trophy.wing === 'right') {
-        eastTrack.appendChild(card);
+        gridRight.appendChild(card);
       }
     });
   }
 
   /* --------------------------------------------------------------------------
-     7. Trophy Story Modal with 5-Photo Gallery Carousel
+     5. Trophy Story Lightbox Modal with 5-Photo Gallery Carousel
      -------------------------------------------------------------------------- */
   function openTrophyModal(trophyId) {
     if (!modal || !window.TROPHY_COLLECTION) return;
@@ -516,7 +395,7 @@
 
     playTrophyClickSound();
 
-    // Populate metadata & narrative
+    // Populate metadata & story
     const badgeEl = document.getElementById('modalBadge');
     const yearEl = document.getElementById('modalYear');
     const titleEl = document.getElementById('modalTitle');
@@ -547,7 +426,7 @@
       }
     }
 
-    // Populate Photo Gallery Carousel (up to 5 celebration photos)
+    // Populate 5-Photo Gallery Carousel
     const gallerySection = document.getElementById('modalGallerySection');
     const thumbsStrip = document.getElementById('modalThumbsStrip');
     const mainImg = document.getElementById('modalMainImg');
@@ -651,19 +530,22 @@
     // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       if (!modal.classList.contains('modal-active')) {
-        // In-Tour Shortcuts
-        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-          targetYaw += 15;
-        } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-          targetYaw -= 15;
-        } else if (e.key === '1') {
-          goToVantage('center');
-        } else if (e.key === '2') {
-          goToVantage('left');
-        } else if (e.key === '3') {
-          goToVantage('right');
-        } else if (e.key === '4') {
-          goToVantage('roomCenter');
+        if (showroomStage && showroomStage.style.display !== 'none') {
+          if (e.key === 'ArrowLeft') {
+            const currentIndex = WALL_ORDER.indexOf(currentWall);
+            const prevIndex = (currentIndex - 1 + WALL_ORDER.length) % WALL_ORDER.length;
+            switchWall(WALL_ORDER[prevIndex]);
+          } else if (e.key === 'ArrowRight') {
+            const currentIndex = WALL_ORDER.indexOf(currentWall);
+            const nextIndex = (currentIndex + 1) % WALL_ORDER.length;
+            switchWall(WALL_ORDER[nextIndex]);
+          } else if (e.key === '1') {
+            switchWall('center');
+          } else if (e.key === '2') {
+            switchWall('left');
+          } else if (e.key === '3') {
+            switchWall('right');
+          }
         }
         return;
       }
@@ -679,77 +561,39 @@
   }
 
   /* --------------------------------------------------------------------------
-     8. Fullscreen & Audio Controls
+     6. Audio Toggle
      -------------------------------------------------------------------------- */
-  function initHUDControls() {
-    // Fullscreen Toggle
-    if (fullscreenBtn && viewport) {
-      fullscreenBtn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          if (viewport.requestFullscreen) {
-            viewport.requestFullscreen();
-          } else if (viewport.webkitRequestFullscreen) {
-            viewport.webkitRequestFullscreen();
-          }
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          }
-        }
-      });
+  function initAudioToggle() {
+    if (!audioToggleBtn) return;
 
-      document.addEventListener('fullscreenchange', () => {
-        const isFs = !!document.fullscreenElement;
-        const expandIcon = fullscreenBtn.querySelector('.fs-icon-expand');
-        const compressIcon = fullscreenBtn.querySelector('.fs-icon-compress');
-        if (expandIcon && compressIcon) {
-          expandIcon.style.display = isFs ? 'none' : 'block';
-          compressIcon.style.display = isFs ? 'block' : 'none';
-        }
-        viewport.classList.toggle('is-fullscreen', isFs);
-      });
-    }
-
-    // Audio Toggle
-    const audioToggleBtn = document.getElementById('audioToggleBtn');
     const updateAudioUI = () => {
-      if (audioToggleBtn) {
-        audioToggleBtn.classList.toggle('muted', isMuted);
-        const label = audioToggleBtn.querySelector('.audio-label');
-        if (label) label.textContent = isMuted ? 'Sound: Off' : 'Sound: On';
-        audioToggleBtn.setAttribute('aria-pressed', isMuted ? 'false' : 'true');
-      }
-      if (audioBtn) {
-        audioBtn.style.opacity = isMuted ? '0.5' : '1';
-      }
+      audioToggleBtn.classList.toggle('muted', isMuted);
+      const label = audioToggleBtn.querySelector('.audio-label');
+      if (label) label.textContent = isMuted ? 'Sound: Off' : 'Sound: On';
+      audioToggleBtn.setAttribute('aria-pressed', isMuted ? 'false' : 'true');
     };
 
     updateAudioUI();
 
-    const toggleMute = () => {
+    audioToggleBtn.addEventListener('click', () => {
       isMuted = !isMuted;
       localStorage.setItem('kavach_trophy_muted', isMuted ? 'true' : 'false');
       updateAudioUI();
       if (!isMuted) {
         playTrophyClickSound();
       }
-    };
-
-    if (audioToggleBtn) audioToggleBtn.addEventListener('click', toggleMute);
-    if (audioBtn) audioBtn.addEventListener('click', toggleMute);
+    });
   }
 
   /* --------------------------------------------------------------------------
-     9. Initialization
+     7. Initialization on DOM Ready
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
-    initHUDControls();
-    initEntrance();
+    initAudioToggle();
+    initVaultEntrance();
     renderTrophyPedestals();
-    initPointerLook();
-    initVantageControls();
+    initShowroomNavigation();
     initTrophyModal();
-    updateCameraLoop();
   });
 
 })();

@@ -1,11 +1,11 @@
 /* ==========================================================================
-   KAvach Cricket Club - 3D Virtual Trophy Room Tour Stylesheet
-   Architecture: First-Person PoV Camera, 3D Room Box, Spotlights & Story Modal
+   KAvach Cricket Club - Virtual Trophy Room Tour Stylesheet
+   Architecture: Two-Stage Spatial Showroom (3D Vault Entrance -> Panoramic Chamber)
    Palette: Scarlet Red (#D90429), Golden Yellow (#FFC107), Dark Obsidian (#08090C)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Audio Toggle Floating Button
+   Audio Floating Toggle Button
    -------------------------------------------------------------------------- */
 .audio-control-wrap {
   position: fixed;
@@ -19,7 +19,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  background: rgba(18, 20, 26, 0.88);
+  background: rgba(18, 20, 26, 0.9);
   border: 1px solid rgba(255, 193, 7, 0.35);
   border-radius: var(--radius-pill, 9999px);
   color: var(--text-primary, #FFFFFF);
@@ -59,28 +59,392 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tour Section & Viewport Container
+   Tour Section Wrapper
    -------------------------------------------------------------------------- */
 .tour-section {
   position: relative;
   width: 100%;
-  padding: 30px 16px 60px;
+  padding: 40px 16px 80px;
   background: #08090C;
   overflow: hidden;
 }
 
-.tour-outer-container {
+.tour-stage-container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1360px;
   margin: 0 auto;
+  position: relative;
 }
 
-.tour-viewport {
+/* ==========================================================================
+   STAGE 1: 3D CLOSED VAULT ENTRANCE
+   ========================================================================== */
+.vault-entrance-stage {
   position: relative;
   width: 100%;
-  height: min(800px, 86vh);
-  min-height: 560px;
-  background: radial-gradient(circle at 50% 50%, #10131B 0%, #060709 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.vault-portal-frame {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 10;
+  min-height: 500px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 193, 7, 0.35);
+  background: #0D0F14;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95),
+              0 0 50px rgba(217, 4, 41, 0.15),
+              inset 0 0 60px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3D Doors Wrapper */
+.vault-doors-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+.vault-door {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(135deg, #1B1E28 0%, #10131B 60%, #090B0F 100%);
+  border: 2px solid rgba(255, 193, 7, 0.25);
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vault-door-left {
+  transform-origin: left center;
+  border-right: 3px solid #060709;
+}
+
+.vault-door-right {
+  transform-origin: right center;
+  border-left: 3px solid #060709;
+}
+
+/* Open Doors Animation */
+.doors-open .vault-door-left {
+  transform: rotateY(-112deg);
+}
+
+.doors-open .vault-door-right {
+  transform: rotateY(112deg);
+}
+
+.door-plate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 193, 7, 0.04) 0%, transparent 70%);
+}
+
+.door-emblem-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #252A38 0%, #0E1017 100%);
+  border: 2px solid rgba(255, 193, 7, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8), 0 0 16px rgba(255, 193, 7, 0.25);
+}
+
+.door-grab-handle {
+  width: 14px;
+  height: 100px;
+  background: linear-gradient(90deg, #FFC107 0%, #B8860B 100%);
+  border-radius: 7px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.9);
+}
+
+/* Light spill burst when doors open */
+.vault-light-spill {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 209, 102, 0.9) 0%, rgba(217, 4, 41, 0.5) 45%, rgba(10, 11, 14, 0.95) 85%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in;
+  z-index: 1;
+}
+
+.doors-open .vault-light-spill {
+  opacity: 1;
+}
+
+/* Entrance Invitation Card Overlay */
+.vault-card-overlay {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  background: rgba(14, 16, 22, 0.94);
+  border: 2px solid rgba(255, 193, 7, 0.4);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(217, 4, 41, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.doors-open .vault-card-overlay {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.vault-kicker {
+  display: inline-block;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--yellow-accent, #FFC107);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.vault-title {
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.vault-title span {
+  color: var(--yellow-accent, #FFC107);
+}
+
+.vault-desc {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #CBD5E1);
+  margin: 0 0 28px;
+}
+
+.btn-unlock-vault {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 38px;
+  background: linear-gradient(135deg, #D90429 0%, #EF233C 100%);
+  border: 1px solid rgba(255, 193, 7, 0.5);
+  border-radius: var(--radius-pill, 9999px);
+  color: #FFFFFF;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(217, 4, 41, 0.55), 0 0 25px rgba(255, 193, 7, 0.35);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-unlock-vault:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 42px rgba(217, 4, 41, 0.7), 0 0 35px rgba(255, 193, 7, 0.5);
+  background: linear-gradient(135deg, #EF233C 0%, #FFC107 100%);
+  color: #0A0B0E;
+}
+
+.btn-unlock-vault svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.btn-unlock-vault:hover svg {
+  transform: translateX(4px);
+}
+
+.vault-feature-tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted, #94A3B8);
+}
+
+/* ==========================================================================
+   STAGE 2: INSIDE THE VIRTUAL TROPHY ROOM (SHOWROOM CHAMBER)
+   ========================================================================== */
+.showroom-stage {
+  position: relative;
+  width: 100%;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Top HUD Control Bar */
+.showroom-top-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.hud-left-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(14, 16, 22, 0.9);
+  border: 1px solid rgba(255, 193, 7, 0.35);
+  border-radius: var(--radius-pill, 9999px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hud-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--yellow-accent, #FFC107);
+  box-shadow: 0 0 10px var(--yellow-accent, #FFC107);
+  animation: pulseDot 2s infinite;
+}
+
+.hud-heading-text {
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.hud-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Showroom Navigation Pills */
+.showroom-nav-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(12, 14, 19, 0.9);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  padding: 5px 8px;
+  border-radius: var(--radius-pill, 9999px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill, 9999px);
+  color: var(--text-secondary, #CBD5E1);
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-pill-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-pill-btn.active {
+  background: rgba(217, 4, 41, 0.3);
+  border-color: var(--yellow-accent, #FFC107);
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(255, 193, 7, 0.35);
+}
+
+.pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 193, 7, 0.25);
+  color: var(--yellow-accent, #FFC107);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.btn-exit-showroom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(18, 20, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill, 9999px);
+  color: var(--text-muted, #94A3B8);
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-exit-showroom:hover {
+  border-color: var(--red-primary, #D90429);
+  color: #FFFFFF;
+  background: rgba(217, 4, 41, 0.2);
+}
+
+.btn-exit-showroom svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   SHOWROOM VIEWPORT & 3D ROTATOR
+   -------------------------------------------------------------------------- */
+.showroom-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  background: radial-gradient(circle at 50% 25%, #151822 0%, #0B0D13 60%, #060709 100%);
   border-radius: 20px;
   border: 2px solid rgba(255, 193, 7, 0.32);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95),
@@ -89,516 +453,164 @@
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: none;
-  cursor: grab;
-  outline: none;
 }
 
-.tour-viewport:active {
-  cursor: grabbing;
-}
-
-/* Fullscreen Mode */
-.tour-viewport:fullscreen,
-.tour-viewport:-webkit-full-screen,
-.tour-viewport.is-fullscreen {
-  width: 100vw !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-/* Lens Vignette & Ambient Glow */
-.tour-lens-vignette {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
-}
-
-.tour-center-reticle {
+/* Turn Arrows */
+.chamber-turn-btn {
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: rgba(255, 193, 7, 0.45);
-  pointer-events: none;
-  z-index: 11;
-  box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-/* --------------------------------------------------------------------------
-   3D World Scene & First-Person Camera Rig
-   -------------------------------------------------------------------------- */
-.tour-world-scene {
-  position: absolute;
-  inset: 0;
-  perspective: 780px;
-  perspective-origin: 50% 50%;
-  overflow: hidden;
-}
-
-.tour-camera {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.tour-room-box {
-  position: absolute;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-/* --------------------------------------------------------------------------
-   Room Planes (Floor, Ceiling, 4 Walls)
-   Room size: 1500px W × 1500px D × 640px H
-   -------------------------------------------------------------------------- */
-.room-plane {
-  position: absolute;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* 1. FLOOR */
-.plane-floor {
-  width: 1500px;
-  height: 1500px;
-  margin-left: -750px;
-  margin-top: -750px;
-  transform: translateY(320px) rotateX(90deg);
-  background: radial-gradient(circle at 50% 50%, #151821 0%, #0A0C11 70%, #050608 100%);
-  border: 1px solid rgba(255, 193, 7, 0.15);
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
-}
-
-.floor-tile-grid {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 75px 75px;
-}
-
-/* Floor Spotlight Reflection Pools */
-.floor-spot-pools-north {
-  position: absolute;
-  top: 0;
-  left: 50px;
-  right: 50px;
-  height: 250px;
-  background: radial-gradient(ellipse at center top, rgba(255, 193, 7, 0.18) 0%, rgba(217, 4, 41, 0.08) 50%, transparent 80%);
-  pointer-events: none;
-}
-
-.floor-spot-pools-west {
-  position: absolute;
-  left: 0;
-  top: 50px;
-  bottom: 50px;
-  width: 250px;
-  background: radial-gradient(ellipse at left center, rgba(217, 4, 41, 0.16) 0%, rgba(255, 193, 7, 0.06) 50%, transparent 80%);
-  pointer-events: none;
-}
-
-.floor-spot-pools-east {
-  position: absolute;
-  right: 0;
-  top: 50px;
-  bottom: 50px;
-  width: 250px;
-  background: radial-gradient(ellipse at right center, rgba(255, 193, 7, 0.16) 0%, rgba(217, 4, 41, 0.06) 50%, transparent 80%);
-  pointer-events: none;
-}
-
-/* Floor Center Seal */
-.floor-center-seal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-.floor-center-seal img {
-  filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.5));
-}
-
-.seal-text {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--yellow-accent, #FFC107);
-}
-
-/* Floor Interactive Waypoints (Walk Targets) */
-.floor-waypoint {
-  position: absolute;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  transform-style: preserve-3d;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-  z-index: 5;
-}
-
-.floor-waypoint:hover {
-  transform: scale(1.1);
-}
-
-.waypoint-pulse {
+  transform: translateY(-50%);
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid var(--yellow-accent, #FFC107);
-  background: radial-gradient(circle, rgba(255, 193, 7, 0.45) 0%, rgba(217, 4, 41, 0.25) 70%, transparent 100%);
-  box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
-  animation: pulseWaypoint 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  background: rgba(14, 16, 22, 0.88);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: var(--yellow-accent, #FFC107);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@keyframes pulseWaypoint {
-  0% { transform: scale(0.9); opacity: 0.7; box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); }
-  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 25px rgba(255, 193, 7, 0.9); }
-  100% { transform: scale(0.9); opacity: 0.7; box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); }
+.chamber-turn-btn:hover {
+  background: rgba(26, 29, 39, 0.98);
+  border-color: var(--yellow-accent, #FFC107);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.waypoint-label {
-  padding: 4px 10px;
-  background: rgba(10, 11, 14, 0.88);
-  border: 1px solid rgba(255, 193, 7, 0.5);
-  border-radius: var(--radius-pill, 9999px);
-  color: #FFFFFF;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
-  pointer-events: none;
+.chamber-turn-btn.turn-left { left: 16px; }
+.chamber-turn-btn.turn-right { right: 16px; }
+
+.chamber-turn-btn svg {
+  width: 22px;
+  height: 22px;
 }
 
-/* Floor Waypoint Locations */
-.waypoint-north { top: 220px; left: 50%; transform: translateX(-50%); }
-.waypoint-west { top: 50%; left: 220px; transform: translateY(-50%); }
-.waypoint-east { top: 50%; right: 220px; transform: translateY(-50%); }
-.waypoint-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-/* 2. CEILING */
-.plane-ceiling {
-  width: 1500px;
-  height: 1500px;
-  margin-left: -750px;
-  margin-top: -750px;
-  transform: translateY(-320px) rotateX(-90deg);
-  background: radial-gradient(circle at 50% 50%, #12141A 0%, #07080A 75%, #030305 100%);
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
+/* Chamber Track & Wall Panes */
+.chamber-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
 }
 
-.ceiling-grid {
+.chamber-wall {
   position: absolute;
   inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 193, 7, 0.04) 2px, transparent 2px),
-    linear-gradient(to bottom, rgba(255, 193, 7, 0.04) 2px, transparent 2px);
-  background-size: 150px 150px;
-}
-
-.ceiling-center-fixture {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(255, 193, 7, 0.25) 50%, transparent 80%);
-  box-shadow: 0 0 50px rgba(255, 193, 7, 0.5);
-}
-
-/* --------------------------------------------------------------------------
-   3. WALLS COMMON STYLES
-   -------------------------------------------------------------------------- */
-.plane-wall {
-  width: 1500px;
-  height: 640px;
-  margin-left: -750px;
-  margin-top: -320px;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.9);
+  padding: 36px 48px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 30px 40px 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.94) translateX(60px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.wall-header-ribbon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.chamber-wall.active-wall {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateX(0);
+  z-index: 5;
+}
+
+.chamber-wall.wall-prev {
+  transform: scale(0.94) translateX(-60px);
+}
+
+/* Wall Header Banner */
+.wall-header-banner {
   text-align: center;
-  z-index: 4;
+  margin-bottom: 24px;
+  z-index: 10;
 }
 
-.wall-badge {
+.banner-kicker {
   display: inline-block;
   font-family: var(--font-display, 'Montserrat', sans-serif);
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--yellow-accent, #FFC107);
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   margin-bottom: 4px;
 }
 
-.wall-title {
+.banner-title {
   font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 1.65rem;
+  font-size: 1.85rem;
   font-weight: 900;
   color: #FFFFFF;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
+  line-height: 1.25;
   text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 193, 7, 0.25);
 }
 
-.wall-desc {
-  font-size: 0.84rem;
-  color: var(--text-muted, #94A3B8);
-  font-weight: 600;
-}
-
-.wall-base-plinth {
-  width: 100%;
-  height: 24px;
-  background: linear-gradient(180deg, #181B24 0%, #0A0B0E 100%);
-  border-top: 1px solid rgba(255, 193, 7, 0.3);
-  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
+.banner-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary, #CBD5E1);
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
-   WALL 1: FRONT WALL (NORTH - KPL Flagship Showcase)
+   PEDESTALS 5-COLUMN SHOWCASE GRID
    -------------------------------------------------------------------------- */
-.plane-front {
-  transform: translateZ(-750px);
-  background: 
-    radial-gradient(ellipse at 50% 20%, rgba(255, 193, 7, 0.14) 0%, transparent 60%),
-    linear-gradient(180deg, #12151E 0%, #0B0D13 50%, #060709 100%);
-  border-top: 2px solid rgba(255, 193, 7, 0.4);
-}
-
-/* --------------------------------------------------------------------------
-   WALL 2: LEFT WALL (WEST - Corporate & Weekend Showcase)
-   -------------------------------------------------------------------------- */
-.plane-left {
-  transform: translateX(-750px) rotateY(90deg);
-  background: 
-    radial-gradient(ellipse at 50% 20%, rgba(217, 4, 41, 0.16) 0%, transparent 60%),
-    linear-gradient(180deg, #161014 0%, #0E0B0E 50%, #070607 100%);
-  border-top: 2px solid rgba(217, 4, 41, 0.4);
-}
-
-/* --------------------------------------------------------------------------
-   WALL 3: RIGHT WALL (EAST - Plate & Sportsmanship Honors)
-   -------------------------------------------------------------------------- */
-.plane-right {
-  transform: translateX(750px) rotateY(-90deg);
-  background: 
-    radial-gradient(ellipse at 50% 20%, rgba(255, 193, 7, 0.12) 0%, transparent 60%),
-    linear-gradient(180deg, #141716 0%, #0C0F0E 50%, #060807 100%);
-  border-top: 2px solid rgba(255, 193, 7, 0.35);
-}
-
-/* --------------------------------------------------------------------------
-   WALL 4: BACK WALL (SOUTH - Vault Entrance Doors)
-   -------------------------------------------------------------------------- */
-.plane-back {
-  transform: translateZ(750px) rotateY(180deg);
-  background: 
-    radial-gradient(ellipse at 50% 30%, rgba(217, 4, 41, 0.1) 0%, transparent 60%),
-    linear-gradient(180deg, #101218 0%, #090B0E 100%);
-  border-top: 2px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.south-portal-frame {
-  position: relative;
-  width: 580px;
-  height: 480px;
-  border: 4px solid rgba(255, 193, 7, 0.35);
-  border-radius: 16px 16px 0 0;
-  background: #07080B;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(0, 0, 0, 0.9);
-  perspective: 1000px;
-  overflow: hidden;
-}
-
-.vault-portal-arch {
-  position: absolute;
-  top: 14px;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  z-index: 5;
-}
-
-.portal-crest img {
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
-}
-
-.portal-text {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--yellow-accent, #FFC107);
-}
-
-/* 3D Swing Double Doors */
-.portal-doors-hinge-wrapper {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  transform-style: preserve-3d;
-  z-index: 3;
-}
-
-.portal-door {
-  flex: 1;
-  height: 100%;
-  background: linear-gradient(135deg, #1E222D 0%, #11141A 60%, #0A0C10 100%);
-  border: 2px solid rgba(255, 193, 7, 0.25);
-  transform-style: preserve-3d;
-  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.portal-door.door-left {
-  transform-origin: left center;
-  border-right: 2px solid #060709;
-}
-
-.portal-door.door-right {
-  transform-origin: right center;
-  border-left: 2px solid #060709;
-}
-
-/* Door Opened State */
-.doors-open .portal-door.door-left {
-  transform: rotateY(-112deg);
-}
-
-.doors-open .portal-door.door-right {
-  transform: rotateY(112deg);
-}
-
-.door-face {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-.door-roundel {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #252A38 0%, #10131A 100%);
-  border: 2px solid rgba(255, 193, 7, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-}
-
-.door-pull-handle {
-  width: 14px;
-  height: 90px;
-  background: linear-gradient(90deg, #FFC107 0%, #B8860B 100%);
-  border-radius: 7px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-}
-
-/* --------------------------------------------------------------------------
-   WALL PEDESTALS ROW & CARDS (5 per wall)
-   -------------------------------------------------------------------------- */
-.wall-pedestals-track {
-  width: 100%;
+.pedestals-showcase-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  gap: 16px;
   align-items: flex-end;
-  margin-bottom: 20px;
-  z-index: 4;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 16px;
+  z-index: 10;
 }
 
-.wall-pedestal-card {
+.pedestal-item-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   outline: none;
-  transform-style: preserve-3d;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.wall-pedestal-card:hover,
-.wall-pedestal-card:focus-visible {
-  transform: translateY(-8px) scale(1.03);
+.pedestal-item-card:hover,
+.pedestal-item-card:focus-visible {
+  transform: translateY(-8px);
 }
 
 /* Overhead Spotlight Beam */
-.pedestal-spotlight-beam {
+.spotlight-beam-cone {
   position: absolute;
-  top: -140px;
-  width: 120px;
-  height: 240px;
-  background: linear-gradient(180deg, rgba(255, 215, 0, 0.35) 0%, rgba(255, 193, 7, 0.12) 40%, transparent 100%);
+  top: -120px;
+  width: 100px;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.32) 0%, rgba(255, 193, 7, 0.1) 40%, transparent 100%);
   clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
   pointer-events: none;
-  opacity: 0.65;
+  opacity: 0.6;
   transition: opacity 0.3s ease;
   z-index: 1;
 }
 
-.wall-pedestal-card:hover .pedestal-spotlight-beam,
-.wall-pedestal-card:focus-visible .pedestal-spotlight-beam {
+.pedestal-item-card:hover .spotlight-beam-cone,
+.pedestal-item-card:focus-visible .spotlight-beam-cone {
   opacity: 1;
 }
 
-/* Trophy Image Wrapper */
-.pedestal-trophy-wrap {
+/* Trophy Image Display */
+.trophy-media-wrap {
   position: relative;
   width: 100%;
-  height: 180px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -606,56 +618,41 @@
   margin-bottom: 8px;
 }
 
-.pedestal-trophy-wrap img {
+.trophy-media-wrap img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 10px rgba(255, 193, 7, 0.2));
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 10px rgba(255, 193, 7, 0.2));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.wall-pedestal-card:hover .pedestal-trophy-wrap img,
-.wall-pedestal-card:focus-visible .pedestal-trophy-wrap img {
+.pedestal-item-card:hover .trophy-media-wrap img,
+.pedestal-item-card:focus-visible .trophy-media-wrap img {
   transform: scale(1.08);
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(255, 193, 7, 0.5));
-}
-
-.trophy-ambient-halo {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 193, 7, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.wall-pedestal-card:hover .trophy-ambient-halo {
-  opacity: 1;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(255, 193, 7, 0.5));
 }
 
 /* 3D Shelf Base */
-.pedestal-shelf-base {
+.pedestal-marble-base {
   width: 100%;
-  max-width: 220px;
-  height: 14px;
+  max-width: 200px;
+  height: 12px;
   background: linear-gradient(180deg, #2D3242 0%, #151821 100%);
   border-radius: 4px;
   border-top: 1px solid rgba(255, 215, 0, 0.6);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 193, 7, 0.25);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   z-index: 2;
 }
 
 /* Brass Plaque */
-.pedestal-brass-plaque {
+.pedestal-brass-plate {
   width: 100%;
-  max-width: 230px;
+  max-width: 210px;
   background: rgba(14, 16, 22, 0.92);
   border: 1px solid rgba(255, 193, 7, 0.35);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -667,14 +664,14 @@
   z-index: 3;
 }
 
-.wall-pedestal-card:hover .pedestal-brass-plaque,
-.wall-pedestal-card:focus-visible .pedestal-brass-plaque {
+.pedestal-item-card:hover .pedestal-brass-plate,
+.pedestal-item-card:focus-visible .pedestal-brass-plate {
   border-color: var(--yellow-accent, #FFC107);
   background: rgba(22, 26, 36, 0.98);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 193, 7, 0.3);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85), 0 0 18px rgba(255, 193, 7, 0.3);
 }
 
-.plaque-year-badge {
+.plate-status-badge {
   font-family: var(--font-display, 'Montserrat', sans-serif);
   font-size: 0.68rem;
   font-weight: 800;
@@ -684,9 +681,9 @@
   margin-bottom: 2px;
 }
 
-.plaque-title {
+.plate-trophy-name {
   font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   color: #FFFFFF;
   line-height: 1.25;
@@ -697,8 +694,8 @@
   overflow: hidden;
 }
 
-.plaque-subtitle {
-  font-size: 0.72rem;
+.plate-franchise-sub {
+  font-size: 0.7rem;
   color: var(--text-muted, #94A3B8);
   white-space: nowrap;
   overflow: hidden;
@@ -707,15 +704,15 @@
   margin-bottom: 6px;
 }
 
-.plaque-action-hint {
+.plate-action-tag {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.68rem;
   font-weight: 700;
 }
 
-.photos-tag {
+.photo-count-pill {
   background: rgba(217, 4, 41, 0.2);
   border: 1px solid var(--red-primary, #D90429);
   color: #FFFFFF;
@@ -723,412 +720,42 @@
   border-radius: var(--radius-pill, 9999px);
 }
 
-.inspect-text {
+.inspect-cta-text {
   color: var(--yellow-accent, #FFC107);
 }
 
-/* --------------------------------------------------------------------------
-   HUD OVERLAYS & FIRST-PERSON CONTROLS
-   -------------------------------------------------------------------------- */
-
-/* Top HUD */
-.tour-hud-top {
+/* Polished Floor Reflections */
+.chamber-reflective-floor {
   position: absolute;
-  top: 18px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 193, 7, 0.05) 50%, rgba(10, 11, 14, 0.8) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   pointer-events: none;
+  z-index: 1;
 }
 
-.tour-status-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(14, 16, 22, 0.82);
-  border: 1px solid rgba(255, 193, 7, 0.35);
-  border-radius: var(--radius-pill, 9999px);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  pointer-events: auto;
-}
-
-.status-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--yellow-accent, #FFC107);
-  box-shadow: 0 0 10px var(--yellow-accent, #FFC107);
-  animation: pulseDot 2s infinite;
-}
-
-@keyframes pulseDot {
-  0% { transform: scale(0.9); opacity: 0.7; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.7; }
-}
-
-.status-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  letter-spacing: 0.5px;
-}
-
-.tour-hud-controls-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  pointer-events: auto;
-}
-
-/* Interactive Minimap / Radar Compass */
-.tour-radar-compass {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(14, 16, 22, 0.85);
-  border: 1px solid rgba(255, 193, 7, 0.35);
-  padding: 6px 14px 6px 8px;
-  border-radius: var(--radius-pill, 9999px);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.tour-radar-compass:hover {
-  border-color: var(--yellow-accent, #FFC107);
-  box-shadow: 0 0 18px rgba(255, 193, 7, 0.35);
-}
-
-.radar-disc {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #080A0E;
-  border: 1.5px solid rgba(255, 193, 7, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: transform 0.1s linear;
-}
-
-.radar-fov-cone {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 32px;
-  height: 32px;
-  transform: translate(-50%, -100%);
-  background: radial-gradient(circle at center bottom, rgba(255, 193, 7, 0.6) 0%, rgba(217, 4, 41, 0.3) 60%, transparent 100%);
-  clip-path: polygon(25% 0%, 75% 0%, 50% 100%);
-}
-
-.radar-mark {
-  position: absolute;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.58rem;
-  font-weight: 800;
-  color: var(--text-muted, #94A3B8);
-  pointer-events: auto;
-}
-
-.radar-mark:hover {
-  color: var(--yellow-accent, #FFC107);
-}
-
-.radar-mark.mark-n { top: 2px; }
-.radar-mark.mark-s { bottom: 2px; }
-.radar-mark.mark-w { left: 3px; }
-.radar-mark.mark-e { right: 3px; }
-
-.radar-blip {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--yellow-accent, #FFC107);
-  box-shadow: 0 0 6px var(--yellow-accent, #FFC107);
-}
-
-.radar-label {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--yellow-accent, #FFC107);
-  letter-spacing: 0.4px;
-}
-
-/* HUD Buttons */
-.tour-hud-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(14, 16, 22, 0.85);
-  border: 1px solid rgba(255, 193, 7, 0.35);
-  color: var(--yellow-accent, #FFC107);
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  transition: all 0.25s ease;
-}
-
-.tour-hud-btn:hover {
-  background: rgba(26, 29, 39, 0.98);
-  border-color: var(--yellow-accent, #FFC107);
-  transform: translateY(-2px);
-  box-shadow: 0 0 16px rgba(255, 193, 7, 0.35);
-}
-
-.tour-hud-btn svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* --------------------------------------------------------------------------
-   Entrance Overlay Screen
-   -------------------------------------------------------------------------- */
-.tour-entrance-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(14, 16, 22, 0.92) 0%, rgba(6, 7, 9, 0.98) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 30;
-  padding: 24px;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-.tour-entrance-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.entrance-dialog-card {
-  max-width: 620px;
-  background: rgba(18, 21, 29, 0.95);
-  border: 2px solid rgba(255, 193, 7, 0.4);
-  border-radius: 20px;
-  padding: 40px 32px;
-  text-align: center;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(217, 4, 41, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  animation: entranceCardIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@keyframes entranceCardIn {
-  0% { transform: translateY(30px) scale(0.95); opacity: 0; }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.entrance-gold-kicker {
-  display: inline-block;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--yellow-accent, #FFC107);
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
-.entrance-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #FFFFFF;
-  margin: 0 0 14px;
-  line-height: 1.2;
-}
-
-.entrance-title span {
-  color: var(--yellow-accent, #FFC107);
-}
-
-.entrance-desc {
-  font-size: 0.96rem;
-  line-height: 1.6;
-  color: var(--text-secondary, #CBD5E1);
-  margin: 0 0 28px;
-}
-
-.btn-enter-room-main {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, #D90429 0%, #EF233C 100%);
-  border: 1px solid rgba(255, 193, 7, 0.5);
-  border-radius: var(--radius-pill, 9999px);
-  color: #FFFFFF;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  box-shadow: 0 12px 32px rgba(217, 4, 41, 0.5), 0 0 25px rgba(255, 193, 7, 0.3);
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.btn-enter-room-main:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 16px 40px rgba(217, 4, 41, 0.65), 0 0 35px rgba(255, 193, 7, 0.5);
-  background: linear-gradient(135deg, #EF233C 0%, #FFC107 100%);
-  color: #0A0B0E;
-}
-
-.btn-enter-room-main svg {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.btn-enter-room-main:hover svg {
-  transform: translateX(4px);
-}
-
-.entrance-meta-pills {
+/* Bottom Bar */
+.showroom-bottom-bar {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-muted, #94A3B8);
+  margin-top: 16px;
 }
 
-/* --------------------------------------------------------------------------
-   Bottom HUD Bar
-   -------------------------------------------------------------------------- */
-.tour-hud-bottom {
-  position: absolute;
-  bottom: 16px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  z-index: 20;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-
-.tour-vantage-pills {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  background: rgba(12, 14, 19, 0.88);
-  border: 1px solid rgba(255, 193, 7, 0.3);
-  padding: 6px 10px;
-  border-radius: var(--radius-pill, 9999px);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
-  pointer-events: auto;
-}
-
-.tour-vantage-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill, 9999px);
-  color: var(--text-secondary, #CBD5E1);
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+.gesture-tip-pill {
   font-size: 0.76rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  color: var(--text-muted, #94A3B8);
 }
 
-.tour-vantage-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
-}
-
-.tour-vantage-btn.active {
-  background: rgba(217, 4, 41, 0.3);
-  border-color: var(--yellow-accent, #FFC107);
-  color: #FFFFFF;
-  box-shadow: 0 0 12px rgba(255, 193, 7, 0.35);
-}
-
-/* Directional Navigation Buttons */
-.tour-nav-cluster {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  pointer-events: auto;
-}
-
-.tour-dir-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(14, 16, 22, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-pill, 9999px);
-  color: #FFFFFF;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  font-size: 0.74rem;
-  font-weight: 700;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-  transition: all 0.2s ease;
-}
-
-.tour-dir-btn:hover {
-  border-color: var(--yellow-accent, #FFC107);
-  background: rgba(24, 28, 38, 0.98);
-  color: var(--yellow-accent, #FFC107);
-  transform: translateY(-2px);
-}
-
-.tour-dir-btn svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* Gesture Instructions */
-.tour-gesture-instructions {
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
-  pointer-events: none;
-}
-
-.tour-gesture-instructions strong {
+.gesture-tip-pill strong {
   color: var(--yellow-accent, #FFC107);
 }
 
-/* --------------------------------------------------------------------------
-   STAGE 3: Trophy Story Modal (Lightbox with 5-Photo Gallery)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   STAGE 3: TROPHY STORY LIGHTBOX MODAL (WITH 5-PHOTO GALLERY)
+   ========================================================================== */
 .trophy-modal {
   position: fixed;
   inset: 0;
@@ -1153,7 +780,7 @@
 .trophy-modal-dialog {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 960px;
   max-height: 90vh;
   background: #111319;
   border: 1px solid rgba(255, 193, 7, 0.35);
@@ -1303,7 +930,7 @@
   box-shadow: 0 0 12px rgba(255, 193, 7, 0.5);
 }
 
-/* Right Column: Victory Narrative & Scorecard Details */
+/* Right Column: Narrative & Highlights */
 .modal-details-col {
   padding: 32px 28px;
   display: flex;
@@ -1372,7 +999,6 @@
   color: var(--red-light, #EF233C);
 }
 
-/* Victory Story Section */
 .modal-story-box {
   background: rgba(255, 255, 255, 0.02);
   border-left: 3px solid var(--yellow-accent, #FFC107);
@@ -1398,7 +1024,6 @@
   margin: 0;
 }
 
-/* Match Highlights Box */
 .modal-highlights-card {
   background: rgba(10, 11, 14, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1442,7 +1067,6 @@
   margin-top: 3px;
 }
 
-/* Modal Bottom Navigation Bar */
 .modal-nav-bar {
   display: flex;
   justify-content: space-between;
@@ -1479,81 +1103,80 @@
   height: 16px;
 }
 
-/* --------------------------------------------------------------------------
-   Responsive Adaptations
-   -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .tour-viewport {
-    height: min(650px, 80vh);
-    min-height: 500px;
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .pedestals-showcase-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
   }
-
-  .entrance-title {
-    font-size: 1.75rem;
-  }
-
-  .entrance-dialog-card {
-    padding: 30px 20px;
-  }
-
-  .tour-vantage-pills {
-    gap: 4px;
-    padding: 4px 8px;
-  }
-
-  .tour-vantage-btn {
-    padding: 6px 10px;
-    font-size: 0.72rem;
-  }
-
-  .tour-radar-compass .radar-label {
-    display: none;
-  }
-
-  .tour-radar-compass {
-    padding: 4px;
-  }
-
-  .tour-gesture-instructions {
-    display: none;
+  
+  .chamber-wall {
+    padding: 24px 20px;
+    overflow-y: auto;
   }
 }
 
-@media (max-width: 600px) {
-  .tour-viewport {
-    height: 75vh;
-    min-height: 460px;
-    border-radius: 12px;
+@media (max-width: 768px) {
+  .vault-portal-frame {
+    aspect-ratio: auto;
+    min-height: 480px;
+  }
+  
+  .vault-title {
+    font-size: 1.8rem;
+  }
+  
+  .vault-card-overlay {
+    padding: 28px 20px;
+    margin: 16px;
+  }
+  
+  .showroom-top-hud {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .hud-right-controls {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .showroom-nav-pills {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .nav-pill-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  
+  .banner-title {
+    font-size: 1.4rem;
+  }
+  
+  .pedestals-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .tour-hud-top {
-    top: 12px;
-    left: 12px;
-    right: 12px;
-  }
-
-  .tour-hud-bottom {
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-  }
-
-  .tour-vantage-btn {
-    padding: 5px 8px;
-    font-size: 0.68rem;
-  }
-
-  .tour-nav-cluster {
-    gap: 6px;
-  }
-
-  .tour-dir-btn {
-    padding: 6px 10px;
-    font-size: 0.68rem;
+  .chamber-turn-btn {
+    display: none;
   }
 
   .audio-control-wrap {
     top: 76px;
     right: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pedestals-showcase-grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    margin: 0 auto 20px;
   }
 }
