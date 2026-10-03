@@ -1,27 +1,59 @@
 /**
- * KAvach Cricket Club - Interactive Trophy Room Engine
+ * KAvach Cricket Club - 3D Virtual Trophy Room First-Person PoV Tour Engine
  * 
  * Features:
- * 1. Web Audio API Synthesizer (0 KB external audio, zero-latency sound effects)
- * 2. 3D Vault Door Entrance & Room Reveal Controller
- * 3. Spatial Multi-Wing Navigator (Center Stage, Left Wing, Right Wing)
- * 4. Touch Swipe Navigation for Mobile
- * 5. Dynamic 3D Pedestal Tilt
- * 6. Detailed Story Lightbox Modal with 5-Photo Gallery Carousel
+ * 1. Web Audio API Synthesizer (0 KB external audio, zero-latency effects)
+ * 2. 3D First-Person PoV Camera Rig with 360° Drag & Smooth Damping
+ * 3. 3D Architectural Room Box with Floor, Ceiling, and 3 Thematic Gallery Walls
+ * 4. Interactive Clickable Floor Waypoints & Radar Compass Heading
+ * 5. Dynamic 3D Trophy Pedestals with Ceiling Spotlights
+ * 6. Detailed Victory Story Lightbox Modal with 5-Photo Gallery Carousel
  */
 
 (function () {
   'use strict';
 
+  // ---------------------------------------------------------------------------
   // State Management
+  // ---------------------------------------------------------------------------
   let audioCtx = null;
   let isMuted = localStorage.getItem('kavach_trophy_muted') === 'true';
-  let currentWing = 'center';
+
+  // Camera PoV Coordinates
+  // 0 = North (Center Stage), 90 = West (Left Gallery), 180 = South (Vault Entrance), -90/270 = East (Right Honors)
+  let currentX = 0;
+  let currentY = 0;
+  let currentZ = 750; // Initially in front of closed vault doors
+  let targetX = 0;
+  let targetY = 0;
+  let targetZ = 750;
+
+  let currentYaw = 0;
+  let targetYaw = 0;
+  let currentPitch = 0;
+  let targetPitch = 0;
+
+  let isInsideRoom = false;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let startYaw = 0;
+  let startPitch = 0;
+
   let currentTrophyId = null;
   let currentPhotoIndex = 0;
 
-  // Wing order for arrow / swipe navigation
-  const WING_ORDER = ['left', 'center', 'right'];
+  // DOM Elements Cache
+  const viewport = document.getElementById('tourViewport');
+  const camera = document.getElementById('tourCamera');
+  const radarDisc = document.getElementById('radarDisc');
+  const radarHeadingLabel = document.getElementById('radarHeadingLabel');
+  const entranceOverlay = document.getElementById('tourEntranceOverlay');
+  const vaultPortal = document.getElementById('roomWallSouth');
+  const btnEnterTour = document.getElementById('btnEnterTour');
+  const fullscreenBtn = document.getElementById('tourFullscreenBtn');
+  const audioBtn = document.getElementById('tourAudioBtn');
+  const modal = document.getElementById('trophyModal');
 
   /* --------------------------------------------------------------------------
      1. Web Audio API Synthesizer
@@ -39,32 +71,30 @@
     return audioCtx;
   }
 
-  // Sound 1: Deep Cinematic Door Opening Rumble & Whoosh
+  // Vault Door Opening Mechanical Rumble & Ethereal Chord
   function playDoorOpenSound() {
     if (isMuted) return;
     try {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const now = ctx.currentTime;
 
-      // Low frequency rumble oscillator
+      // Heavy low-pass rumble
       const osc1 = ctx.createOscillator();
       const gain1 = ctx.createGain();
       osc1.type = 'sawtooth';
       osc1.frequency.setValueAtTime(65, now);
-      osc1.frequency.exponentialRampToValueAtTime(35, now + 1.2);
+      osc1.frequency.exponentialRampToValueAtTime(32, now + 1.2);
 
       gain1.gain.setValueAtTime(0.01, now);
       gain1.gain.linearRampToValueAtTime(0.2, now + 0.2);
       gain1.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
 
-      // Low-pass filter for heavy stone/steel feel
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
       filter.frequency.setValueAtTime(180, now);
-      filter.frequency.linearRampToValueAtTime(400, now + 0.6);
-      filter.frequency.exponentialRampToValueAtTime(120, now + 1.4);
+      filter.frequency.linearRampToValueAtTime(420, now + 0.6);
+      filter.frequency.exponentialRampToValueAtTime(100, now + 1.4);
 
       osc1.connect(filter);
       filter.connect(gain1);
@@ -73,27 +103,24 @@
       osc1.start(now);
       osc1.stop(now + 1.5);
 
-      // Ethereal golden chime chord as light spills
+      // Shimmering Golden Chime
       setTimeout(() => {
         playChimeChord([523.25, 659.25, 783.99, 1046.50], 0.12, 1.8);
       }, 400);
-
     } catch (e) {
-      console.warn('Audio synthesis not supported or blocked:', e);
+      console.warn('Audio synthesis note:', e);
     }
   }
 
-  // Sound 2: Harmonic Golden Shimmer Chime on Trophy Click
+  // Shimmering Chime on Trophy Inspection
   function playTrophyClickSound() {
     if (isMuted) return;
     try {
-      playChimeChord([659.25, 830.61, 987.77, 1318.51], 0.15, 1.2);
-    } catch (e) {
-      // Graceful fallback
-    }
+      playChimeChord([659.25, 830.61, 987.77, 1318.51], 0.14, 1.2);
+    } catch (e) {}
   }
 
-  // Sound 3: Soft Tactile Photo Switch Click
+  // Subtle Tactile Click
   function playPhotoClickSound() {
     if (isMuted) return;
     try {
@@ -118,7 +145,33 @@
     } catch (e) {}
   }
 
-  // Helper: Play shimmering harmonic chord
+  // Soft Glide Whoosh when Walking / Teleporting
+  function playGlideSound() {
+    if (isMuted) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(240, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.35);
+
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.07, now + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } catch (e) {}
+  }
+
+  // Harmonic chord synthesizer
   function playChimeChord(frequencies, masterVol, duration) {
     const ctx = getAudioContext();
     if (!ctx) return;
@@ -144,213 +197,314 @@
   }
 
   /* --------------------------------------------------------------------------
-     2. Audio Mute Toggle Button
+     2. 3D First-Person PoV Camera Render Loop (60fps LERP)
      -------------------------------------------------------------------------- */
-  function initAudioToggle() {
-    const btn = document.getElementById('audioToggleBtn');
-    if (!btn) return;
+  function updateCameraLoop() {
+    // Smooth position interpolation
+    currentX += (targetX - currentX) * 0.1;
+    currentY += (targetY - currentY) * 0.1;
+    currentZ += (targetZ - currentZ) * 0.1;
 
-    const updateBtnUI = () => {
-      btn.classList.toggle('muted', isMuted);
-      const label = btn.querySelector('.audio-label');
-      if (label) {
-        label.textContent = isMuted ? 'Sound: Off' : 'Sound: On';
+    // Smooth angle interpolation
+    currentYaw += (targetYaw - currentYaw) * 0.12;
+    currentPitch += (targetPitch - currentPitch) * 0.12;
+
+    if (camera) {
+      camera.style.transform = `translateZ(380px) rotateX(${currentPitch}deg) rotateY(${currentYaw}deg) translate3d(${-currentX}px, ${-currentY}px, ${-currentZ}px)`;
+    }
+
+    // Update Radar Compass rotation
+    if (radarDisc) {
+      radarDisc.style.transform = `rotate(${-currentYaw}deg)`;
+    }
+
+    // Update Heading Label text based on normalized yaw
+    if (radarHeadingLabel) {
+      let normalized = ((currentYaw % 360) + 360) % 360;
+      if (normalized >= 315 || normalized < 45) {
+        radarHeadingLabel.textContent = 'Center Stage (N)';
+      } else if (normalized >= 45 && normalized < 135) {
+        radarHeadingLabel.textContent = 'Left Showcase (W)';
+      } else if (normalized >= 135 && normalized < 225) {
+        radarHeadingLabel.textContent = 'Vault Doors (S)';
+      } else {
+        radarHeadingLabel.textContent = 'Right Honors (E)';
       }
-      btn.setAttribute('aria-pressed', isMuted ? 'false' : 'true');
+    }
+
+    requestAnimationFrame(updateCameraLoop);
+  }
+
+  /* --------------------------------------------------------------------------
+     3. Pointer / Touch 360° Drag Look Around
+     -------------------------------------------------------------------------- */
+  function initPointerLook() {
+    if (!viewport) return;
+
+    const onPointerDown = (e) => {
+      // Don't drag if clicking buttons, waypoints, or modal
+      if (e.target.closest('button') || e.target.closest('.wall-pedestal-card') || e.target.closest('.trophy-modal')) {
+        return;
+      }
+      isDragging = true;
+      dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      dragStartY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+      startYaw = targetYaw;
+      startPitch = targetPitch;
     };
 
-    updateBtnUI();
+    const onPointerMove = (e) => {
+      if (!isDragging) return;
 
-    btn.addEventListener('click', () => {
-      isMuted = !isMuted;
-      localStorage.setItem('kavach_trophy_muted', isMuted ? 'true' : 'false');
-      updateBtnUI();
+      const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
 
-      if (!isMuted) {
-        playTrophyClickSound();
-      }
+      const deltaX = clientX - dragStartX;
+      const deltaY = clientY - dragStartY;
+
+      targetYaw = startYaw - deltaX * 0.28;
+      targetPitch = Math.max(-20, Math.min(18, startPitch + deltaY * 0.22));
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+    };
+
+    viewport.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    viewport.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('touchend', onPointerUp, { passive: true });
+  }
+
+  /* --------------------------------------------------------------------------
+     4. Vantage Point Teleportation & Navigation
+     -------------------------------------------------------------------------- */
+  function goToVantage(vantageName) {
+    if (!isInsideRoom) {
+      enterTrophyRoom();
+    }
+
+    // Update navigation pill buttons
+    document.querySelectorAll('.tour-vantage-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-vantage') === vantageName);
+    });
+
+    playGlideSound();
+
+    switch (vantageName) {
+      case 'center':
+        // Stand right in front of KPL Center Showcase
+        targetX = 0;
+        targetY = 0;
+        targetZ = -340;
+        targetYaw = 0;
+        targetPitch = 0;
+        break;
+
+      case 'left':
+        // Stand in front of Weekend & Corporate Showcase
+        targetX = -340;
+        targetY = 0;
+        targetZ = 0;
+        targetYaw = 90;
+        targetPitch = 0;
+        break;
+
+      case 'right':
+        // Stand in front of Plate & Honors Showcase
+        targetX = 340;
+        targetY = 0;
+        targetZ = 0;
+        targetYaw = -90;
+        targetPitch = 0;
+        break;
+
+      case 'roomCenter':
+        // Stand in center of hall for 360° overview
+        targetX = 0;
+        targetY = 0;
+        targetZ = 0;
+        targetPitch = 0;
+        break;
+
+      case 'entrance':
+        // Turn to look back at the grand vault entrance
+        targetX = 0;
+        targetY = 0;
+        targetZ = 340;
+        targetYaw = 180;
+        targetPitch = 0;
+        break;
+    }
+  }
+
+  function initVantageControls() {
+    // Navigation Pills
+    document.querySelectorAll('.tour-vantage-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const vantage = btn.getAttribute('data-vantage');
+        goToVantage(vantage);
+      });
+    });
+
+    // Floor Waypoints
+    document.querySelectorAll('.floor-waypoint').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const vantage = btn.getAttribute('data-vantage');
+        goToVantage(vantage);
+      });
+    });
+
+    // Directional Turn Buttons
+    const btnTurnLeft = document.getElementById('btnTurnLeft');
+    const btnTurnRight = document.getElementById('btnTurnRight');
+    const btnStepForward = document.getElementById('btnStepForward');
+
+    if (btnTurnLeft) {
+      btnTurnLeft.addEventListener('click', () => {
+        targetYaw += 45;
+        playGlideSound();
+      });
+    }
+
+    if (btnTurnRight) {
+      btnTurnRight.addEventListener('click', () => {
+        targetYaw -= 45;
+        playGlideSound();
+      });
+    }
+
+    if (btnStepForward) {
+      btnStepForward.addEventListener('click', () => {
+        const rad = targetYaw * (Math.PI / 180);
+        targetX += Math.sin(rad) * -160;
+        targetZ += Math.cos(rad) * -160;
+
+        // Clamp inside room boundary
+        targetX = Math.max(-360, Math.min(360, targetX));
+        targetZ = Math.max(-360, Math.min(360, targetZ));
+
+        playGlideSound();
+      });
+    }
+
+    // Radar Marks Clicks (N, W, E, S)
+    document.querySelectorAll('.radar-mark').forEach(mark => {
+      mark.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const vantage = mark.getAttribute('data-vantage');
+        goToVantage(vantage);
+      });
     });
   }
 
   /* --------------------------------------------------------------------------
-     3. Vault Door Entrance & Room Reveal
+     5. Vault Entrance Sequence ("Enter Trophy Room")
      -------------------------------------------------------------------------- */
-  function initVaultEntrance() {
-    const enterBtn = document.getElementById('btnEnterVault');
-    const portalFrame = document.getElementById('vaultPortalFrame');
-    const trophyRoom = document.getElementById('trophyRoomSection');
-    const exitBtn = document.getElementById('btnExitVault');
+  function enterTrophyRoom() {
+    playDoorOpenSound();
 
-    if (!enterBtn || !portalFrame || !trophyRoom) return;
+    if (vaultPortal) {
+      vaultPortal.classList.add('doors-open');
+    }
 
-    enterBtn.addEventListener('click', () => {
-      playDoorOpenSound();
-      portalFrame.classList.add('doors-open');
+    if (entranceOverlay) {
+      entranceOverlay.classList.add('hidden');
+    }
 
-      // Seamless reveal of the room showcase
-      setTimeout(() => {
-        trophyRoom.classList.add('active-room');
-        trophyRoom.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 850);
-    });
+    // Smooth camera glide forward through open doors into center of the room
+    setTimeout(() => {
+      targetZ = 0;
+      targetX = 0;
+      targetYaw = 0;
+      targetPitch = 0;
+      isInsideRoom = true;
+    }, 400);
+  }
 
-    if (exitBtn) {
-      exitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        trophyRoom.classList.remove('active-room');
-        portalFrame.classList.remove('doors-open');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+  function initEntrance() {
+    if (btnEnterTour) {
+      btnEnterTour.addEventListener('click', enterTrophyRoom);
     }
   }
 
   /* --------------------------------------------------------------------------
-     4. Dynamic Pedestal Generation & 3D Tilt
+     6. Dynamic Pedestal Generation on 3D Gallery Walls
      -------------------------------------------------------------------------- */
   function renderTrophyPedestals() {
     if (!window.TROPHY_COLLECTION || !Array.isArray(window.TROPHY_COLLECTION)) return;
 
-    ['center', 'left', 'right'].forEach(wing => {
-      const container = document.getElementById(`pedestals-${wing}`);
-      if (!container) return;
+    const northTrack = document.getElementById('wallNorthPedestals');
+    const westTrack = document.getElementById('wallWestPedestals');
+    const eastTrack = document.getElementById('wallEastPedestals');
 
-      const wingTrophies = window.TROPHY_COLLECTION.filter(t => t.wing === wing);
-      container.innerHTML = '';
+    if (!northTrack || !westTrack || !eastTrack) return;
 
-      wingTrophies.forEach(trophy => {
-        const card = document.createElement('div');
-        card.className = 'trophy-pedestal-card';
-        card.setAttribute('data-id', trophy.id);
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `View details for ${trophy.title}`);
+    northTrack.innerHTML = '';
+    westTrack.innerHTML = '';
+    eastTrack.innerHTML = '';
 
-        const photoCount = trophy.photos && trophy.photos.length ? trophy.photos.length : 0;
-        const photoTag = photoCount > 0 ? `<span class="trophy-badge-pill">📸 ${photoCount} Photos</span>` : `<span class="trophy-badge-pill">${trophy.badge}</span>`;
+    window.TROPHY_COLLECTION.forEach(trophy => {
+      const card = document.createElement('div');
+      card.className = 'wall-pedestal-card';
+      card.setAttribute('data-id', trophy.id);
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `Inspect ${trophy.title}`);
 
-        card.innerHTML = `
-          ${photoTag}
-          <div class="trophy-img-wrap">
-            <img src="${trophy.image}" alt="${trophy.title}" loading="lazy" decoding="async">
+      const photoCount = (trophy.photos && trophy.photos.length) ? trophy.photos.length : 1;
+
+      card.innerHTML = `
+        <div class="pedestal-spotlight-beam"></div>
+        <div class="pedestal-trophy-wrap">
+          <img src="${trophy.image}" alt="${trophy.title}" loading="lazy" decoding="async">
+          <div class="trophy-ambient-halo"></div>
+        </div>
+        <div class="pedestal-shelf-base"></div>
+        <div class="pedestal-brass-plaque">
+          <div class="plaque-year-badge">${trophy.year} • ${trophy.badge}</div>
+          <h3 class="plaque-title">${trophy.title}</h3>
+          <div class="plaque-subtitle">${trophy.subtitle}</div>
+          <div class="plaque-action-hint">
+            <span class="photos-tag">📸 ${photoCount} Photos</span>
+            <span class="inspect-text">Inspect &rarr;</span>
           </div>
-          <div class="pedestal-base"></div>
-          <div class="trophy-info-plate">
-            <div class="trophy-year">${trophy.year} • ${trophy.badge}</div>
-            <h3 class="trophy-name">${trophy.title}</h3>
-            <div class="trophy-category">${trophy.subtitle}</div>
-            <div class="trophy-inspect-hint">
-              <span>Read Story</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </div>
-        `;
+        </div>
+      `;
 
-        // Interactive 3D tilt on hover (Desktop)
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          const rotateX = (-y / rect.height) * 12;
-          const rotateY = (x / rect.width) * 12;
+      card.addEventListener('mouseenter', () => {
+        playPhotoClickSound();
+      });
 
-          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-        });
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openTrophyModal(trophy.id);
+      });
 
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = '';
-        });
-
-        // Click to open modal
-        card.addEventListener('click', () => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
           openTrophyModal(trophy.id);
-        });
-
-        // Keyboard Enter/Space
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openTrophyModal(trophy.id);
-          }
-        });
-
-        container.appendChild(card);
+        }
       });
-    });
-  }
 
-  /* --------------------------------------------------------------------------
-     5. Wing Navigation & Mobile Touch Swipe
-     -------------------------------------------------------------------------- */
-  function switchWing(targetWing) {
-    if (!['center', 'left', 'right'].includes(targetWing)) return;
-    currentWing = targetWing;
-
-    // Update nav buttons
-    const navBtns = document.querySelectorAll('.wing-nav-btn');
-    navBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-wing') === targetWing);
-    });
-
-    // Update active wing pane
-    const panes = document.querySelectorAll('.wing-pane');
-    panes.forEach(pane => {
-      pane.classList.toggle('active-pane', pane.id === `wing-${targetWing}`);
-    });
-
-    playPhotoClickSound();
-  }
-
-  function initWingNavigation() {
-    const navBtns = document.querySelectorAll('.wing-nav-btn');
-    navBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const wing = btn.getAttribute('data-wing');
-        switchWing(wing);
-      });
-    });
-
-    // Mobile Touch Swipe Handling
-    const stage = document.querySelector('.wings-stage-wrapper');
-    if (!stage) return;
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    stage.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    stage.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-      const swipeDistance = touchEndX - touchStartX;
-      const threshold = 50;
-
-      const currentIndex = WING_ORDER.indexOf(currentWing);
-
-      if (swipeDistance > threshold) {
-        // Swiped Right -> Go to previous wing
-        const prevIndex = (currentIndex - 1 + WING_ORDER.length) % WING_ORDER.length;
-        switchWing(WING_ORDER[prevIndex]);
-      } else if (swipeDistance < -threshold) {
-        // Swiped Left -> Go to next wing
-        const nextIndex = (currentIndex + 1) % WING_ORDER.length;
-        switchWing(WING_ORDER[nextIndex]);
+      if (trophy.wing === 'center') {
+        northTrack.appendChild(card);
+      } else if (trophy.wing === 'left') {
+        westTrack.appendChild(card);
+      } else if (trophy.wing === 'right') {
+        eastTrack.appendChild(card);
       }
-    }
+    });
   }
 
   /* --------------------------------------------------------------------------
-     6. Trophy Detail Story Modal & 5-Photo Gallery
+     7. Trophy Story Modal with 5-Photo Gallery Carousel
      -------------------------------------------------------------------------- */
-  const modal = document.getElementById('trophyModal');
-  const closeBtn = document.getElementById('modalCloseBtn');
-  const prevTrophyBtn = document.getElementById('modalPrevTrophy');
-  const nextTrophyBtn = document.getElementById('modalNextTrophy');
-
   function openTrophyModal(trophyId) {
     if (!modal || !window.TROPHY_COLLECTION) return;
 
@@ -362,49 +516,57 @@
 
     playTrophyClickSound();
 
-    // Populate Details
-    document.getElementById('modalBadge').textContent = trophy.badge;
-    document.getElementById('modalYear').textContent = trophy.year;
-    document.getElementById('modalTitle').textContent = trophy.title;
-    document.getElementById('modalSubtitle').textContent = trophy.subtitle;
-    document.getElementById('modalVenueText').textContent = trophy.venue;
-    document.getElementById('modalStoryText').textContent = trophy.story;
+    // Populate metadata & narrative
+    const badgeEl = document.getElementById('modalBadge');
+    const yearEl = document.getElementById('modalYear');
+    const titleEl = document.getElementById('modalTitle');
+    const subtitleEl = document.getElementById('modalSubtitle');
+    const venueEl = document.getElementById('modalVenueText');
+    const storyEl = document.getElementById('modalStoryText');
 
-    // Populate Scorecard Highlights
+    if (badgeEl) badgeEl.textContent = trophy.badge;
+    if (yearEl) yearEl.textContent = trophy.year;
+    if (titleEl) titleEl.textContent = trophy.title;
+    if (subtitleEl) subtitleEl.textContent = trophy.subtitle;
+    if (venueEl) venueEl.textContent = trophy.venue;
+    if (storyEl) storyEl.textContent = trophy.story;
+
+    // Populate scorecard highlights
     const highlightsList = document.getElementById('modalHighlightsList');
-    highlightsList.innerHTML = '';
-    if (Array.isArray(trophy.highlights)) {
-      trophy.highlights.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <span>${item}</span>
-        `;
-        highlightsList.appendChild(li);
-      });
+    if (highlightsList) {
+      highlightsList.innerHTML = '';
+      if (Array.isArray(trophy.highlights)) {
+        trophy.highlights.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>${item}</span>
+          `;
+          highlightsList.appendChild(li);
+        });
+      }
     }
 
-    // Populate Photo Gallery (Accommodates up to 5 celebration/match photos)
+    // Populate Photo Gallery Carousel (up to 5 celebration photos)
     const gallerySection = document.getElementById('modalGallerySection');
     const thumbsStrip = document.getElementById('modalThumbsStrip');
     const mainImg = document.getElementById('modalMainImg');
     const photoCounter = document.getElementById('modalPhotoCounter');
 
-    thumbsStrip.innerHTML = '';
+    if (thumbsStrip) thumbsStrip.innerHTML = '';
 
-    // Array of photos (defaulting to trophy image if no photos provided)
     const photosList = (trophy.photos && trophy.photos.length) ? trophy.photos : [trophy.image];
 
-    // Set initial preview photo
-    mainImg.src = photosList[0];
-    mainImg.alt = `${trophy.title} celebration photo`;
+    if (mainImg) {
+      mainImg.src = photosList[0];
+      mainImg.alt = `${trophy.title} celebration photo`;
+    }
 
     if (photoCounter) {
       photoCounter.textContent = photosList.length > 1 ? `1 of ${photosList.length}` : '';
     }
 
-    // Render thumbnail strip
-    if (photosList.length > 1) {
+    if (photosList.length > 1 && thumbsStrip && gallerySection) {
       gallerySection.style.display = 'block';
 
       photosList.forEach((src, idx) => {
@@ -416,9 +578,11 @@
 
         thumbBtn.addEventListener('click', () => {
           currentPhotoIndex = idx;
-          mainImg.src = src;
-          mainImg.style.transform = 'scale(0.97)';
-          setTimeout(() => { mainImg.style.transform = 'scale(1)'; }, 100);
+          if (mainImg) {
+            mainImg.src = src;
+            mainImg.style.transform = 'scale(0.96)';
+            setTimeout(() => { mainImg.style.transform = 'scale(1)'; }, 100);
+          }
 
           thumbsStrip.querySelectorAll('.modal-thumb-btn').forEach((btn, i) => {
             btn.classList.toggle('active-thumb', i === idx);
@@ -433,11 +597,10 @@
 
         thumbsStrip.appendChild(thumbBtn);
       });
-    } else {
+    } else if (gallerySection) {
       gallerySection.style.display = 'none';
     }
 
-    // Show Modal
     modal.classList.add('modal-active');
     document.body.style.overflow = 'hidden';
   }
@@ -470,20 +633,40 @@
   function initTrophyModal() {
     if (!modal) return;
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeTrophyModal);
-    }
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const prevBtn = document.getElementById('modalPrevTrophy');
+    const nextBtn = document.getElementById('modalNextTrophy');
 
-    // Dismiss by clicking backdrop
+    if (closeBtn) closeBtn.addEventListener('click', closeTrophyModal);
+
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         closeTrophyModal();
       }
     });
 
-    // Keyboard Shortcuts: Esc to close, Arrow keys to navigate
+    if (prevBtn) prevBtn.addEventListener('click', () => navigateTrophies('prev'));
+    if (nextBtn) nextBtn.addEventListener('click', () => navigateTrophies('next'));
+
+    // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
-      if (!modal.classList.contains('modal-active')) return;
+      if (!modal.classList.contains('modal-active')) {
+        // In-Tour Shortcuts
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+          targetYaw += 15;
+        } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+          targetYaw -= 15;
+        } else if (e.key === '1') {
+          goToVantage('center');
+        } else if (e.key === '2') {
+          goToVantage('left');
+        } else if (e.key === '3') {
+          goToVantage('right');
+        } else if (e.key === '4') {
+          goToVantage('roomCenter');
+        }
+        return;
+      }
 
       if (e.key === 'Escape') {
         closeTrophyModal();
@@ -493,25 +676,80 @@
         navigateTrophies('next');
       }
     });
-
-    if (prevTrophyBtn) {
-      prevTrophyBtn.addEventListener('click', () => navigateTrophies('prev'));
-    }
-
-    if (nextTrophyBtn) {
-      nextTrophyBtn.addEventListener('click', () => navigateTrophies('next'));
-    }
   }
 
   /* --------------------------------------------------------------------------
-     Initialization on DOM Ready
+     8. Fullscreen & Audio Controls
+     -------------------------------------------------------------------------- */
+  function initHUDControls() {
+    // Fullscreen Toggle
+    if (fullscreenBtn && viewport) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          if (viewport.requestFullscreen) {
+            viewport.requestFullscreen();
+          } else if (viewport.webkitRequestFullscreen) {
+            viewport.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        const isFs = !!document.fullscreenElement;
+        const expandIcon = fullscreenBtn.querySelector('.fs-icon-expand');
+        const compressIcon = fullscreenBtn.querySelector('.fs-icon-compress');
+        if (expandIcon && compressIcon) {
+          expandIcon.style.display = isFs ? 'none' : 'block';
+          compressIcon.style.display = isFs ? 'block' : 'none';
+        }
+        viewport.classList.toggle('is-fullscreen', isFs);
+      });
+    }
+
+    // Audio Toggle
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+    const updateAudioUI = () => {
+      if (audioToggleBtn) {
+        audioToggleBtn.classList.toggle('muted', isMuted);
+        const label = audioToggleBtn.querySelector('.audio-label');
+        if (label) label.textContent = isMuted ? 'Sound: Off' : 'Sound: On';
+        audioToggleBtn.setAttribute('aria-pressed', isMuted ? 'false' : 'true');
+      }
+      if (audioBtn) {
+        audioBtn.style.opacity = isMuted ? '0.5' : '1';
+      }
+    };
+
+    updateAudioUI();
+
+    const toggleMute = () => {
+      isMuted = !isMuted;
+      localStorage.setItem('kavach_trophy_muted', isMuted ? 'true' : 'false');
+      updateAudioUI();
+      if (!isMuted) {
+        playTrophyClickSound();
+      }
+    };
+
+    if (audioToggleBtn) audioToggleBtn.addEventListener('click', toggleMute);
+    if (audioBtn) audioBtn.addEventListener('click', toggleMute);
+  }
+
+  /* --------------------------------------------------------------------------
+     9. Initialization
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
-    initAudioToggle();
-    initVaultEntrance();
+    initHUDControls();
+    initEntrance();
     renderTrophyPedestals();
-    initWingNavigation();
+    initPointerLook();
+    initVantageControls();
     initTrophyModal();
+    updateCameraLoop();
   });
 
 })();
