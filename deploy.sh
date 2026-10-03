@@ -61,11 +61,12 @@ aws s3 sync . "s3://${BUCKET_NAME}/" \
   --cache-control "public, max-age=3600, must-revalidate" \
   --delete
 
-echo "☁️  Uploading clean extensionless routing objects for S3 (/about, /kpl, /timeout, /policies)..."
+echo "☁️  Uploading clean extensionless routing objects for S3 (/about, /kpl, /timeout, /policies, /trophies)..."
 aws s3 cp about.html "s3://${BUCKET_NAME}/about" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp kpl.html "s3://${BUCKET_NAME}/kpl" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp timeout.html "s3://${BUCKET_NAME}/timeout" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp policies.html "s3://${BUCKET_NAME}/policies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+aws s3 cp trophies.html "s3://${BUCKET_NAME}/trophies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 
 echo ""
 echo "🎉 DEPLOYMENT COMPLETE!"

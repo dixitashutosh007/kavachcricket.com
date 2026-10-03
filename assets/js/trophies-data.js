@@ -1,0 +1,411 @@
+/**
+ * KAvach Cricket Club - Trophy Room Collection Data
+ * 
+ * Each trophy object contains:
+ * - id: Unique string identifier
+ * - wing: Room section ("center" | "left" | "right")
+ * - title: Official trophy title
+ * - year: Year won / Edition
+ * - category: Category badge (Flagship Tournament, Weekend League, etc.)
+ * - badge: Status badge (Champions, Winners, Gold Cup, etc.)
+ * - image: Main trophy photo
+ * - subtitle: Match / Franchise context
+ * - venue: Match venue location
+ * - story: Detailed narrative of the championship victory
+ * - highlights: Bulleted match scorecard/performance highlights
+ * - photos: Up to 5 celebration/match photos displayed in the modal gallery
+ */
+
+const TROPHY_COLLECTION = [
+  // =========================================================================
+  // CENTER STAGE: Marquee & Flagship Tournaments (KPL Championships)
+  // =========================================================================
+  {
+    id: "trophy-1",
+    wing: "center",
+    title: "KPL Season 3 Championship Trophy",
+    year: "2023",
+    category: "Flagship Tournament",
+    badge: "Champions",
+    image: "./assets/images/kpl-trophy-champions.webp",
+    subtitle: "KAvach Hunkaar • Grand Finale Victory",
+    venue: "Play Arena, Sarjapur Road, Bangalore",
+    story: "In an electrifying night under the Play Arena floodlights, KAvach Hunkaar etched their names in club folklore. Chasing a formidable target of 168 in the championship final against Rudra, Hunkaar held their nerve with disciplined running and calculated aggression. A match-defining 5th-wicket partnership sealed the title with two balls to spare, igniting wild celebrations among players and supporters.",
+    highlights: [
+      "Chased down 168 in 19.4 overs in high-pressure chase",
+      "Captain's innings: 58* off 39 balls with 4 sixes",
+      "14 tournament wickets by the spin attack across the campaign",
+      "Live streamed with digital CricClubs ball-by-ball coverage"
+    ],
+    photos: [
+      "./assets/images/kpl-hunkaar-winner.webp",
+      "./assets/images/kpl-anthem-lineup.webp",
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/kpl-trophies-display.webp",
+      "./assets/images/timeout-night-trophy.webp"
+    ]
+  },
+  {
+    id: "trophy-2",
+    wing: "center",
+    title: "KPL Season 4 Super Cup",
+    year: "2024",
+    category: "Flagship Tournament",
+    badge: "Champions",
+    image: "./assets/images/kavach-winning-trophy.webp",
+    subtitle: "Prithvi KAvach • Undefeated Season",
+    venue: "Standard Turf Grounds, Bangalore South",
+    story: "Prithvi KAvach completed a historic unbeaten tournament run to lift the coveted KPL Season 4 Super Cup. Dominating both group stages and knockout rounds, Prithvi displayed clinical fielding and formidable top-order stability. The final was won by 34 runs defending a commanding 185, backed by two sharp direct-hit run-outs in the death overs.",
+    highlights: [
+      "Defended 185 with clinical death bowling (final won by 34 runs)",
+      "Player of the Tournament: 212 runs and 8 wickets",
+      "Record tournament economy rate: 5.6 RPO",
+      "Historic undefeated streak across all 6 fixtures"
+    ],
+    photos: [
+      "./assets/images/kpl-winner-prithvi.webp",
+      "./assets/images/trophy-celebration-night.webp",
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/fielding-drills.webp",
+      "./assets/images/kpl-trophies-display.webp"
+    ]
+  },
+  {
+    id: "trophy-3",
+    wing: "center",
+    title: "KPL Season 2 Champions Shield",
+    year: "2023",
+    category: "Flagship Tournament",
+    badge: "Champions",
+    image: "./assets/images/kpl-trophies-display.webp",
+    subtitle: "Rudra KAvach • Inaugural Red Ball Trophy",
+    venue: "Play Arena Turf, Bangalore",
+    story: "The second edition of KPL witnessed a legendary bowling masterclass from Rudra KAvach. Defending a modest total of 132 on a lively pitch, Rudra's pacers utilized seam movement to dismantle the opposition top order, claiming 4 wickets in the first 5 overs and lifting the championship shield amidst thundering applause.",
+    highlights: [
+      "Sensational opening spell: 4/18 in 4 overs",
+      "Defended 132 to win by 19 runs in low-scoring thriller",
+      "Highest team catch success rate in tournament history (92%)",
+      "Awarded Best Bowling Unit of KPL Season 2"
+    ],
+    photos: [
+      "./assets/images/kpl-team-rudra.webp",
+      "./assets/images/match-day-wickets.webp",
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/trophy-celebration-night.webp"
+    ]
+  },
+  {
+    id: "trophy-4",
+    wing: "center",
+    title: "KAvach Super League Championship",
+    year: "2024",
+    category: "Premier League",
+    badge: "Champions",
+    image: "./assets/images/trophy-celebration-night.webp",
+    subtitle: "KAvach Premier XI • 30-Over Format",
+    venue: "Bangalore Standard Cricket Ground",
+    story: "A grueling 6-week 30-over competition testing stamina, temperament, and tactical depth. KAvach Premier XI showed supreme resolve in the knockout stages, chasing down 215 against an elite corporate side with 3 wickets in hand in the 29th over.",
+    highlights: [
+      "Successful chase of 215 in 28.4 overs",
+      "Century partnership for the 4th wicket (112 runs)",
+      "Flawless wicketkeeping performance: 3 catches and 1 stumping",
+      "Trophy presented during the Annual Club Gala Night"
+    ],
+    photos: [
+      "./assets/images/timeout-night-trophy.webp",
+      "./assets/images/kpl-hunkaar-winner.webp",
+      "./assets/images/cricket-ground-panorama.webp",
+      "./assets/images/kavach-winning-trophy.webp",
+      "./assets/images/play-arena-pitch-celebration.webp"
+    ]
+  },
+  {
+    id: "trophy-5",
+    wing: "center",
+    title: "KPL Season 1 Inaugural Trophy",
+    year: "2022",
+    category: "Flagship Tournament",
+    badge: "Inaugural Milestone",
+    image: "./assets/images/kpl-trophy-champions.webp",
+    subtitle: "Sabyasachi KAvach • The Beginning of Legacy",
+    venue: "Play Arena, Sarjapur Road, Bangalore",
+    story: "The foundation of KAvach's tournament heritage. The inaugural season of KPL brought working professionals together under colored kits and white-ball cricket. Sabyasachi KAvach triumphed in the finale through all-round balance, setting the standard for teamwork and club camaraderie that defines KAvach today.",
+    highlights: [
+      "Inaugural champions of KAvach Premier League",
+      "All-round masterclass: 45 runs and 3/22 in final",
+      "First ever live auction draft tournament in Sarjapur amateur cricket",
+      "100% participation with corporate professionals and IT architects"
+    ],
+    photos: [
+      "./assets/images/kpl-team-sabyasachi.webp",
+      "./assets/images/kpl-franchise-team.webp",
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/practice-nets.webp",
+      "./assets/images/kpl-trophies-display.webp"
+    ]
+  },
+
+  // =========================================================================
+  // LEFT WING: Weekend Leagues & Corporate Tournaments
+  // =========================================================================
+  {
+    id: "trophy-6",
+    wing: "left",
+    title: "Bangalore Corporate Invitational Cup",
+    year: "2024",
+    category: "Corporate Tournament",
+    badge: "Gold Cup",
+    image: "./assets/images/kavach-winning-trophy.webp",
+    subtitle: "KAvach Titans • 16-Team Tournament",
+    venue: "HAL Sports Complex Turf Ground",
+    story: "Compromising top corporate teams and tech enterprises across Bangalore, the Corporate Invitational Cup was a true test of competitive grit. KAvach Titans went toe-to-toe with seasoned corporate sides, pulling off a breathtaking last-ball boundary in the semi-final and a dominant 45-run victory in the grand finale.",
+    highlights: [
+      "Defeated 4 Tier-1 corporate squads en route to championship",
+      "Tournament highest run-scorer: 245 runs at 142 SR",
+      "Disciplined fielding: 0 dropped catches across semi-final and final",
+      "Special sportsmanship recognition from Karnataka Cricket organizers"
+    ],
+    photos: [
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/match-day-wickets.webp",
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/kavach-winning-trophy.webp"
+    ]
+  },
+  {
+    id: "trophy-7",
+    wing: "left",
+    title: "Sarjapur Weekend League Shield",
+    year: "2023",
+    category: "Weekend League",
+    badge: "League Champions",
+    image: "./assets/images/kpl-trophies-display.webp",
+    subtitle: "KAvach Scarlet Squad • 10-Round Season",
+    venue: "Curated Turf Grounds, Sarjapur Belt",
+    story: "Over 10 competitive weekends of leather-ball cricket, KAvach Scarlet Squad showcased unmatched consistency. Finishing atop the league table with 8 wins out of 10 matches, the team demonstrated strategic cost-shared professionalism, fair batting rotations, and lethal spin bowling on dry Bangalore surfaces.",
+    highlights: [
+      "Top of the table with 16 points in 10 league matches",
+      "Best spin duo of the season: 28 combined wickets",
+      "Average team total of 172 in 20-over matches",
+      "Celebrated with customary KAvach breakfast debrief"
+    ],
+    photos: [
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/practice-nets.webp",
+      "./assets/images/fielding-drills.webp",
+      "./assets/images/cricket-ground-panorama.webp",
+      "./assets/images/trophy-celebration-night.webp"
+    ]
+  },
+  {
+    id: "trophy-8",
+    wing: "left",
+    title: "Red-Ball Championship Cup",
+    year: "2023",
+    category: "Classic Cricket",
+    badge: "Red-Ball Winners",
+    image: "./assets/images/kpl-trophy-champions.webp",
+    subtitle: "Traditional Whites • 2-Day Fixture",
+    venue: "Bangalore Suburbs Cricket Pavilion",
+    story: "A pure celebration of traditional cricket culture. Donning pristine club whites and facing seasoned red leather balls, KAvach cricketers demonstrated classic defensive technique, leaving outside off-stump, and building enduring bowling partnerships over two grueling days of cricket.",
+    highlights: [
+      "First innings lead of 64 runs paved the way for victory",
+      "Sensational opening spell of 12 maiden overs across 2 days",
+      "Century in club whites: 104* off 158 deliveries",
+      "True showcase of cricket discipline and mental endurance"
+    ],
+    photos: [
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/match-day-wickets.webp",
+      "./assets/images/fielding-drills.webp",
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/timeout-night-trophy.webp"
+    ]
+  },
+  {
+    id: "trophy-9",
+    wing: "left",
+    title: "Monsoon Floodlit Cup",
+    year: "2024",
+    category: "Night Tournament",
+    badge: "Champions",
+    image: "./assets/images/timeout-night-trophy.webp",
+    subtitle: "KAvach Night Hawks • D/N Format",
+    venue: "Play Arena Floodlit Arena, Bangalore",
+    story: "Played under high-mast LED floodlights during breezy Bangalore monsoon evenings. The ball skidded fast off the damp turf, demanding laser-focused hand-eye coordination. Night Hawks chased down 140 in just 15.2 overs with relentless powerplay boundaries.",
+    highlights: [
+      "Powerplay blitz: 68/0 in 6 overs under lights",
+      "Fastest fifty of the tournament (19 balls)",
+      "High-speed bowling machine drills translated into clinical strokeplay",
+      "Man of the Match: 62* (24) and 2 catches at long-on"
+    ],
+    photos: [
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/studio-turf-warmup.webp",
+      "./assets/images/kpl-anthem-lineup.webp",
+      "./assets/images/timeout-night-trophy.webp",
+      "./assets/images/hero-team-scarlet.webp"
+    ]
+  },
+  {
+    id: "trophy-10",
+    wing: "left",
+    title: "Sarjapur Corporate Challenge Shield",
+    year: "2022",
+    category: "Corporate Tournament",
+    badge: "Winners",
+    image: "./assets/images/kavach-winning-trophy.webp",
+    subtitle: "KAvach Engineers & Architects XI",
+    venue: "Green Turf Pavilion, Sarjapur",
+    story: "Representing IT architects, founders, and engineers from Bangalore's tech corridor, this victory demonstrated how working professionals balance intense corporate deadlines with peak athletic performance. Defending 154, the team restricted the opponents to 138 with masterclass slower balls.",
+    highlights: [
+      "Won by 16 runs defending 154 against corporate giants",
+      "Exceptional death bowling: Only 14 runs conceded in last 3 overs",
+      "Player-of-the-Match award for bowling figures of 3/16",
+      "Proof of KAvach's motto: Cricket for Working Professionals"
+    ],
+    photos: [
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/kpl-franchise-team.webp",
+      "./assets/images/practice-nets.webp",
+      "./assets/images/kavach-winning-trophy.webp"
+    ]
+  },
+
+  // =========================================================================
+  // RIGHT WING: Plate Honors, Milestones & Individual Trophies
+  // =========================================================================
+  {
+    id: "trophy-11",
+    wing: "right",
+    title: "KPL Season 3 Plate Trophy",
+    year: "2023",
+    category: "Plate Championship",
+    badge: "Plate Winners",
+    image: "./assets/images/kpl-trophies-display.webp",
+    subtitle: "Atharva KAvach • Knockout Resurgence",
+    venue: "Play Arena, Sarjapur Road, Bangalore",
+    story: "After a challenging group stage, Atharva KAvach made a fairytale comeback in the Plate playoffs. Displaying unmatched resilience and tactical recalibration, Atharva won both the semi-final and final convincingly to hoist the KPL Season 3 Plate Silverware.",
+    highlights: [
+      "Unbeaten playoff streak in the Plate knockout bracket",
+      "Turnaround victory: Defended 145 after being 42/4 early on",
+      "Spirit of Cricket award for exemplary on-field conduct",
+      "Crucial 8th-wicket partnership of 48 runs"
+    ],
+    photos: [
+      "./assets/images/kpl-team-atharva-logo.webp",
+      "./assets/images/kpl-hunkaar-winner.webp",
+      "./assets/images/fielding-drills.webp",
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/kpl-trophies-display.webp"
+    ]
+  },
+  {
+    id: "trophy-12",
+    wing: "right",
+    title: "Bangalore Veterans Cricket Cup",
+    year: "2024",
+    category: "Veterans Cricket",
+    badge: "Champions",
+    image: "./assets/images/kavach-winning-trophy.webp",
+    subtitle: "KAvach Seniors (38+ Years) XI",
+    venue: "Central Turf Ground, Bangalore",
+    story: "Proving that age is just a number when passion drives you. Our senior cricketers, many playing active cricket in their 40s and 50s, executed textbook seam bowling, smart placement, and tactical field settings to outthink younger squads and lift the prestigious Veterans Cup.",
+    highlights: [
+      "All squad members aged 38 and above with corporate careers",
+      "Clinical 6-wicket win chasing 148 against senior league champions",
+      "Economical 4-over spells by the veteran pace trio",
+      "Inspiring demonstration of lifelong fitness through sports"
+    ],
+    photos: [
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/fitness-agility.webp",
+      "./assets/images/practice-nets.webp",
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/trophy-celebration-night.webp"
+    ]
+  },
+  {
+    id: "trophy-13",
+    wing: "right",
+    title: "Independence Day Unity Cup",
+    year: "2023",
+    category: "Annual Invitational",
+    badge: "Winners",
+    image: "./assets/images/kpl-trophy-champions.webp",
+    subtitle: "KAvach Cricket Club Invitational",
+    venue: "Play Arena, Bangalore",
+    story: "Held annually on August 15th, the Independence Day Unity Cup brings together clubs from across Bangalore for a day of patriotic celebration, high-intensity cricket, and community bonding. KAvach clinched the 2023 trophy with a commanding 52-run victory in the final.",
+    highlights: [
+      "Annual 1-day 8-team knock-out format tournament",
+      "Player of the Final: Scored 74 off 44 balls",
+      "Highest team total of the day: 198/4 in 15 overs",
+      "Anthem ceremony and flag-hoisting at Play Arena"
+    ],
+    photos: [
+      "./assets/images/kpl-anthem-lineup.webp",
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/kpl-trophies-display.webp"
+    ]
+  },
+  {
+    id: "trophy-14",
+    wing: "right",
+    title: "KAvach Timeout Annual Sports Silverware",
+    year: "2024",
+    category: "Club Milestone",
+    badge: "Club Honors",
+    image: "./assets/images/timeout-night-trophy.webp",
+    subtitle: "Annual Family & Members Award Night",
+    venue: "KAvach Annual Retreat & Resort, Bangalore",
+    story: "The centerpiece award presented at KAvach Timeout, our annual multi-sport retreat bringing together players, spouses, and children for tug-of-war, volleyball, box cricket, and cultural gala nights. Awarded to the best all-round club contributor of the year.",
+    highlights: [
+      "Presented during the annual awards banquet with 150+ attendees",
+      "Celebrates on-field performance, mentorship, and community spirit",
+      "Part of the premier 2-day KAvach Timeout retreat series",
+      "Embossed with the signature club slogan: Go Get Them ! KAvach"
+    ],
+    photos: [
+      "./assets/images/timeout-night-trophy.webp",
+      "./assets/images/timeout-awards-dinner.webp",
+      "./assets/images/timeout-celebration-hug.webp",
+      "./assets/images/timeout-mega-family.webp",
+      "./assets/images/timeout-tug-of-war.webp"
+    ]
+  },
+  {
+    id: "trophy-15",
+    wing: "right",
+    title: "Fair Play & Sportsmanship Excellence Shield",
+    year: "2024",
+    category: "Club Ethics & Honor",
+    badge: "Fair Play",
+    image: "./assets/images/kpl-trophies-display.webp",
+    subtitle: "KSCA Affiliated League Assessment",
+    venue: "Bangalore Cricket Association Grounds",
+    story: "Winning is secondary to upholding the gentleman's game. This prestigious award was presented to KAvach Cricket Club in recognition of zero disciplinary infractions, impeccable respect toward certified umpires, positive opponent camaraderie, and unwavering sportsmanship across 40+ sanctioned fixtures.",
+    highlights: [
+      "Zero code-of-conduct violations across 42 league fixtures",
+      "Highest umpire rating score in South Bangalore division (9.8/10)",
+      "Strict enforcement of club code of conduct and safety gear standards",
+      "Core testament to KAvach's 6 defining cultural pillars"
+    ],
+    photos: [
+      "./assets/images/cricket-whites-team.webp",
+      "./assets/images/kpl-anthem-lineup.webp",
+      "./assets/images/community-play-arena.webp",
+      "./assets/images/hero-team-scarlet.webp",
+      "./assets/images/timeout-celebration-hug.webp"
+    ]
+  }
+];
+
+// Helper functions for easy export / querying
+if (typeof window !== "undefined") {
+  window.TROPHY_COLLECTION = TROPHY_COLLECTION;
+}

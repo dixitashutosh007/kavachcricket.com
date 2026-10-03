@@ -10,3 +10,4 @@
 ## Programs & Tournaments
 - [KAvach Premier League (KPL)](https://www.kavachcricket.com/kpl.html) - Our flagship IPL-style amateur tournament featuring live auction drafts and bespoke colored kits.
 - [KAvach Timeout](https://www.kavachcricket.com/timeout.html) - Our signature annual family sports evening including mini cricket, tug of war, and a family banquet.
+- [Virtual Trophy Room](https://www.kavachcricket.com/trophies.html) - Interactive 3D showroom showcasing 15 championship trophies, victory stories, match scorecards, and celebration photo galleries.
