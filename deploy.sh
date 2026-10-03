@@ -68,8 +68,13 @@ aws s3 cp timeout.html "s3://${BUCKET_NAME}/timeout" --region "${REGION}" --cont
 aws s3 cp policies.html "s3://${BUCKET_NAME}/policies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp trophies.html "s3://${BUCKET_NAME}/trophies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 
+echo "⚡ Invalidating CloudFront distribution (E26S1ELTWWUVSI)..."
+aws cloudfront create-invalidation --distribution-id E26S1ELTWWUVSI --paths "/*" > /dev/null 2>&1 || true
+
 echo ""
 echo "🎉 DEPLOYMENT COMPLETE!"
 echo "🌐 Live S3 Website Endpoint:"
 echo "   http://${BUCKET_NAME}.s3-website.ap-south-1.amazonaws.com"
+echo "🌐 Live CloudFront Domain:"
+echo "   https://www.kavachcricket.com/trophies"
 echo "=============================================="
