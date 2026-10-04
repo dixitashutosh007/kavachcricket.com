@@ -104,11 +104,13 @@
         <aside class="trophy-sidebar">
           <div class="sidebar-header">
             <span class="sidebar-title">Showroom Trophies</span>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="addNewTrophy()">+ Add New</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openNewTrophyModal()">
+              <span>✨ + Add Trophy</span>
+            </button>
           </div>
 
           <div class="wing-filters">
-            <button type="button" class="wing-filter-btn active" data-wing="all">All (15)</button>
+            <button type="button" class="wing-filter-btn active" data-wing="all">All</button>
             <button type="button" class="wing-filter-btn" data-wing="center">Center</button>
             <button type="button" class="wing-filter-btn" data-wing="left">Left</button>
             <button type="button" class="wing-filter-btn" data-wing="right">Right</button>
@@ -116,6 +118,12 @@
 
           <div class="trophy-list" id="trophyList">
             <!-- Dynamically populated -->
+          </div>
+
+          <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+            <button type="button" class="btn btn-secondary" style="width: 100%; font-weight: 700;" onclick="openNewTrophyModal()">
+              <span>✨ + Add New Trophy</span>
+            </button>
           </div>
         </aside>
 
@@ -441,6 +449,111 @@
           <span>Apply &amp; Save WebP</span>
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. MODAL: ADD NEW TROPHY CREATION WIZARD
+       ========================================================================= -->
+  <div id="newTrophyModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-title">
+        <span>🏆 Add New Trophy to Showroom</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeNewTrophyModal()">✕</button>
+      </div>
+
+      <form id="newTrophyModalForm" onsubmit="event.preventDefault(); submitCreateTrophy();">
+        <div class="form-grid">
+          
+          <!-- Showroom Wall -->
+          <div class="form-group">
+            <label class="form-label">Showroom Wall / Wing</label>
+            <select class="form-select" id="new_trophy_wing">
+              <option value="center" selected>🏆 Center Stage (KPL Cups)</option>
+              <option value="left">🛡️ Left Showcase (Corporate &amp; Weekend)</option>
+              <option value="right">🎖️ Right Honors (Plate &amp; Sportsmanship)</option>
+            </select>
+          </div>
+
+          <!-- Year -->
+          <div class="form-group">
+            <label class="form-label">Year Won / Edition</label>
+            <input type="text" class="form-input" id="new_trophy_year" value="2025" placeholder="e.g. 2025" required>
+          </div>
+
+          <!-- Title -->
+          <div class="form-group form-grid-full">
+            <div class="form-label-row">
+              <label class="form-label">Official Trophy Title</label>
+              <span class="char-counter" id="count_newTrophyTitle">0 / 40</span>
+            </div>
+            <input type="text" class="form-input" id="new_trophy_title" placeholder="e.g. KPL Season 5 Championship Cup" maxlength="45" required data-rule="newTrophyTitle">
+          </div>
+
+          <!-- Subtitle -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label">Franchise / Match Subtitle</label>
+              <span class="char-counter" id="count_newTrophySubtitle">0 / 35</span>
+            </div>
+            <input type="text" class="form-input" id="new_trophy_subtitle" placeholder="e.g. KAvach Rudra • Finale Victory" maxlength="40" data-rule="newTrophySubtitle">
+          </div>
+
+          <!-- Status Badge -->
+          <div class="form-group">
+            <label class="form-label">Status Badge</label>
+            <input type="text" class="form-input" id="new_trophy_badge" value="Champions" placeholder="e.g. Champions">
+          </div>
+
+          <!-- Category Badge -->
+          <div class="form-group">
+            <label class="form-label">Category Badge</label>
+            <input type="text" class="form-input" id="new_trophy_category" value="Flagship Tournament" placeholder="e.g. Flagship Tournament">
+          </div>
+
+          <!-- Venue -->
+          <div class="form-group">
+            <label class="form-label">Match Venue Location</label>
+            <input type="text" class="form-input" id="new_trophy_venue" value="Play Arena, Sarjapur Road, Bangalore">
+          </div>
+
+          <!-- Victory Story -->
+          <div class="form-group form-grid-full">
+            <div class="form-label-row">
+              <label class="form-label">Victory Story Narrative</label>
+              <span class="char-counter" id="count_newTrophyStory">0 / 350</span>
+            </div>
+            <textarea class="form-textarea" id="new_trophy_story" rows="3" placeholder="Recount the decisive performance, key partnerships, and match outcome (150-350 chars)..." data-rule="newTrophyStory" required></textarea>
+            <div class="form-hint">Enforces 150–350 characters to keep modal popup perfectly responsive without scrolling glitches.</div>
+          </div>
+
+          <!-- Main Pedestal Photo Uploader -->
+          <div class="form-group form-grid-full">
+            <label class="form-label">Main Pedestal Photo (1:1 Square)</label>
+            <div class="image-uploader-card" id="dropzone_newTrophyMain">
+              <img src="./assets/images/kpl-trophy-champions.webp" class="image-preview-thumb" id="preview_newTrophyMain">
+              <div class="image-upload-actions">
+                <div class="image-specs-badge">Target: 800×800 px (1:1) • WebP • Max 200 KB</div>
+                <input type="hidden" id="new_trophy_image_path" value="./assets/images/kpl-trophy-champions.webp">
+                <p style="font-size: 0.775rem; color: var(--text-dim); margin-bottom: 6px;">
+                  Current: <code id="label_newTrophyMain">./assets/images/kpl-trophy-champions.webp</code>
+                </p>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="triggerNewTrophyMainUpload()">
+                  📷 Choose / Drop Photo (Auto WebP Crop)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+          <button type="button" class="btn btn-secondary" onclick="closeNewTrophyModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmitNewTrophy">
+            <span>✨ Create &amp; Add Trophy</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

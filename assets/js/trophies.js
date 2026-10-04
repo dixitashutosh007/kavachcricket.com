@@ -329,6 +329,23 @@
     const list = getTrophyList();
     if (!list.length) return;
 
+    // Dynamically update trophy count badges
+    const centerCount = list.filter(t => t.wing === 'center').length;
+    const leftCount = list.filter(t => t.wing === 'left').length;
+    const rightCount = list.filter(t => t.wing === 'right').length;
+
+    const elVaultTag = document.getElementById('vaultTrophyCountTag');
+    if (elVaultTag) elVaultTag.textContent = `🏆 ${list.length} Silverware Trophies`;
+
+    const elCenterCount = document.getElementById('countCenterStage');
+    if (elCenterCount) elCenterCount.textContent = centerCount;
+
+    const elLeftCount = document.getElementById('countLeftShowcase');
+    if (elLeftCount) elLeftCount.textContent = leftCount;
+
+    const elRightCount = document.getElementById('countRightHonors');
+    if (elRightCount) elRightCount.textContent = rightCount;
+
     const gridCenter = document.getElementById('gridPedestalsCenter');
     const gridLeft = document.getElementById('gridPedestalsLeft');
     const gridRight = document.getElementById('gridPedestalsRight');

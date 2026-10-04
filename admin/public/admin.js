@@ -41,11 +41,14 @@ const IMAGE_SPECS = {
 // Character Limit Rules
 const CHAR_LIMITS = {
   trophyTitle: { max: 40, warn: 35 },
+  newTrophyTitle: { max: 40, warn: 35 },
   trophySubtitle: { max: 35, warn: 30 },
+  newTrophySubtitle: { max: 35, warn: 30 },
   trophyCategory: { max: 25, warn: 20 },
   trophyBadge: { max: 15, warn: 12 },
   trophyVenue: { max: 45, warn: 40 },
   trophyStory: { min: 150, max: 350, warn: 320 },
+  newTrophyStory: { min: 150, max: 350, warn: 320 },
   heroSlogan: { max: 30, warn: 25 },
   heroRanking: { max: 35, warn: 30 },
   heroTitlePrefix: { max: 30, warn: 25 },
@@ -233,6 +236,20 @@ function renderTrophySidebar() {
   const container = document.getElementById('trophyList');
   container.innerHTML = '';
 
+  const totalCount = currentTrophies.length;
+  const centerCount = currentTrophies.filter(t => t.wing === 'center').length;
+  const leftCount = currentTrophies.filter(t => t.wing === 'left').length;
+  const rightCount = currentTrophies.filter(t => t.wing === 'right').length;
+
+  const btnAll = document.querySelector('.wing-filter-btn[data-wing="all"]');
+  if (btnAll) btnAll.textContent = `All (${totalCount})`;
+  const btnCenter = document.querySelector('.wing-filter-btn[data-wing="center"]');
+  if (btnCenter) btnCenter.textContent = `Center (${centerCount})`;
+  const btnLeft = document.querySelector('.wing-filter-btn[data-wing="left"]');
+  if (btnLeft) btnLeft.textContent = `Left (${leftCount})`;
+  const btnRight = document.querySelector('.wing-filter-btn[data-wing="right"]');
+  if (btnRight) btnRight.textContent = `Right (${rightCount})`;
+
   const filterBtns = document.querySelectorAll('.wing-filter-btn');
   filterBtns.forEach(btn => {
     btn.onclick = () => {
@@ -280,9 +297,11 @@ function renderTrophyEditor(index) {
         <h2 class="editor-title">Editing: ${escapeHtml(trophy.title)}</h2>
         <span style="font-size: 0.8rem; color: var(--text-dim);">ID: ${trophy.id}</span>
       </div>
-      <div style="display: flex; gap: 8px;">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary btn-sm" onclick="openNewTrophyModal()">✨ + Add Trophy</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="duplicateCurrentTrophy()">📋 Duplicate</button>
         <button type="button" class="btn btn-danger btn-sm" onclick="deleteTrophy(${index})">🗑️ Delete</button>
-        <button type="button" class="btn btn-primary" onclick="saveTrophyChanges()">💾 Save Trophies</button>
+        <button type="button" class="btn btn-accent btn-sm" onclick="saveTrophyChanges()">💾 Save Trophies</button>
       </div>
     </div>
 
@@ -457,34 +476,107 @@ function removeCelebrationPhoto(pIdx) {
   renderTrophyEditor(activeTrophyIndex);
 }
 
-function addNewTrophy() {
-  const newId = `trophy-${Date.now().toString().slice(-4)}`;
+function openNewTrophyModal() {
+  const modal = document.getElementById('newTrophyModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    const titleInput = document.getElementById('new_trophy_title');
+    if (titleInput) titleInput.focus();
+    initCharCounters();
+  }
+}
+
+function closeNewTrophyModal() {
+  const modal = document.getElementById('newTrophyModal');
+  if (modal) modal.style.display = 'none';
+  const form = document.getElementById('newTrophyModalForm');
+  if (form) form.reset();
+}
+
+function triggerNewTrophyMainUpload() {
+  currentCropTargetSpec = IMAGE_SPECS.trophyMain;
+  activeCropperCallback = (path) => {
+    document.getElementById('new_trophy_image_path').value = path;
+    document.getElementById('preview_newTrophyMain').src = path;
+    document.getElementById('label_newTrophyMain').textContent = path;
+  };
+  document.getElementById('globalFileInput').click();
+}
+
+async function submitCreateTrophy() {
+  const title = document.getElementById('new_trophy_title').value.trim();
+  if (!title) {
+    showToast('Please enter a trophy title', 'error');
+    return;
+  }
+
+  const wing = document.getElementById('new_trophy_wing').value;
+  const year = document.getElementById('new_trophy_year').value.trim() || '2025';
+  const subtitle = document.getElementById('new_trophy_subtitle').value.trim() || 'KAvach Squad • Victory';
+  const category = document.getElementById('new_trophy_category').value.trim() || 'Tournament Cup';
+  const badge = document.getElementById('new_trophy_badge').value.trim() || 'Champions';
+  const venue = document.getElementById('new_trophy_venue').value.trim() || 'Play Arena, Sarjapur Road, Bangalore';
+  const story = document.getElementById('new_trophy_story').value.trim();
+  const image = document.getElementById('new_trophy_image_path').value || './assets/images/kpl-trophy-champions.webp';
+
+  const newId = `trophy-${Date.now().toString().slice(-5)}`;
   const newTrophy = {
     id: newId,
-    wing: 'center',
-    title: 'New Championship Trophy',
-    year: '2025',
-    category: 'Tournament Cup',
-    badge: 'Winners',
-    image: './assets/images/kpl-trophy-champions.webp',
-    subtitle: 'KAvach Squad • Victory',
-    venue: 'Play Arena, Bangalore',
-    story: 'Write a victory story here recounting the key innings, critical partnerships, and championship celebration of this tournament triumph.',
+    wing: wing,
+    title: title,
+    year: year,
+    category: category,
+    badge: badge,
+    image: image,
+    subtitle: subtitle,
+    venue: venue,
+    story: story,
     highlights: [
-      'Clinical bowling in the final overs',
-      'High-pressure chase completed with 3 balls to spare'
+      "Decisive championship victory under the floodlights",
+      "Clinical bowling attack restricted opponents in death overs",
+      "Man of the Match performance in championship final"
     ],
     photos: [
-      './assets/images/kpl-hunkaar-winner.webp',
-      './assets/images/play-arena-pitch-celebration.webp'
+      "./assets/images/kpl-hunkaar-winner.webp",
+      "./assets/images/kpl-anthem-lineup.webp",
+      "./assets/images/play-arena-pitch-celebration.webp",
+      "./assets/images/kpl-trophies-display.webp",
+      "./assets/images/timeout-night-trophy.webp"
     ]
   };
 
   currentTrophies.unshift(newTrophy);
   activeTrophyIndex = 0;
+  trophyFilterWing = 'all';
+
+  closeNewTrophyModal();
   renderTrophySidebar();
   renderTrophyEditor(0);
-  showToast('New trophy added! Edit its fields and click Save.');
+
+  // Automatically persist to backend
+  await saveTrophyChanges();
+  showToast(`✨ Trophy "${title}" added and saved!`);
+}
+
+async function duplicateCurrentTrophy() {
+  const orig = currentTrophies[activeTrophyIndex];
+  if (!orig) return;
+
+  const cloned = JSON.parse(JSON.stringify(orig));
+  cloned.id = `trophy-${Date.now().toString().slice(-5)}`;
+  cloned.title = `${orig.title} (Copy)`;
+
+  currentTrophies.splice(activeTrophyIndex + 1, 0, cloned);
+  activeTrophyIndex = activeTrophyIndex + 1;
+
+  renderTrophySidebar();
+  renderTrophyEditor(activeTrophyIndex);
+  await saveTrophyChanges();
+  showToast(`📋 Duplicated "${orig.title}"!`);
+}
+
+function addNewTrophy() {
+  openNewTrophyModal();
 }
 
 function deleteTrophy(index) {
