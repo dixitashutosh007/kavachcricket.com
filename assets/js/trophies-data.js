@@ -4,7 +4,7 @@
  * Last Updated: 2026-10-04T01:14:36.727Z
  */
 
-const TROPHY_COLLECTION = [
+window.TROPHY_COLLECTION = [
   {
     "id": "trophy-1",
     "wing": "center",
@@ -381,3 +381,5 @@ const TROPHY_COLLECTION = [
     ]
   }
 ];
+
+var TROPHY_COLLECTION = window.TROPHY_COLLECTION;

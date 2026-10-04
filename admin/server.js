@@ -334,9 +334,9 @@ function updateIndexHtml(siteData) {
 function getTrophies() {
   const code = fs.readFileSync(TROPHIES_DATA_FILE, 'utf8');
   const vm = require('vm');
-  const sandbox = {};
+  const sandbox = { window: {} };
   vm.createContext(sandbox);
-  vm.runInContext(code + '\nsandbox_export = TROPHY_COLLECTION;', sandbox);
+  vm.runInContext(code + '\nsandbox_export = sandbox.window.TROPHY_COLLECTION || sandbox.TROPHY_COLLECTION || window.TROPHY_COLLECTION;', sandbox);
   return sandbox.sandbox_export || [];
 }
 
@@ -349,7 +349,8 @@ function saveTrophies(trophies) {
  * Last Updated: ${new Date().toISOString()}
  */
 
-const TROPHY_COLLECTION = ${JSON.stringify(trophies, null, 2)};
+window.TROPHY_COLLECTION = ${JSON.stringify(trophies, null, 2)};
+var TROPHY_COLLECTION = window.TROPHY_COLLECTION;
 `;
   fs.writeFileSync(TROPHIES_DATA_FILE, code, 'utf8');
 }
@@ -669,8 +670,9 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Serve Assets
-  if (pathname.startsWith('/assets/')) {
-    const filePath = path.join(ROOT_DIR, pathname);
+  if (pathname.startsWith('/assets/') || pathname.startsWith('/preview/assets/')) {
+    const cleanPath = pathname.replace('/preview', '');
+    const filePath = path.join(ROOT_DIR, cleanPath);
     serveFile(res, filePath);
     return;
   }

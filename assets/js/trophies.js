@@ -315,8 +315,19 @@
   /* --------------------------------------------------------------------------
      4. Dynamic Pedestal Generation
      -------------------------------------------------------------------------- */
+  function getTrophyList() {
+    if (typeof window !== 'undefined' && Array.isArray(window.TROPHY_COLLECTION)) {
+      return window.TROPHY_COLLECTION;
+    }
+    if (typeof TROPHY_COLLECTION !== 'undefined' && Array.isArray(TROPHY_COLLECTION)) {
+      return TROPHY_COLLECTION;
+    }
+    return [];
+  }
+
   function renderTrophyPedestals() {
-    if (!window.TROPHY_COLLECTION || !Array.isArray(window.TROPHY_COLLECTION)) return;
+    const list = getTrophyList();
+    if (!list.length) return;
 
     const gridCenter = document.getElementById('gridPedestalsCenter');
     const gridLeft = document.getElementById('gridPedestalsLeft');
@@ -328,7 +339,7 @@
     gridLeft.innerHTML = '';
     gridRight.innerHTML = '';
 
-    window.TROPHY_COLLECTION.forEach(trophy => {
+    list.forEach(trophy => {
       const card = document.createElement('div');
       card.className = 'pedestal-item-card';
       card.setAttribute('data-id', trophy.id);
@@ -385,9 +396,10 @@
      5. Trophy Story Lightbox Modal with 5-Photo Gallery Carousel
      -------------------------------------------------------------------------- */
   function openTrophyModal(trophyId) {
-    if (!modal || !window.TROPHY_COLLECTION) return;
+    const list = getTrophyList();
+    if (!modal || !list.length) return;
 
-    const trophy = window.TROPHY_COLLECTION.find(t => t.id === trophyId);
+    const trophy = list.find(t => t.id === trophyId);
     if (!trophy) return;
 
     currentTrophyId = trophyId;
@@ -491,19 +503,20 @@
   }
 
   function navigateTrophies(direction) {
-    if (!window.TROPHY_COLLECTION || !currentTrophyId) return;
+    const list = getTrophyList();
+    if (!list.length || !currentTrophyId) return;
 
-    const currentIndex = window.TROPHY_COLLECTION.findIndex(t => t.id === currentTrophyId);
+    const currentIndex = list.findIndex(t => t.id === currentTrophyId);
     if (currentIndex === -1) return;
 
     let targetIndex;
     if (direction === 'prev') {
-      targetIndex = (currentIndex - 1 + window.TROPHY_COLLECTION.length) % window.TROPHY_COLLECTION.length;
+      targetIndex = (currentIndex - 1 + list.length) % list.length;
     } else {
-      targetIndex = (currentIndex + 1) % window.TROPHY_COLLECTION.length;
+      targetIndex = (currentIndex + 1) % list.length;
     }
 
-    const nextTrophy = window.TROPHY_COLLECTION[targetIndex];
+    const nextTrophy = list[targetIndex];
     if (nextTrophy) {
       openTrophyModal(nextTrophy.id);
     }
@@ -588,12 +601,18 @@
   /* --------------------------------------------------------------------------
      7. Initialization on DOM Ready
      -------------------------------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', () => {
+  function init() {
     initAudioToggle();
     initVaultEntrance();
     renderTrophyPedestals();
     initShowroomNavigation();
     initTrophyModal();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();
