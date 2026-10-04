@@ -64,12 +64,20 @@ aws s3 sync . "s3://${BUCKET_NAME}/" \
   --cache-control "public, max-age=3600, must-revalidate" \
   --delete
 
-echo "☁️  Uploading clean extensionless routing objects for S3 (/about, /kpl, /timeout, /policies, /trophies)..."
+echo "☁️  Syncing video clips (MP4, WebM) with immutable caching..."
+if [ -d "assets/videos" ]; then
+  aws s3 sync assets/videos "s3://${BUCKET_NAME}/assets/videos" \
+    --region "${REGION}" \
+    --cache-control "public, max-age=31536000, immutable"
+fi
+
+echo "☁️  Uploading clean extensionless routing objects for S3 (/about, /kpl, /timeout, /policies, /trophies, /vault)..."
 aws s3 cp about.html "s3://${BUCKET_NAME}/about" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp kpl.html "s3://${BUCKET_NAME}/kpl" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp timeout.html "s3://${BUCKET_NAME}/timeout" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp policies.html "s3://${BUCKET_NAME}/policies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 aws s3 cp trophies.html "s3://${BUCKET_NAME}/trophies" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
+aws s3 cp vault.html "s3://${BUCKET_NAME}/vault" --region "${REGION}" --content-type "text/html" --cache-control "public, max-age=3600, must-revalidate"
 
 echo "⚡ Invalidating CloudFront distribution (E26S1ELTWWUVSI)..."
 aws cloudfront create-invalidation --distribution-id E26S1ELTWWUVSI --paths "/*" > /dev/null 2>&1 || true

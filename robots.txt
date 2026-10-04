@@ -21,3 +21,10 @@ User-agent: anthropic-ai
 Allow: /
 
 Sitemap: https://www.kavachcricket.com/sitemap.xml
+
+# Apple Intelligence & Claude AI Search Crawlers
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
