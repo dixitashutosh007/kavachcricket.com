@@ -3,3 +3,6 @@
 *.tmp
 .idea/
 .vscode/
+backups/
+.env
+admin/.config.json

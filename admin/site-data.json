@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "slogan": "Go Get Them ! KAvach",
+    "ranking": "Cricket for Working Professionals",
+    "titlePrefix": "Where Passion Meets",
+    "titleAccent": "The Pitch",
+    "description": "<strong>Best Cricket Club in Bangalore for Adults & Working Professionals:</strong> KAvach Cricket Club is a premier leather ball cricket club based at <strong>Play Arena, Sarjapur Road in Bangalore South</strong>. Reconnect with the game, rebuild match fitness, and play competitive 20/30-over matches with fellow corporate executives, engineers, doctors, and senior cricketers.",
+    "perks": [
+      "400+ Players (Youth, Veterans & IT Professionals)",
+      "900+ Matches Played",
+      "Adults, Seniors & Youths (16+)"
+    ],
+    "imageDesktop": "./assets/images/hero-team-scarlet.webp",
+    "imageMobile": "./assets/images/hero-team-scarlet-mobile.webp",
+    "imageFallback": "./assets/images/hero-team-scarlet.jpg",
+    "captionTitle": "KAvach Squad in Scarlet Red",
+    "captionVenue": "Play Arena, Sarjapur Road • Bangalore",
+    "floatingBadgeTitle": "India's Top 20 Club",
+    "floatingBadgeSubtitle": "Bangalore's Top 5 Amateur Club"
+  },
+  "stats": [
+    {
+      "target": "400",
+      "suffix": "+",
+      "label": "Players",
+      "desc": "Youth, Veteran Cricketers & IT Professionals"
+    },
+    {
+      "target": "900",
+      "suffix": "+",
+      "label": "Matches Played",
+      "desc": "Weekend 20/30 Overs Fixtures"
+    },
+    {
+      "target": "5",
+      "suffix": "/ 20",
+      "label": "Top Club Rankings",
+      "desc": "Top 5 in Bangalore • Top 20 in India"
+    },
+    {
+      "target": "16",
+      "suffix": "+ Yrs",
+      "label": "Age Eligibility",
+      "desc": "Youth to Experienced Veterans"
+    }
+  ],
+  "announcement": {
+    "badge": "5th Edition Milestone",
+    "status": "Registration Opening Soon",
+    "tag": "Mega Cricket Festival",
+    "title": "KAvach Premier League KPL (V) — Season 5.0",
+    "description": "Bangalore’s most anticipated amateur cricket spectacle returns with its landmark 5th Edition — <strong>KPL (V)</strong>! An IPL-style franchise tournament where club players enter the auction draft, compete in bespoke colored team jerseys, and battle under lights for the championship glory.",
+    "features": [
+      {
+        "title": "Live Auction Draft:",
+        "desc": "Franchise owners bid with virtual purse budgets."
+      },
+      {
+        "title": "5 Elite Franchises:",
+        "desc": "Atharva, Prithvi, Hunkaaar, Rudra & Sabyasachi."
+      },
+      {
+        "title": "Bespoke Coloured Kits:",
+        "desc": "Official custom jerseys, caps, and leather balls."
+      },
+      {
+        "title": "Live Matchday Broadcast:",
+        "desc": "CricHeroes ball-by-ball streaming & award nights."
+      }
+    ],
+    "ctaText": "Know More →",
+    "ctaLink": "./kpl.html",
+    "secondaryCtaText": "Register for Season 5 Draft",
+    "secondaryCtaLink": "https://form.jotform.com/252223927769063"
+  },
+  "faqs": [
+    {
+      "question": "How do I join KAvach Cricket Club?",
+      "answer": "<p>\n                Joining KAvach Cricket Club is simple and structured around your goals and weekly schedule:\n              </p>\n              <ol style=\"margin: 8px 0 12px 20px; color: var(--text-secondary); line-height: 1.75;\">\n                <li><strong>Join Weekdays Practice Sessions (KAvach Studio):</strong> If you want regular morning training and skill development, book a trial net session (Tue–Fri, 7:00 AM – 9:00 AM at Play Arena, Sarjapur Road) by filling our <a href=\"#contact\" style=\"color: var(--yellow-accent); text-decoration: underline; font-weight: 600;\">Trial Booking Form</a> below.</li>\n                <li><strong>Join Weekend Club Matches:</strong> If you are match-ready and want to play competitive Saturday/Sunday 20 or 30-over leather ball matches, complete our <a href=\"https://form.jotform.com/231925336416153\" target=\"_blank\" rel=\"noopener\" style=\"color: var(--red-light); text-decoration: underline; font-weight: 600;\">Official Registration Form ↗</a>. Share your cricketing background or CricHeroes profile link.</li>\n              </ol>\n              <p>\n                Once submitted, our Think Tank committee will review your profile and connect with you on WhatsApp to confirm your trial slot or match assessment.\n              </p>"
+    },
+    {
+      "question": "Which is the best cricket club in Bangalore for adults and working professionals?",
+      "answer": "<p>\n                <strong>KAvach Cricket Club</strong> is ranked among Bangalore's Top 5 amateur cricket clubs and India's Top 20. Designed specifically for working professionals, adults, and senior cricketers, KAvach provides weekday morning practice sessions (7:00 AM – 9:00 AM) at Play Arena, Sarjapur Road in Bangalore South, structured 20/30-over weekend leather ball matches, and the marquee KAvach Premier League (KPL).\n              </p>"
+    },
+    {
+      "question": "Does KAvach play with tennis ball or leather ball? Can seniors and veterans join?",
+      "answer": "<p>\n                KAvach plays <strong>100% seasoned leather ball cricket</strong> (red and white ball). We do not operate tennis ball teams. We warmly welcome senior and veteran cricketers (in their 40s and 50s) returning to cricket after years in corporate life, as well as young adults (16+). Our coordinators match players to suitable squads to ensure balanced, safe, and competitive games.\n              </p>"
+    },
+    {
+      "question": "What kind of players play at KAvach Cricket Club?",
+      "answer": "<p>\n                Our 400+ community is predominantly composed of working professionals from across Bangalore: Software Architects and IT engineers (Google, Amazon, Microsoft, Infosys), Doctors & Surgeons, Civil Servants & Government Officers, Startup Founders, CEOs, and corporate executives, alongside talented university cricketers and KSCA Division/State-level players.\n              </p>"
+    },
+    {
+      "question": "What is the age requirement to join?",
+      "answer": "<p>\n                KAvach welcomes players aged <strong>16 years and onwards</strong>. We accommodate young aspiring players, busy working professionals in their 20s, 30s, and 40s, right through to veteran players returning for their second cricketing innings.\n              </p>"
+    },
+    {
+      "question": "What are the criteria for player admission?",
+      "answer": "<p>\n                Because we play exclusively with seasoned leather balls, players must possess <strong>foundational cricketing skills, coachability, physical readiness, and a team-first attitude</strong>. As one of Bangalore's top-ranked clubs, we are <strong>selective about who joins our community</strong> to preserve our club culture and ground safety. Trial sessions allow our Think Tank to evaluate skill alignment and commitment. <strong>All rights of admission and membership are strictly reserved by club management.</strong>\n              </p>"
+    },
+    {
+      "question": "How are players assigned to match squads?",
+      "answer": "<p>\n                All players represent KAvach. After attending a trial session, coordinators assign players to matching weekend fixtures based on net performance, verified CricHeroes statistics, or player references to ensure competitive, balanced games.\n              </p>"
+    },
+    {
+      "question": "Do you have a scholarship program for youth cricketers?",
+      "answer": "<p>\n                Yes! Through our <strong>Youth Cricket Initiative</strong>, young players who are full-time students and do not earn a salary yet can practice with us at <strong>zero cost</strong>. Furthermore, if a youth player performs exceptionally well (playing Karnataka Division 4 and above), KAvach Cricket Club takes care of part or all of their match and tournament fees.\n              </p>"
+    },
+    {
+      "question": "What are the exact practice timings and location?",
+      "answer": "<p>\n                Daily team practice sessions run Tuesday through Friday from <strong>7:00 AM to 9:00 AM</strong> inside <strong>Play Arena, Kasavanahalli, Off Sarjapur Road, Bangalore South - 560035</strong>. Weekend matches take place on full-size cricket grounds across Bangalore.\n              </p>"
+    },
+    {
+      "question": "Do I need to buy a full kit before my first trial session?",
+      "answer": "<p>\n                No! The club arranges basic equipment (leather balls, bats, pads, keeping gloves). All you need is sports attire, running/turf shoes, and your own personal <strong>abdominal guard</strong> (for hygiene and safety).\n              </p>"
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAvach Control Room | Local Admin CMS</title>
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. SECURITY & AUTHENTICATION LOCK SCREEN
+       ========================================================================= -->
+  <div id="authScreen">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      </div>
+      <h1 class="auth-title">KAvach Control Room</h1>
+      <p class="auth-subtitle">Local Admin CMS &amp; Content Management</p>
+
+      <div class="pin-input-group">
+        <input type="password" id="pinInput" class="pin-input" placeholder="••••" maxlength="12" autofocus>
+      </div>
+
+      <button type="button" id="unlockBtn" class="btn btn-primary" style="width: 100%;">
+        <span>🔓 Unlock Control Room</span>
+      </button>
+
+      <div class="auth-hint">
+        🔒 Protected local portal on <code>127.0.0.1:4040</code>.<br>
+        Default Master PIN: <code>kavach2026</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. APP HEADER
+       ========================================================================= -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-badge">K</div>
+        <div>
+          <div class="brand-title">KAvach Control Room</div>
+          <div class="brand-subtitle">
+            <span class="pulse-dot"></span>
+            <span>Local Server Active &bull; 127.0.0.1:4040</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="/preview" target="_blank" class="btn btn-secondary btn-sm" title="Open Homepage in new tab">
+          <span>👁️ View Website</span>
+        </a>
+        <a href="/preview/trophies" target="_blank" class="btn btn-secondary btn-sm" title="Open Trophy Room in new tab">
+          <span>🏆 View Trophy Room</span>
+        </a>
+        <button type="button" class="btn btn-accent btn-sm" onclick="document.querySelector('[data-tab=tabPublish]').click()">
+          <span>🚀 Publish Changes</span>
+        </button>
+        <button type="button" id="changePinBtn" class="btn btn-secondary btn-sm" title="Change PIN">
+          <span>🔑 PIN</span>
+        </button>
+        <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm" title="Lock Session">
+          <span>🔒 Lock</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. MAIN CONTAINER & NAVIGATION TABS
+       ========================================================================= -->
+  <main class="app-container">
+
+    <nav class="tabs-nav">
+      <button type="button" class="tab-btn active" data-tab="tabTrophies">
+        <span>🏆 Virtual Trophy Room</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabHero">
+        <span>⚡ Hero &amp; Announcements</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabStats">
+        <span>📊 Live Stats Bar</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabFaq">
+        <span>❓ FAQ Accordion</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabPublish">
+        <span>☁️ Publish &amp; Backups</span>
+      </button>
+    </nav>
+
+    <!-- =======================================================================
+         TAB 1: VIRTUAL TROPHY ROOM
+         ======================================================================= -->
+    <section id="tabTrophies" class="tab-content active">
+      <div class="trophy-layout">
+        
+        <!-- Sidebar: Trophy Picker -->
+        <aside class="trophy-sidebar">
+          <div class="sidebar-header">
+            <span class="sidebar-title">Showroom Trophies</span>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addNewTrophy()">+ Add New</button>
+          </div>
+
+          <div class="wing-filters">
+            <button type="button" class="wing-filter-btn active" data-wing="all">All (15)</button>
+            <button type="button" class="wing-filter-btn" data-wing="center">Center</button>
+            <button type="button" class="wing-filter-btn" data-wing="left">Left</button>
+            <button type="button" class="wing-filter-btn" data-wing="right">Right</button>
+          </div>
+
+          <div class="trophy-list" id="trophyList">
+            <!-- Dynamically populated -->
+          </div>
+        </aside>
+
+        <!-- Main Panel: Trophy Editor Form -->
+        <div class="editor-panel">
+          <form id="trophyEditorForm" onsubmit="event.preventDefault(); saveTrophyChanges();">
+            <!-- Dynamically populated -->
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 2: HERO & ANNOUNCEMENTS
+         ======================================================================= -->
+    <section id="tabHero" class="tab-content">
+      
+      <!-- Card A: Hero Section -->
+      <div class="content-section-card">
+        <div class="section-card-title">
+          <span>⚡ Homepage Hero Section</span>
+        </div>
+        <p class="section-card-desc">Edit high-impact headlines, slogan, trust badges, and the main hero squad photo.</p>
+
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label">Slogan Badge</label>
+              <span class="char-counter" id="count_heroSlogan">0 / 30</span>
+            </div>
+            <input type="text" class="form-input" id="hero_slogan" data-rule="heroSlogan">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label">Ranking Badge Text</label>
+              <span class="char-counter" id="count_heroRanking">0 / 35</span>
+            </div>
+            <input type="text" class="form-input" id="hero_ranking" data-rule="heroRanking">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label">Main Headline (Prefix)</label>
+              <span class="char-counter" id="count_heroTitlePrefix">0 / 30</span>
+            </div>
+            <input type="text" class="form-input" id="hero_titlePrefix" data-rule="heroTitlePrefix" placeholder="Where Passion Meets">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label">Headline Red Accent Word</label>
+              <span class="char-counter" id="count_heroTitleAccent">0 / 20</span>
+            </div>
+            <input type="text" class="form-input" id="hero_titleAccent" data-rule="heroTitleAccent" placeholder="The Pitch">
+          </div>
+
+          <div class="form-group form-grid-full">
+            <div class="form-label-row">
+              <label class="form-label">Hero Description Copy</label>
+              <span class="char-counter" id="count_heroDesc">0 / 350</span>
+            </div>
+            <textarea class="form-textarea" id="hero_desc" rows="3" data-rule="heroDesc"></textarea>
+          </div>
+
+          <!-- Perks 3 Items -->
+          <div class="form-group form-grid-full">
+            <label class="form-label">Hero Checkmark Perks (3 Points)</label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input type="text" class="form-input" id="hero_perk1" placeholder="Perk 1">
+              <input type="text" class="form-input" id="hero_perk2" placeholder="Perk 2">
+              <input type="text" class="form-input" id="hero_perk3" placeholder="Perk 3">
+            </div>
+          </div>
+
+          <!-- Floating Badges -->
+          <div class="form-group">
+            <label class="form-label">Floating Badge Line 1</label>
+            <input type="text" class="form-input" id="hero_badge1" placeholder="India's Top 20 Club">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Floating Badge Line 2</label>
+            <input type="text" class="form-input" id="hero_badge2" placeholder="Bangalore's Top 5 Amateur Club">
+          </div>
+
+          <!-- Caption -->
+          <div class="form-group">
+            <label class="form-label">Hero Photo Caption Title</label>
+            <input type="text" class="form-input" id="hero_captionTitle" placeholder="KAvach Squad in Scarlet Red">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Hero Photo Caption Venue</label>
+            <input type="text" class="form-input" id="hero_captionVenue" placeholder="Play Arena, Sarjapur Road • Bangalore">
+          </div>
+
+          <!-- Hero Image Uploader -->
+          <div class="form-group form-grid-full">
+            <label class="form-label">Hero Main Squad Photo (Portrait 800:1067)</label>
+            <div class="image-uploader-card" id="dropzone_heroDesktop">
+              <img src="./assets/images/hero-team-scarlet.webp" alt="Hero" class="image-preview-thumb portrait" id="preview_heroDesktop">
+              <div class="image-upload-actions">
+                <div class="image-specs-badge">Aspect: 800:1067 • 800×1067 px • WebP • Max 200 KB</div>
+                <p style="font-size: 0.775rem; color: var(--text-dim); margin-bottom: 8px;">
+                  Current path: <code id="path_heroDesktop">./assets/images/hero-team-scarlet.webp</code>
+                </p>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="triggerImageUpload('heroDesktop')">
+                  📷 Choose / Drop New Hero Photo (Auto WebP Crop)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Card B: Announcement / KPL Promo -->
+      <div class="content-section-card">
+        <div class="section-card-title">
+          <span>📢 KPL Tournament &amp; Announcements Banner</span>
+        </div>
+        <p class="section-card-desc">Manage the landmark tournament banner, registration status pill, and feature highlights.</p>
+
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label class="form-label">Milestone Badge</label>
+            <input type="text" class="form-input" id="ann_badge" placeholder="5th Edition Milestone">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Status Pill Text</label>
+            <input type="text" class="form-input" id="ann_status" placeholder="Registration Opening Soon">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Section Tag</label>
+            <input type="text" class="form-input" id="ann_tag" placeholder="Mega Cricket Festival">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tournament Headline</label>
+            <input type="text" class="form-input" id="ann_title" placeholder="KAvach Premier League KPL (V) — Season 5.0">
+          </div>
+
+          <div class="form-group form-grid-full">
+            <label class="form-label">Tournament Description Copy</label>
+            <textarea class="form-textarea" id="ann_desc" rows="3"></textarea>
+          </div>
+
+          <!-- Feature Highlights (4 points) -->
+          <div class="form-group form-grid-full">
+            <label class="form-label">Tournament Key Highlights</label>
+            <div id="ann_features_container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="form-group">
+            <label class="form-label">Primary Button Text &amp; Link</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" class="form-input" id="ann_ctaText" placeholder="Know More →" style="width: 140px;">
+              <input type="text" class="form-input" id="ann_ctaLink" placeholder="./kpl.html">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Secondary Button Text &amp; Link</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" class="form-input" id="ann_secCtaText" placeholder="Register for KPL 5 Draft →" style="width: 200px;">
+              <input type="text" class="form-input" id="ann_secCtaLink" placeholder="https://form.jotform.com/...">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align: right; margin-top: 16px;">
+          <button type="button" class="btn btn-primary" onclick="saveHeroAndAnnouncements()">
+            💾 Save Hero &amp; Announcement Content
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         TAB 3: LIVE STATS BAR
+         ======================================================================= -->
+    <section id="tabStats" class="tab-content">
+      <div class="content-section-card">
+        <div class="section-card-title">
+          <span>📊 Live Club Stats Counter Bar</span>
+        </div>
+        <p class="section-card-desc">Edit key metrics displayed on the animated stats bar immediately below the hero.</p>
+
+        <div class="stats-editor-grid" id="statsEditorGrid">
+          <!-- Dynamically populated with 4 cards -->
+        </div>
+
+        <div style="text-align: right; margin-top: 24px;">
+          <button type="button" class="btn btn-primary" onclick="saveStats()">
+            💾 Save Live Stats
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 4: FAQ ACCORDION
+         ======================================================================= -->
+    <section id="tabFaq" class="tab-content">
+      <div class="content-section-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <div class="section-card-title"><span>❓ Frequently Asked Questions (FAQ)</span></div>
+            <p class="section-card-desc" style="margin-bottom: 0;">Add, reorder, edit or remove club questions and answers.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="addFaqItem()">+ Add FAQ Item</button>
+        </div>
+
+        <div class="faq-edit-list" id="faqEditList">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div style="text-align: right; margin-top: 24px;">
+          <button type="button" class="btn btn-primary" onclick="saveFaqs()">
+            💾 Save FAQs to Website
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 5: PUBLISH & BACKUPS
+         ======================================================================= -->
+    <section id="tabPublish" class="tab-content">
+      
+      <div class="content-section-card">
+        <div class="section-card-title">
+          <span>🚀 One-Click Publish to Live Website</span>
+        </div>
+        <p class="section-card-desc">Runs <code>./deploy.sh</code> to push changes to GitHub, sync assets to AWS S3 Mumbai, and invalidate the CloudFront CDN cache.</p>
+
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
+          <input type="text" class="form-input" id="commitMsgInput" placeholder="Deployment commit message (e.g. Update trophy stories and new photos)" style="flex: 1;">
+          <button type="button" id="startDeployBtn" class="btn btn-primary" onclick="runDeploy()">
+            <span>🚀 Publish to AWS S3 &amp; CloudFront</span>
+          </button>
+        </div>
+
+        <div class="deploy-terminal">
+          <div class="terminal-header">
+            <span>Terminal Output Console</span>
+            <span>deploy.sh</span>
+          </div>
+          <div id="deployTerminalLogs">Ready to deploy. Make your edits and click Publish above.</div>
+        </div>
+      </div>
+
+      <!-- Backups & Rollback -->
+      <div class="content-section-card">
+        <div class="section-card-title">
+          <span>↺ Automatic Backups &amp; Rollback History</span>
+        </div>
+        <p class="section-card-desc">Every time you click save, a snapshot of your files is preserved in <code>backups/</code>. Revert anytime with 1 click.</p>
+
+        <div id="backupsList">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       4. HIDDEN FILE INPUT & CROPPER MODAL
+       ========================================================================= -->
+  <input type="file" id="globalFileInput" style="display: none;" accept="image/*">
+
+  <div id="cropModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-title">
+        <span>Image Optimizer &amp; WebP Converter</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="cropCancelBtn">✕</button>
+      </div>
+
+      <div class="crop-stats-bar">
+        <div>Original: <strong id="cropOrigInfo">-</strong></div>
+        <div>Target: <strong id="cropTargetInfo">-</strong></div>
+      </div>
+
+      <div class="cropper-preview-wrap">
+        <canvas id="cropperCanvas" class="cropper-canvas"></canvas>
+      </div>
+
+      <div class="form-grid" style="margin-bottom: 16px;">
+        <div class="form-group">
+          <label class="form-label">Framing Mode</label>
+          <select class="form-select" id="cropFitMode">
+            <option value="cover" selected>Auto Smart Center Crop (Recommended)</option>
+            <option value="contain">Fit &amp; Contain (No Crop)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label class="form-label">WebP Compression Quality</label>
+            <span style="font-size: 0.75rem; color: var(--gold-accent);" id="cropQualityValue">85%</span>
+          </div>
+          <input type="range" id="cropQualitySlider" min="0.6" max="0.95" step="0.05" value="0.85" style="accent-color: var(--red-primary);">
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 0.775rem; color: var(--green-accent);" id="cropResultInfo">-</div>
+        <button type="button" class="btn btn-primary" id="cropApplyBtn">
+          <span>Apply &amp; Save WebP</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

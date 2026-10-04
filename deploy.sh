@@ -58,6 +58,9 @@ aws s3 sync . "s3://${BUCKET_NAME}/" \
   --exclude ".github/*" \
   --exclude "deploy.sh" \
   --exclude "assets/*" \
+  --exclude "admin/*" \
+  --exclude "backups/*" \
+  --exclude "package*.json" \
   --cache-control "public, max-age=3600, must-revalidate" \
   --delete
 
