@@ -257,7 +257,7 @@ ${featsHtml}
                 <a href="${escapeHtml(ann.ctaLink || './kpl.html')}" class="btn btn-primary btn-lg">
                   <span>${escapeHtml(ann.ctaText || 'Know More →')}</span>
                 </a>
-                <a href="${escapeHtml(ann.secondaryCtaLink || 'https://form.jotform.com/252223927769063')}" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+                <a href="${escapeHtml(ann.secondaryCtaLink || 'https://auction.kavachcricket.com/league-kpl5/register')}" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
                   <span>${escapeHtml(ann.secondaryCtaText || 'Register for KPL 5 Draft →')}</span>
                 </a>
               </div>
