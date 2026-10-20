@@ -248,7 +248,7 @@
     // Update HUD heading
     if (hudWallHeading) {
       if (targetWall === 'center') {
-        hudWallHeading.textContent = '🏆 Center Stage: KAvach Premier League (KPL)';
+        hudWallHeading.textContent = '🏆 KAvach Trophy Cabinet';
       } else if (targetWall === 'left') {
         hudWallHeading.textContent = '🛡️ Left Showcase: Corporate & Weekend Leagues';
       } else if (targetWall === 'right') {
